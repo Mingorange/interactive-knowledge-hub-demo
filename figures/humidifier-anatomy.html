@@ -1,0 +1,402 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><title>超声波加湿器 · 交互式等距插图</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(740px,100% - 32px);margin:64px auto 96px}
+/* 平板断点：iPad 竖屏 768px 起放宽版心；iPad 横屏/桌面 1100px 起再放宽，阅读行宽设上限 */
+@media (min-width:768px){
+.iso-page{width:min(940px,100% - 48px)}
+.iso-plate{padding-left:32px;padding-right:32px}
+}
+@media (min-width:1100px){
+.iso-page{width:min(1080px,100% - 64px)}
+}
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.iso-swatch[data-mark="mist"] path{stroke:#7db8e8}
+.iso-swatch[data-mark="water"] path{stroke:#5b9bd5}
+.iso-swatch[data-mark="comf"] path{stroke:#30a46c}
+.hu-btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 4px}
+.hu-sliderrow{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin:8px 0 2px;font-size:13.5px;color:var(--anatomy-strong)}
+.hu-sliderrow input[type=range]{width:min(300px,60vw);touch-action:none}
+.hu-fanbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+#hu-fanblades{transform-origin:center;transform-box:fill-box;animation:huSpin 0.9s linear infinite;animation-play-state:paused}
+@keyframes huSpin{to{transform:rotate(360deg)}}
+.hu-ripple{transform-origin:center;transform-box:fill-box;opacity:0}
+.hu-ripple.on{animation:huRip 1.5s ease-out infinite}
+.hu-ripple.on.d2{animation-delay:.5s}
+.hu-ripple.on.d3{animation-delay:1s}
+@keyframes huRip{0%{transform:scale(.35);opacity:.85}100%{transform:scale(1.9);opacity:0}}
+@media (prefers-reduced-motion:reduce){#hu-fanblades,.hu-ripple.on{animation:none}}
+.quiz{margin:22px 0 8px;padding:16px;border:1px solid var(--anatomy-faint);border-radius:12px;background:var(--anatomy-card)}
+.quiz-title{font-size:15px;font-weight:700;color:var(--anatomy-strong);margin-bottom:10px}
+.quiz-q{font-size:14px;color:var(--anatomy-strong);margin:10px 0 8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);background:var(--anatomy-page);border:1px solid var(--anatomy-lo);border-radius:8px;padding:6px 14px;cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e6f6ea;color:#1f7a48;font-weight:700}
+.quiz-opt.wrong{border-color:#e5484d;background:#ffecec;color:#e5484d}
+.quiz-why{font-size:13px;color:var(--anatomy-text);margin:8px 0 4px;display:none}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><nav class="kg-back"><a href="../index.html">← 返回知识馆</a></nav>
+<header class="fx-pagehead"><h1>超声波加湿器</h1><p>按下开关，看水被「打」成雾、被风送出房间——剖开一台加湿器，盯着湿度从 35% 爬进舒适区</p></header>
+<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">超声波加湿器</span><span class="iso-plate-corner" data-corner="hint">点部件看说明 · 1–5 切换步骤 · 开机看雾从哪来</span><span class="iso-plate-corner" data-corner="readout" data-readout>湿度 35%</span></div><div class="iso-stage" id="fx-stage" tabindex="0" role="group" aria-label="超声波加湿器剖视：换能片把水震成雾，风扇送出出雾口，湿度计读数随加湿上升"><div class="fx-tip" id="fx-tip"></div><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 740 520" role="img" aria-label="超声波加湿器剖视：水箱里的水被换能片震成雾，风扇把雾从出雾口送出，湿度计读数随之上升"><path class="iso-halo" d="M165.9 361.7L166.3 359.9L167.4 358.1L169.2 356.4L171.5 355L311.9 284.8L314.8 283.6L318.1 282.7L321.7 282.2L325.4 282L329.2 282.2L332.8 282.7L336.1 283.6L338.9 284.8L568.5 399.5L570.8 401L572.6 402.6L573.7 404.4L574.1 406.3L573.7 408.2L572.6 409.9L570.8 411.6L568.5 413L428.1 483.2L425.2 484.4L421.9 485.3L418.3 485.9L414.6 486L410.8 485.9L407.2 485.3L403.9 484.4L401.1 483.2L171.5 368.5L169.2 367L167.4 365.4L166.3 363.6Z"/><g class="iso-solid"><path class="iso-fill" d="M316 293.5L316.9 292.1L318.7 290.9L321.1 290L324 289.5L326.9 289.5L329.8 290L332.2 290.9L334 292.1L334.9 293.5L334.9 321.4L334 322.9L332.2 324.1L329.8 324.9L326.9 325.4L324 325.4L321.1 324.9L318.7 324.1L316.9 322.9L316 321.4Z"/><path class="iso-top" d="M332.2 324.1L329.8 324.9L326.9 325.4L324 325.4L321.1 324.9L318.7 324.1L316.9 322.9L316 321.4L316 319.9L316.9 318.5L318.7 317.3L321.1 316.4L324 316L326.9 316L329.8 316.4L332.2 317.3L334 318.5L334.9 319.9L334.9 321.4L334 322.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M334.9 321.4L334 322.9L332.2 324.1L329.8 324.9L326.9 325.4L324 325.4L321.1 324.9L318.7 324.1L316.9 322.9L316 321.4"/><path class="iso-line iso-edge" data-tone="lo" d="M316 321.4L316 319.9L316.9 318.5L318.7 317.3L321.1 316.4L324 316L326.9 316L329.8 316.4L332.2 317.3L334 318.5L334.9 319.9L334.9 321.4"/></g><g class="iso-solid"><path class="iso-fill" d="M540.1 405.5L541.1 404.1L542.8 402.9L545.2 402L548.1 401.6L551.1 401.6L553.9 402L556.3 402.9L558.1 404.1L559 405.5L559 433.5L558.1 434.9L556.3 436.1L553.9 437L551.1 437.5L548.1 437.5L545.2 437L542.8 436.1L541.1 434.9L540.1 433.5Z"/><path class="iso-top" d="M556.3 436.1L553.9 437L551.1 437.5L548.1 437.5L545.2 437L542.8 436.1L541.1 434.9L540.1 433.5L540.1 432L541.1 430.6L542.8 429.4L545.2 428.5L548.1 428L551.1 428L553.9 428.5L556.3 429.4L558.1 430.6L559 432L559 433.5L558.1 434.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M559 433.5L558.1 434.9L556.3 436.1L553.9 437L551.1 437.5L548.1 437.5L545.2 437L542.8 436.1L541.1 434.9L540.1 433.5"/><path class="iso-line iso-edge" data-tone="lo" d="M540.1 433.5L540.1 432L541.1 430.6L542.8 429.4L545.2 428.5L548.1 428L551.1 428L553.9 428.5L556.3 429.4L558.1 430.6L559 432L559 433.5"/></g><g class="iso-solid"><path class="iso-fill" d="M181 361L181.9 359.6L183.7 358.4L186.1 357.5L188.9 357L191.9 357L194.8 357.5L197.2 358.4L198.9 359.6L199.9 361L199.9 387.4L199.9 388.9L198.9 390.4L197.2 391.6L194.8 392.4L191.9 392.9L188.9 392.9L186.1 392.4L183.7 391.6L181.9 390.4L181 388.9Z"/><path class="iso-top" d="M197.2 391.6L194.8 392.4L191.9 392.9L188.9 392.9L186.1 392.4L183.7 391.6L181.9 390.4L181 388.9L181 387.4L181.9 386L183.7 384.8L186.1 383.9L188.9 383.5L191.9 383.5L194.8 383.9L197.2 384.8L198.9 386L199.9 387.4L199.9 388.9L198.9 390.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M199.9 388.9L198.9 390.4L197.2 391.6L194.8 392.4L191.9 392.9L188.9 392.9L186.1 392.4L183.7 391.6L181.9 390.4L181 388.9"/><path class="iso-line iso-edge" data-tone="lo" d="M181 388.9L181 387.4L181.9 386L183.7 384.8L186.1 383.9L188.9 383.5L191.9 383.5L194.8 383.9L197.2 384.8L198.9 386L199.9 387.4L199.9 388.9"/></g><g class="iso-solid"><path class="iso-fill" d="M405.1 473.1L406 471.6L407.8 470.4L410.2 469.5L413.1 469.1L416 469.1L418.9 469.5L421.3 470.4L423.1 471.6L424 473.1L424 501L423.1 502.4L421.3 503.6L418.9 504.5L416 505L413.1 505L410.2 504.5L407.8 503.6L406 502.4L405.1 501Z"/><path class="iso-top" d="M421.3 503.6L418.9 504.5L416 505L413.1 505L410.2 504.5L407.8 503.6L406 502.4L405.1 501L405.1 499.5L406 498.1L407.8 496.9L410.2 496L413.1 495.5L416 495.5L418.9 496L421.3 496.9L423.1 498.1L424 499.5L424 501L423.1 502.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M424 501L423.1 502.4L421.3 503.6L418.9 504.5L416 505L413.1 505L410.2 504.5L407.8 503.6L406 502.4L405.1 501"/><path class="iso-line iso-edge" data-tone="lo" d="M405.1 501L405.1 499.5L406 498.1L407.8 496.9L410.2 496L413.1 495.5L416 495.5L418.9 496L421.3 496.9L423.1 498.1L424 499.5L424 501"/></g><g class="iso-solid"><path class="iso-fill" d="M165.9 292.3L166.3 290.4L167.4 288.6L169.2 287L171.5 285.5L311.9 215.3L314.8 214.1L318.1 213.3L321.7 212.7L325.4 212.5L329.2 212.7L332.8 213.3L336.1 214.1L338.9 215.3L568.5 330.1L570.8 331.5L572.6 333.2L573.7 335L574.1 336.8L573.7 338.7L572.6 340.5L570.8 342.1L568.5 343.6L428.1 413.8L425.2 415L421.9 415.9L418.3 416.4L414.6 416.6L410.8 416.4L407.2 415.9L403.9 415L401.1 413.8L171.5 299L169.2 297.6L167.4 295.9L166.3 294.2Z"/><path class="iso-top" d="M568.5 330.1L570.8 331.5L572.6 333.2L573.7 335L574.1 336.8L573.7 338.7L572.6 340.5L570.8 342.1L568.5 343.6L428.1 413.8L425.2 415L421.9 415.9L418.3 416.4L414.6 416.6L410.8 416.4L407.2 415.9L403.9 415L401.1 413.8L171.5 299L169.2 297.6L167.4 295.9L166.3 294.2L165.9 292.3L166.3 290.4L167.4 288.6L169.2 287L171.5 285.5L311.9 215.3L314.8 214.1L318.1 213.3L321.7 212.7L325.4 212.5L329.2 212.7L332.8 213.3L336.1 214.1L338.9 215.3Z"/><path class="iso-line iso-crease" data-tone="faint" d="M574.1 336.8L573.7 338.7L572.6 340.5L570.8 342.1L568.5 343.6L428.1 413.8L425.2 415L421.9 415.9L418.3 416.4L414.6 416.6L410.8 416.4L407.2 415.9L403.9 415L401.1 413.8L171.5 299L169.2 297.6L167.4 295.9L166.3 294.2L165.9 292.3"/><path class="iso-line iso-bevel" data-tone="faint" d="M574.1 336.8L571.4 338.5L570.5 340.1L568.9 341.5L566.8 342.8L426.5 413L423.9 414L421 414.8L417.8 415.3L414.6 415.5L411.3 415.3L408.1 414.8L405.2 414L402.6 413L173.2 298.3L171.1 297L169.5 295.5L168.6 293.9L165.9 292.3"/><path class="iso-line iso-edge" data-tone="mid" d="M165.9 292.3L166.3 290.4L167.4 288.6L169.2 287L171.5 285.5L311.9 215.3L314.8 214.1L318.1 213.3L321.7 212.7L325.4 212.5L329.2 212.7L332.8 213.3L336.1 214.1L338.9 215.3L568.5 330.1L570.8 331.5L572.6 333.2L573.7 335L574.1 336.8"/></g><path class="iso-line" data-tone="faint" d="M560.4 307.7L561.3 308.3L562 308.9L562.5 309.6L562.6 310.4L562.5 311.1L562 311.8L561.3 312.5L560.4 313.1L420 383.3L418.8 383.8L417.5 384.1L416 384.3L414.6 384.4L413.1 384.3L411.6 384.1L410.3 383.8L409.2 383.3L179.6 268.5L178.7 268L178 267.3L177.5 266.6L177.4 265.8L177.5 265.1L178 264.4L178.7 263.7L179.6 263.1L320 192.9L321.2 192.5L322.5 192.1L324 191.9L325.4 191.8L326.9 191.9L328.4 192.1L329.7 192.5L330.8 192.9Z"/><text class="iso-face-text" data-tone="faint" transform="matrix(1.35 0.675 -1.35 0.675 251.19 292.519)" font-size="5" text-anchor="start">加湿器实验台</text><g class="iso-solid"><path class="iso-fill" d="M239.1 244.6L239.5 242.3L240.8 240.2L242.9 238.2L245.8 236.5L299.8 209.5L303.3 208L307.2 207L311.5 206.3L316 206.1L320.5 206.3L324.8 207L328.7 208L332.2 209.5L440.2 263.5L443.1 265.2L445.2 267.2L446.5 269.3L446.9 271.6L446.9 288.1L446.5 290.3L445.2 292.5L443.1 294.5L440.2 296.2L386.2 323.2L382.7 324.6L378.8 325.7L374.5 326.3L370 326.6L365.5 326.3L361.2 325.7L357.3 324.6L353.8 323.2L245.8 269.2L242.9 267.5L240.8 265.5L239.5 263.3L239.1 261.1Z"/><path class="iso-shade" data-shade="0" d="M446.9 288.1L446.5 290.3L446.5 273.8L446.9 271.6ZM446.5 290.3L445.2 292.5L445.2 276L446.5 273.8ZM445.2 292.5L443.1 294.5L443.1 277.9L445.2 276ZM443.1 294.5L440.2 296.2L440.2 279.7L443.1 277.9ZM440.2 296.2L386.2 323.2L386.2 306.7L440.2 279.7ZM386.2 323.2L382.7 324.6L382.7 308.1L386.2 306.7Z"/><path class="iso-shade" data-shade="1" d="M382.7 324.6L378.8 325.7L378.8 309.2L382.7 308.1ZM378.8 325.7L374.5 326.3L374.5 309.8L378.8 309.2ZM374.5 326.3L370 326.6L370 310L374.5 309.8Z"/><path class="iso-shade" data-shade="2" d="M370 326.6L365.5 326.3L365.5 309.8L370 310ZM365.5 326.3L361.2 325.7L361.2 309.2L365.5 309.8ZM361.2 325.7L357.3 324.6L357.3 308.1L361.2 309.2Z"/><path class="iso-shade" data-shade="3" d="M357.3 324.6L353.8 323.2L353.8 306.7L357.3 308.1ZM353.8 323.2L245.8 269.2L245.8 252.7L353.8 306.7ZM245.8 269.2L242.9 267.5L242.9 250.9L245.8 252.7ZM242.9 267.5L240.8 265.5L240.8 249L242.9 250.9ZM240.8 265.5L239.5 263.3L239.5 246.8L240.8 249ZM239.5 263.3L239.1 261.1L239.1 244.6L239.5 246.8Z"/><path class="iso-top" d="M440.2 263.5L443.1 265.2L445.2 267.2L446.5 269.3L446.9 271.6L446.5 273.8L445.2 276L443.1 277.9L440.2 279.7L386.2 306.7L382.7 308.1L378.8 309.2L374.5 309.8L370 310L365.5 309.8L361.2 309.2L357.3 308.1L353.8 306.7L245.8 252.7L242.9 250.9L240.8 249L239.5 246.8L239.1 244.6L239.5 242.3L240.8 240.2L242.9 238.2L245.8 236.5L299.8 209.5L303.3 208L307.2 207L311.5 206.3L316 206.1L320.5 206.3L324.8 207L328.7 208L332.2 209.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M446.9 271.6L446.5 273.8L445.2 276L443.1 277.9L440.2 279.7L386.2 306.7L382.7 308.1L378.8 309.2L374.5 309.8L370 310L365.5 309.8L361.2 309.2L357.3 308.1L353.8 306.7L245.8 252.7L242.9 250.9L240.8 249L239.5 246.8L239.1 244.6"/><path class="iso-line iso-bevel" data-tone="faint" d="M446.9 271.6L444.2 273.6L443.1 275.5L441.2 277.3L438.5 278.9L384.7 305.8L381.5 307.1L377.9 308.1L374 308.7L370 308.9L366 308.7L362.1 308.1L358.5 307.1L355.3 305.8L247.5 251.9L244.8 250.3L242.9 248.5L241.8 246.6L239.1 244.6"/><path class="iso-line iso-edge" data-tone="mid" d="M239.1 244.6L239.5 242.3L240.8 240.2L242.9 238.2L245.8 236.5L299.8 209.5L303.3 208L307.2 207L311.5 206.3L316 206.1L320.5 206.3L324.8 207L328.7 208L332.2 209.5L440.2 263.5L443.1 265.2L445.2 267.2L446.5 269.3L446.9 271.6M446.9 288.1L446.5 290.3L445.2 292.5L443.1 294.5L440.2 296.2L386.2 323.2L382.7 324.6L378.8 325.7L374.5 326.3L370 326.6L365.5 326.3L361.2 325.7L357.3 324.6L353.8 323.2L245.8 269.2L242.9 267.5L240.8 265.5L239.5 263.3L239.1 261.1M446.9 271.6L446.9 288.1M239.1 244.6L239.1 261.1"/></g><g class="iso-solid"><path class="iso-fill" d="M253.7 223.1L254.1 221.2L255.2 219.4L256.9 217.8L259.3 216.3L302.5 194.7L305.4 193.5L308.7 192.7L312.3 192.1L316 191.9L319.7 192.1L323.3 192.7L326.6 193.5L329.5 194.7L426.7 243.3L429.1 244.8L430.8 246.4L431.9 248.2L432.3 250.1L432.3 271.6L431.9 273.4L430.8 275.2L429.1 276.9L426.7 278.3L383.5 299.9L380.6 301.1L377.3 302L373.7 302.5L370 302.7L366.3 302.5L362.7 302L359.4 301.1L356.5 299.9L259.3 251.3L256.9 249.9L255.2 248.2L254.1 246.4L253.7 244.6Z"/><path class="iso-shade" data-shade="0" d="M432.3 271.6L431.9 273.4L431.9 251.9L432.3 250.1ZM431.9 273.4L430.8 275.2L430.8 253.7L431.9 251.9ZM430.8 275.2L429.1 276.9L429.1 255.4L430.8 253.7ZM429.1 276.9L426.7 278.3L426.7 256.8L429.1 255.4ZM426.7 278.3L383.5 299.9L383.5 278.4L426.7 256.8ZM383.5 299.9L380.6 301.1L380.6 279.6L383.5 278.4Z"/><path class="iso-shade" data-shade="1" d="M380.6 301.1L377.3 302L377.3 280.5L380.6 279.6ZM377.3 302L373.7 302.5L373.7 281L377.3 280.5ZM373.7 302.5L370 302.7L370 281.2L373.7 281Z"/><path class="iso-shade" data-shade="2" d="M370 302.7L366.3 302.5L366.3 281L370 281.2ZM366.3 302.5L362.7 302L362.7 280.5L366.3 281ZM362.7 302L359.4 301.1L359.4 279.6L362.7 280.5Z"/><path class="iso-shade" data-shade="3" d="M359.4 301.1L356.5 299.9L356.5 278.4L359.4 279.6ZM356.5 299.9L259.3 251.3L259.3 229.8L356.5 278.4ZM259.3 251.3L256.9 249.9L256.9 228.4L259.3 229.8ZM256.9 249.9L255.2 248.2L255.2 226.7L256.9 228.4ZM255.2 248.2L254.1 246.4L254.1 224.9L255.2 226.7ZM254.1 246.4L253.7 244.6L253.7 223.1L254.1 224.9Z"/><path class="iso-top" d="M426.7 243.3L429.1 244.8L430.8 246.4L431.9 248.2L432.3 250.1L431.9 251.9L430.8 253.7L429.1 255.4L426.7 256.8L383.5 278.4L380.6 279.6L377.3 280.5L373.7 281L370 281.2L366.3 281L362.7 280.5L359.4 279.6L356.5 278.4L259.3 229.8L256.9 228.4L255.2 226.7L254.1 224.9L253.7 223.1L254.1 221.2L255.2 219.4L256.9 217.8L259.3 216.3L302.5 194.7L305.4 193.5L308.7 192.7L312.3 192.1L316 191.9L319.7 192.1L323.3 192.7L326.6 193.5L329.5 194.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M432.3 250.1L431.9 251.9L430.8 253.7L429.1 255.4L426.7 256.8L383.5 278.4L380.6 279.6L377.3 280.5L373.7 281L370 281.2L366.3 281L362.7 280.5L359.4 279.6L356.5 278.4L259.3 229.8L256.9 228.4L255.2 226.7L254.1 224.9L253.7 223.1"/><path class="iso-line iso-bevel" data-tone="faint" d="M432.3 250.1L429.7 251.7L428.7 253.3L427.2 254.7L425 256.1L382 277.6L379.3 278.7L376.4 279.4L373.3 279.9L370 280.1L366.7 279.9L363.6 279.4L360.7 278.7L358 277.6L261 229.1L258.8 227.7L257.3 226.3L256.3 224.7L253.7 223.1"/><path class="iso-line iso-edge" data-tone="lo" d="M253.7 223.1L254.1 221.2L255.2 219.4L256.9 217.8L259.3 216.3L302.5 194.7L305.4 193.5L308.7 192.7L312.3 192.1L316 191.9L319.7 192.1L323.3 192.7L326.6 193.5L329.5 194.7L426.7 243.3L429.1 244.8L430.8 246.4L431.9 248.2L432.3 250.1M432.3 271.6L431.9 273.4L430.8 275.2L429.1 276.9L426.7 278.3L383.5 299.9L380.6 301.1L377.3 302L373.7 302.5L370 302.7L366.3 302.5L362.7 302L359.4 301.1L356.5 299.9L259.3 251.3L256.9 249.9L255.2 248.2L254.1 246.4L253.7 244.6M432.3 250.1L432.3 271.6M253.7 223.1L253.7 244.6"/></g><polygon id="hu-shell" points="264.7,238.3 372.7,292.3 364.6,227 272.8,181.1" fill="rgba(150,195,235,.12)" fill-opacity="0.12" stroke="#8fb8dd" stroke-width="1.2"/><ellipse cx="318.7" cy="204.1" rx="45.9" ry="13.8" fill="rgba(150,195,235,.16)" stroke="#8fb8dd" stroke-width="1"/><g id="hu-water-g"><polygon id="hu-water" points="" fill="rgba(90,160,225,.38)" stroke="none"/><ellipse id="hu-watertop" cx="318.7" cy="262" rx="48.6" ry="14.6" fill="rgba(120,185,240,.55)" stroke="none"/></g><line x1="270.1" y1="193" x2="367.3" y2="241.6" stroke="#e5484d" stroke-width="1.4" stroke-dasharray="5 3"/><text x="371.4" y="246.6" font-size="8.5" font-weight="700" fill="#e5484d" font-family="ui-sans-serif,system-ui,sans-serif">MAX 最高水位</text><g id="hu-membrane-g"><ellipse class="hu-ripple" cx="318.7" cy="260.3" rx="13" ry="4" fill="none" stroke="#5b9bd5" stroke-width="1.4"/><ellipse class="hu-ripple d2" cx="318.7" cy="260.3" rx="13" ry="4" fill="none" stroke="#5b9bd5" stroke-width="1.4"/><ellipse class="hu-ripple d3" cx="318.7" cy="260.3" rx="13" ry="4" fill="none" stroke="#5b9bd5" stroke-width="1.4"/><ellipse cx="318.7" cy="260.3" rx="11" ry="3.6" fill="#aeb9c2" stroke="#6a7680" stroke-width="1"/><ellipse cx="318.7" cy="260.3" rx="5" ry="1.8" fill="#7e8b95" stroke="none"/></g><polygon points="303.8,196.7 333.5,211.5 328.1,193.9 309.2,184.5" fill="rgba(150,195,235,.20)" stroke="#8fb8dd" stroke-width="1.1"/><ellipse cx="318.7" cy="189.2" rx="9.5" ry="2.6" fill="rgba(90,120,150,.35)" stroke="#8fb8dd" stroke-width="1"/><g id="hu-mist"></g><g id="hu-fan-g"><circle cx="299" cy="287.5" r="13.5" fill="rgba(230,238,244,.9)" stroke="#6a7680" stroke-width="1.4"/><g id="hu-fanblades"><path d="M302.4,287.5 Q305.5,295.7 298.4,292.1 Z" fill="#9fb3c2" stroke="#6a7680" stroke-width="0.6"/><path d="M297.3,290.4 Q288.6,289 295.3,284.7 Z" fill="#9fb3c2" stroke="#6a7680" stroke-width="0.6"/><path d="M297.3,284.6 Q302.9,277.7 303.2,285.7 Z" fill="#9fb3c2" stroke="#6a7680" stroke-width="0.6"/><circle cx="299" cy="287.5" r="3" fill="#6a7680"/></g><circle cx="299" cy="287.5" r="13.5" fill="none" stroke="#6a7680" stroke-width="0.7" stroke-dasharray="2.5 2.5" opacity="0.65"/></g><g class="fx-part" data-tip="power"><circle cx="255.8" cy="265.9" r="6" fill="#e8edf1" stroke="#6a7680" stroke-width="1.2"/><path d="M255.8 262.5 v3.6 M253 264.1 a3.4 3.4 0 1 0 5.6 0" fill="none" stroke="#6a7680" stroke-width="1.3" stroke-linecap="round"/><circle id="hu-led" cx="266.8" cy="265.9" r="2.4" fill="#c3cbd1" stroke="#6a7680" stroke-width="0.7"/></g><g id="hu-leak" opacity="0"><path d="M243.1 266.8 C240.5 270.8 240.9 273.2 243.1 273.2 C245.3 273.2 245.7 270.8 243.1 266.8 Z" fill="rgba(80,150,220,.85)"/><path d="M270.1 281.1 C267.5 285.1 267.9 287.5 270.1 287.5 C272.3 287.5 272.7 285.1 270.1 281.1 Z" fill="rgba(80,150,220,.85)"/><path d="M313.3 301.4 C310.7 305.4 311.1 307.8 313.3 307.8 C315.5 307.8 315.9 305.4 313.3 301.4 Z" fill="rgba(80,150,220,.85)"/><path d="M340.3 315.9 C337.7 319.9 338.1 322.3 340.3 322.3 C342.5 322.3 342.9 319.9 340.3 315.9 Z" fill="rgba(80,150,220,.85)"/></g><g class="iso-solid"><path class="iso-fill" d="M393.6 331.5L394 330L395.2 328.6L397 327.4L432.1 309.8L434.5 308.9L437.2 308.4L440.2 308.2L443.2 308.4L445.9 308.9L448.3 309.8L494.2 332.8L496 334L497.2 335.4L497.6 336.9L497.6 343.5L497.2 344.9L496 346.3L494.2 347.5L459.1 365.1L456.7 366L454 366.5L451 366.7L448 366.5L445.3 366L442.9 365.1L397 342.1L395.2 340.9L394 339.5L393.6 338.1Z"/><path class="iso-shade" data-shade="0" d="M497.6 343.5L497.2 344.9L497.2 338.3L497.6 336.9ZM497.2 344.9L496 346.3L496 339.7L497.2 338.3ZM496 346.3L494.2 347.5L494.2 340.9L496 339.7ZM494.2 347.5L459.1 365.1L459.1 358.5L494.2 340.9ZM459.1 365.1L456.7 366L456.7 359.4L459.1 358.5Z"/><path class="iso-shade" data-shade="1" d="M456.7 366L454 366.5L454 359.9L456.7 359.4ZM454 366.5L451 366.7L451 360.1L454 359.9Z"/><path class="iso-shade" data-shade="2" d="M451 366.7L448 366.5L448 359.9L451 360.1ZM448 366.5L445.3 366L445.3 359.4L448 359.9Z"/><path class="iso-shade" data-shade="3" d="M445.3 366L442.9 365.1L442.9 358.5L445.3 359.4ZM442.9 365.1L397 342.1L397 335.5L442.9 358.5ZM397 342.1L395.2 340.9L395.2 334.3L397 335.5ZM395.2 340.9L394 339.5L394 332.9L395.2 334.3ZM394 339.5L393.6 338.1L393.6 331.5L394 332.9Z"/><path class="iso-top" d="M494.2 332.8L496 334L497.2 335.4L497.6 336.9L497.2 338.3L496 339.7L494.2 340.9L459.1 358.5L456.7 359.4L454 359.9L451 360.1L448 359.9L445.3 359.4L442.9 358.5L397 335.5L395.2 334.3L394 332.9L393.6 331.5L394 330L395.2 328.6L397 327.4L432.1 309.8L434.5 308.9L437.2 308.4L440.2 308.2L443.2 308.4L445.9 308.9L448.3 309.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M497.6 336.9L497.2 338.3L496 339.7L494.2 340.9L459.1 358.5L456.7 359.4L454 359.9L451 360.1L448 359.9L445.3 359.4L442.9 358.5L397 335.5L395.2 334.3L394 332.9L393.6 331.5"/><path class="iso-line iso-bevel" data-tone="faint" d="M497.6 336.9L495.3 338.1L494.4 339.2L492.8 340.3L457.8 357.7L455.8 358.5L453.5 359L451 359.2L448.5 359L446.2 358.5L444.2 357.7L398.4 334.9L396.8 333.8L395.9 332.7L393.6 331.5"/><path class="iso-line iso-edge" data-tone="lo" d="M393.6 331.5L394 330L395.2 328.6L397 327.4L432.1 309.8L434.5 308.9L437.2 308.4L440.2 308.2L443.2 308.4L445.9 308.9L448.3 309.8L494.2 332.8L496 334L497.2 335.4L497.6 336.9M497.6 343.5L497.2 344.9L496 346.3L494.2 347.5L459.1 365.1L456.7 366L454 366.5L451 366.7L448 366.5L445.3 366L442.9 365.1L397 342.1L395.2 340.9L394 339.5L393.6 338.1M497.6 336.9L497.6 343.5M393.6 331.5L393.6 338.1"/></g><g class="iso-solid"><path class="iso-fill" d="M441.4 307.7L441.7 306.9L442.6 306.2L444 305.8L445.6 305.6L447.2 305.8L448.6 306.2L449.5 306.9L449.8 307.7L449.8 334.2L449.5 335L448.6 335.6L447.2 336.1L445.6 336.3L444 336.1L442.6 335.6L441.7 335L441.4 334.2Z"/><path class="iso-shade" data-shade="0" d="M448.6 335.6L447.2 336.1L447.2 309.6L448.6 309.2ZM449.8 334.2L449.5 335L449.5 308.5L449.8 307.7ZM449.5 335L448.6 335.6L448.6 309.2L449.5 308.5Z"/><path class="iso-shade" data-shade="1" d="M447.2 336.1L445.6 336.3L445.6 309.8L447.2 309.6Z"/><path class="iso-shade" data-shade="2" d="M445.6 336.3L444 336.1L444 309.6L445.6 309.8Z"/><path class="iso-shade" data-shade="3" d="M444 336.1L442.6 335.6L442.6 309.2L444 309.6ZM442.6 335.6L441.7 335L441.7 308.5L442.6 309.2ZM441.7 335L441.4 334.2L441.4 307.7L441.7 308.5Z"/><path class="iso-top" d="M448.6 309.2L447.2 309.6L445.6 309.8L444 309.6L442.6 309.2L441.7 308.5L441.4 307.7L441.7 306.9L442.6 306.2L444 305.8L445.6 305.6L447.2 305.8L448.6 306.2L449.5 306.9L449.8 307.7L449.5 308.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M449.8 307.7L449.5 308.5L448.6 309.2L447.2 309.6L445.6 309.8L444 309.6L442.6 309.2L441.7 308.5L441.4 307.7"/><path class="iso-line iso-edge" data-tone="mid" d="M441.4 307.7L441.7 306.9L442.6 306.2L444 305.8L445.6 305.6L447.2 305.8L448.6 306.2L449.5 306.9L449.8 307.7M449.8 334.2L449.5 335L448.6 335.6L447.2 336.1L445.6 336.3L444 336.1L442.6 335.6L441.7 335L441.4 334.2M441.4 307.7L441.4 334.2M449.8 307.7L449.8 334.2"/></g><g class="fx-part" data-tip="hygro"><circle cx="445.6" cy="281.2" r="27" fill="#fdfdf8" stroke="#8a8a8f" stroke-width="1.6"/><path d="M432.9 262.6 A22.5 22.5 0 0 1 452.2 259.7" fill="none" stroke="#30a46c" stroke-width="3.4"/><line x1="423.9" y1="293.7" x2="427.8" y2="291.5" stroke="#8a8a8f" stroke-width="1.1"/><text x="431.3" y="292.1" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">20</text><line x1="420.7" y1="279.3" x2="425.2" y2="279.7" stroke="#8a8a8f" stroke-width="1.1"/><text x="429.1" y="282.6" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">30</text><line x1="426.1" y1="265.6" x2="429.6" y2="268.4" stroke="#8a8a8f" stroke-width="1.1"/><text x="432.7" y="273.5" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">40</text><line x1="438.2" y1="257.3" x2="439.6" y2="261.6" stroke="#8a8a8f" stroke-width="1.1"/><text x="440.7" y="268" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">50</text><line x1="453" y1="257.3" x2="451.6" y2="261.6" stroke="#8a8a8f" stroke-width="1.1"/><text x="450.5" y="268" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">60</text><line x1="465.1" y1="265.6" x2="461.6" y2="268.4" stroke="#8a8a8f" stroke-width="1.1"/><text x="458.5" y="273.5" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">70</text><line x1="470.5" y1="279.3" x2="466" y2="279.7" stroke="#8a8a8f" stroke-width="1.1"/><text x="462.1" y="282.6" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">80</text><line x1="467.3" y1="293.7" x2="463.4" y2="291.5" stroke="#8a8a8f" stroke-width="1.1"/><text x="459.9" y="292.1" text-anchor="middle" font-size="6.4" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">90</text><text x="445.6" y="272.2" text-anchor="middle" font-size="7" fill="#8a8a8f" font-family="ui-sans-serif,system-ui,sans-serif">相对湿度 %</text><g id="hu-needle"><line x1="445.6" y1="286.2" x2="445.6" y2="262.2" stroke="#e5484d" stroke-width="2" stroke-linecap="round"/></g><circle cx="445.6" cy="281.2" r="3" fill="#57575a"/><text id="hu-humnum" x="445.6" y="296.2" text-anchor="middle" font-size="11.5" font-weight="800" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">35%</text></g><text x="414.6" y="354.6" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">湿度计</text><g class="fx-part" data-tip="purewater"><g class="iso-solid"><path class="iso-fill" d="M214.4 248.8L215.2 247.1L216.7 245.6L218.8 244.2L221.5 243.2L224.5 242.4L227.9 242L231.3 242L234.6 242.4L237.7 243.2L240.4 244.2L242.5 245.6L244 247.1L244.8 248.8L244.8 283.6L244 285.2L242.5 286.8L240.4 288.1L237.7 289.2L234.6 289.9L231.3 290.3L227.9 290.3L224.5 289.9L221.5 289.2L218.8 288.1L216.7 286.8L215.2 285.2L214.4 283.6Z"/><path class="iso-shade" data-shade="0" d="M240.4 288.1L237.7 289.2L237.7 256.1L240.4 255ZM244.8 283.6L244 285.2L244 252.2L244.8 250.5ZM244 285.2L242.5 286.8L242.5 253.7L244 252.2ZM242.5 286.8L240.4 288.1L240.4 255L242.5 253.7Z"/><path class="iso-shade" data-shade="1" d="M237.7 289.2L234.6 289.9L234.6 256.8L237.7 256.1ZM234.6 289.9L231.3 290.3L231.3 257.2L234.6 256.8Z"/><path class="iso-shade" data-shade="2" d="M231.3 290.3L227.9 290.3L227.9 257.2L231.3 257.2ZM227.9 290.3L224.5 289.9L224.5 256.8L227.9 257.2ZM224.5 289.9L221.5 289.2L221.5 256.1L224.5 256.8Z"/><path class="iso-shade" data-shade="3" d="M221.5 289.2L218.8 288.1L218.8 255L221.5 256.1ZM218.8 288.1L216.7 286.8L216.7 253.7L218.8 255ZM216.7 286.8L215.2 285.2L215.2 252.2L216.7 253.7ZM215.2 285.2L214.4 283.6L214.4 250.5L215.2 252.2Z"/><path class="iso-top" d="M240.4 255L237.7 256.1L234.6 256.8L231.3 257.2L227.9 257.2L224.5 256.8L221.5 256.1L218.8 255L216.7 253.7L215.2 252.2L214.4 250.5L214.4 248.8L215.2 247.1L216.7 245.6L218.8 244.2L221.5 243.2L224.5 242.4L227.9 242L231.3 242L234.6 242.4L237.7 243.2L240.4 244.2L242.5 245.6L244 247.1L244.8 248.8L244.8 250.5L244 252.2L242.5 253.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M244.8 250.5L244 252.2L242.5 253.7L240.4 255L237.7 256.1L234.6 256.8L231.3 257.2L227.9 257.2L224.5 256.8L221.5 256.1L218.8 255L216.7 253.7L215.2 252.2L214.4 250.5"/><path class="iso-line iso-edge" data-tone="mid" d="M214.4 250.5L214.4 248.8L215.2 247.1L216.7 245.6L218.8 244.2L221.5 243.2L224.5 242.4L227.9 242L231.3 242L234.6 242.4L237.7 243.2L240.4 244.2L242.5 245.6L244 247.1L244.8 248.8L244.8 250.5M244.8 283.6L244 285.2L242.5 286.8L240.4 288.1L237.7 289.2L234.6 289.9L231.3 290.3L227.9 290.3L224.5 289.9L221.5 289.2L218.8 288.1L216.7 286.8L215.2 285.2L214.4 283.6M214.4 250.5L214.4 283.6M244.8 250.5L244.8 283.6"/></g><g class="iso-solid"><path class="iso-fill" d="M221.3 207.6L222.1 206.4L223.6 205.3L225.8 204.6L228.3 204.2L230.9 204.2L233.4 204.6L235.5 205.3L237.1 206.4L237.9 207.6L237.9 250.3L237.1 251.5L235.5 252.6L233.4 253.4L230.9 253.8L228.3 253.8L225.8 253.4L223.6 252.6L222.1 251.5L221.3 250.3L221.3 249Z"/><path class="iso-shade" data-shade="0" d="M235.5 252.6L233.4 253.4L233.4 212L235.5 211.3ZM237.9 250.3L237.1 251.5L237.1 210.2L237.9 209ZM237.1 251.5L235.5 252.6L235.5 211.3L237.1 210.2Z"/><path class="iso-shade" data-shade="1" d="M233.4 253.4L230.9 253.8L230.9 212.4L233.4 212Z"/><path class="iso-shade" data-shade="2" d="M230.9 253.8L228.3 253.8L228.3 212.4L230.9 212.4ZM228.3 253.8L225.8 253.4L225.8 212L228.3 212.4Z"/><path class="iso-shade" data-shade="3" d="M225.8 253.4L223.6 252.6L223.6 211.3L225.8 212ZM223.6 252.6L222.1 251.5L222.1 210.2L223.6 211.3ZM222.1 251.5L221.3 250.3L221.3 209L222.1 210.2Z"/><path class="iso-top" d="M235.5 211.3L233.4 212L230.9 212.4L228.3 212.4L225.8 212L223.6 211.3L222.1 210.2L221.3 209L221.3 207.6L222.1 206.4L223.6 205.3L225.8 204.6L228.3 204.2L230.9 204.2L233.4 204.6L235.5 205.3L237.1 206.4L237.9 207.6L237.9 209L237.1 210.2Z"/><path class="iso-line iso-crease" data-tone="faint" d="M237.9 209L237.1 210.2L235.5 211.3L233.4 212L230.9 212.4L228.3 212.4L225.8 212L223.6 211.3L222.1 210.2L221.3 209"/><path class="iso-line iso-edge" data-tone="lo" d="M221.3 209L221.3 207.6L222.1 206.4L223.6 205.3L225.8 204.6L228.3 204.2L230.9 204.2L233.4 204.6L235.5 205.3L237.1 206.4L237.9 207.6L237.9 209M237.9 250.3L237.1 251.5L235.5 252.6L233.4 253.4L230.9 253.8L228.3 253.8L225.8 253.4L223.6 252.6L222.1 251.5L221.3 250.3M221.3 209L221.3 250.3M237.9 209L237.9 250.3"/></g><g class="iso-solid"><path class="iso-fill" d="M219 195.6L220.1 194L222 192.6L224.7 191.6L227.9 191.1L231.3 191.1L234.4 191.6L237.1 192.6L239.1 194L240.1 195.6L240.1 242.2L239.1 243.8L237.1 245.2L234.4 246.1L231.3 246.7L227.9 246.7L224.7 246.1L222 245.2L220.1 243.8L219 242.2Z"/><path class="iso-shade" data-shade="0" d="M237.1 245.2L234.4 246.1L234.4 201.2L237.1 200.2ZM240.1 242.2L239.1 243.8L239.1 198.8L240.1 197.2ZM239.1 243.8L237.1 245.2L237.1 200.2L239.1 198.8Z"/><path class="iso-shade" data-shade="1" d="M234.4 246.1L231.3 246.7L231.3 201.7L234.4 201.2Z"/><path class="iso-shade" data-shade="2" d="M231.3 246.7L227.9 246.7L227.9 201.7L231.3 201.7ZM227.9 246.7L224.7 246.1L224.7 201.2L227.9 201.7Z"/><path class="iso-shade" data-shade="3" d="M224.7 246.1L222 245.2L222 200.2L224.7 201.2ZM222 245.2L220.1 243.8L220.1 198.8L222 200.2ZM220.1 243.8L219 242.2L219 197.2L220.1 198.8Z"/><path class="iso-top" d="M237.1 200.2L234.4 201.2L231.3 201.7L227.9 201.7L224.7 201.2L222 200.2L220.1 198.8L219 197.2L219 195.6L220.1 194L222 192.6L224.7 191.6L227.9 191.1L231.3 191.1L234.4 191.6L237.1 192.6L239.1 194L240.1 195.6L240.1 197.2L239.1 198.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M240.1 197.2L239.1 198.8L237.1 200.2L234.4 201.2L231.3 201.7L227.9 201.7L224.7 201.2L222 200.2L220.1 198.8L219 197.2"/><path class="iso-line iso-edge" data-tone="lo" d="M219 197.2L219 195.6L220.1 194L222 192.6L224.7 191.6L227.9 191.1L231.3 191.1L234.4 191.6L237.1 192.6L239.1 194L240.1 195.6L240.1 197.2M240.1 242.2L239.1 243.8L237.1 245.2L234.4 246.1L231.3 246.7L227.9 246.7L224.7 246.1L222 245.2L220.1 243.8L219 242.2M219 197.2L219 242.2M240.1 197.2L240.1 242.2"/></g><text x="218.2" y="273.5" text-anchor="middle" font-size="9" fill="#57575a" font-family="ui-sans-serif,system-ui,sans-serif">纯净水</text></g><g class="iso-solid"><path class="iso-fill" d="M363.8 345.4L365.5 342.8L368.6 340.7L373 339.1L378.1 338.3L383.5 338.3L388.6 339.1L393 340.7L396.1 342.8L397.8 345.4L397.8 359.7L396.1 362.2L393 364.4L388.6 366L383.5 366.8L378.1 366.8L373 366L368.6 364.4L365.5 362.2L363.8 359.7L363.8 357Z"/><path class="iso-shade" data-shade="0" d="M393 364.4L388.6 366L388.6 354.4L393 352.8ZM397.8 359.7L396.1 362.2L396.1 350.6L397.8 348.1ZM396.1 362.2L393 364.4L393 352.8L396.1 350.6Z"/><path class="iso-shade" data-shade="1" d="M388.6 366L383.5 366.8L383.5 355.2L388.6 354.4Z"/><path class="iso-shade" data-shade="2" d="M383.5 366.8L378.1 366.8L378.1 355.2L383.5 355.2ZM378.1 366.8L373 366L373 354.4L378.1 355.2Z"/><path class="iso-shade" data-shade="3" d="M373 366L368.6 364.4L368.6 352.8L373 354.4ZM368.6 364.4L365.5 362.2L365.5 350.6L368.6 352.8ZM365.5 362.2L363.8 359.7L363.8 348.1L365.5 350.6Z"/><path class="iso-top" d="M393 352.8L388.6 354.4L383.5 355.2L378.1 355.2L373 354.4L368.6 352.8L365.5 350.6L363.8 348.1L363.8 345.4L365.5 342.8L368.6 340.7L373 339.1L378.1 338.3L383.5 338.3L388.6 339.1L393 340.7L396.1 342.8L397.8 345.4L397.8 348.1L396.1 350.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M397.8 348.1L396.1 350.6L393 352.8L388.6 354.4L383.5 355.2L378.1 355.2L373 354.4L368.6 352.8L365.5 350.6L363.8 348.1"/><path class="iso-line iso-edge" data-tone="lo" d="M363.8 348.1L363.8 345.4L365.5 342.8L368.6 340.7L373 339.1L378.1 338.3L383.5 338.3L388.6 339.1L393 340.7L396.1 342.8L397.8 345.4L397.8 348.1M397.8 359.7L396.1 362.2L393 364.4L388.6 366L383.5 366.8L378.1 366.8L373 366L368.6 364.4L365.5 362.2L363.8 359.7M363.8 348.1L363.8 359.7M397.8 348.1L397.8 359.7"/></g><circle cx="380.8" cy="338.5" r="6" fill="#7fb069" opacity="0.9"/><circle cx="370" cy="337.1" r="4.6" fill="#7fb069" opacity="0.9"/><circle cx="383.5" cy="343.9" r="4.6" fill="#7fb069" opacity="0.9"/><circle cx="387.6" cy="335.1" r="4.2" fill="#7fb069" opacity="0.9"/><text x="364.6" y="364.8" text-anchor="middle" font-size="9.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">绿植</text><g class="fx-part" data-tip="outlet"><text x="361.9" y="156" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">出雾口</text></g><g class="fx-part" data-tip="tank"><text x="386.2" y="264.3" text-anchor="start" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">水箱</text></g><g class="fx-part" data-tip="membrane"><text x="259.3" y="228.9" text-anchor="end" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">换能片</text></g><g class="fx-part" data-tip="fan"><text x="289" y="300" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">风扇（底座里）</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="mist" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>白雾 = 被打碎的微小水滴</span><span class="iso-key"><svg class="iso-swatch" data-mark="water" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>水位随出雾缓缓下降</span><span class="iso-key"><svg class="iso-swatch" data-mark="comf" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>湿度 45%~60% 是舒适区</span></span><span class="iso-caption">超声波加湿器不加热：换能片以每秒约170万次的频率振动，把水打成微米级水滴，风扇再把雾送出。注水别超 MAX 线，尽量用纯净水，水空了要关机防干烧。</span></figcaption></figure>
+<div class="fx-steps"><button class="fx-stepbtn active" data-step="0">1 · 认识部件</button><button class="fx-stepbtn" data-step="1">2 · 水怎么变成雾</button><button class="fx-stepbtn" data-step="2">3 · 雾怎么出去</button><button class="fx-stepbtn" data-step="3">4 · 房间湿度变化</button><button class="fx-stepbtn" data-step="4">5 · 避坑与保养</button></div><div class="fx-steptext" id="fx-steptext"></div>
+<div class="fx-controls">
+<div class="hu-btnrow"><button class="fx-btn primary" id="btn-power">⏻ 开机</button><button class="fx-btn" id="btn-view">👁 外观模式</button><button class="fx-btn" id="btn-reset">重置</button></div>
+<div class="hu-sliderrow"><span>注水量</span><input type="range" id="hu-waterslider" min="0" max="100" value="70" step="1"><span id="hu-waterpct">70%</span></div>
+<div class="hu-sliderrow"><span>风速</span><button class="fx-btn hu-fanbtn" data-fan="1">低</button><button class="fx-btn hu-fanbtn active" data-fan="2">中</button><button class="fx-btn hu-fanbtn" data-fan="3">高</button></div>
+<div class="fx-readline" id="fx-readline">待机 · 湿度 35% · 水量 70%</div>
+<div class="fx-msg" id="fx-msg"></div></div>
+
+<div class="quiz" id="quiz"><div class="quiz-title">小测验</div><div id="quiz-body"></div></div></main><script type="module">var STEPS=[{"t":"1 · 认识部件","html":"点一点图上的名字看说明书：<b>水箱</b>装水、<b>换能片</b>（震荡膜片）藏在水箱底部、<b>风扇</b>在底座里、雾从顶部<b>出雾口</b>出去，旁边<b>湿度计</b>盯着房间湿度。这台机器全程<b>不加热</b>——它出的不是「蒸汽」，是冷雾。"},{"t":"2 · 水怎么变成雾","html":"点「⏻ 开机」看水面：换能片以<b>每秒约 170 万次</b>的超声波频率振动，把表面的水「打碎」成 <b>1~5 微米</b>的小水滴——这就是雾。⚠️ 看得见的白雾是<b>小水滴</b>；真正的水蒸气是气体，<b>看不见</b>。"},{"t":"3 · 雾怎么出去","html":"光有雾还不够：底座里的<b>风扇</b>转动，把雾从出雾口<b>吹送</b>到房间里。切换<b>风速</b>试试——风越大，雾飘得越远、湿度涨得越快，水也用得越快（盯着水位看）。"},{"t":"4 · 房间湿度变化","html":"盯着湿度计：开机后读数从 <b>35%</b> 一路爬升。人体最舒服的相对湿度是 <b>45%~60%</b>（表盘上的绿色弧段），到了就该关小或关机——<b>太潮</b>同样不好：容易滋生霉菌、被子发黏。"},{"t":"5 · 避坑与保养","html":"三个大坑：① 注水<b>别超过 MAX 线</b>——我刚帮你加满试试，看到底座漏水了吧？② 尽量用<b>纯净水</b>：自来水里的矿物质会变成白色粉末飘出来（「白粉」），还结水垢；③ 水箱<b>没水要关机</b>，换能片干烧会烧坏——本页水用完会自动停机保护。"}];
+var TIPS={"outlet":["出雾口","雾从这里被风扇送出来。出雾口别对着木家具和电器直吹，凝结的水珠会把它们泡坏。"],"tank":["水箱","装水的地方，侧面的红虚线是 MAX 最高水位线。加水别超过它，不然水会从漫水口溢出来漏到桌面上。"],"membrane":["换能片（震荡膜片）","加湿器的心脏：一片压电陶瓷，通电后以每秒约170万次的频率振动，把水打成微米级小水滴。用久了表面结水垢，出雾量会变小，要定期擦洗。"],"fan":["风扇","藏在底座里，负责把水箱里生成的雾吹送出出雾口。风速越大，雾送得越远、加湿越快，耗水也越快。"],"power":["电源开关","点下面的「⏻ 开机」按钮控制它。指示灯亮绿 = 正在工作；水箱没水时机器会自动停机，保护换能片不被干烧。"],"hygro":["湿度计","显示房间的相对湿度。指针下面的数字和指针是同一个「大脑」在算：开机加湿就涨，关机就慢慢回落。绿色弧段 45%~60% 是舒适区。"],"purewater":["纯净水","给加湿器喝的水首选纯净水或蒸馏水。自来水含钙镁等矿物质，会被打成白色粉末飘满屋（白粉），还会让换能片结垢。"]};
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var OUTX=329.5,OUTY=178.8;
+var WBLX=270.1,WBLY=237.7,WBRX=367.3,WBRY=286.3;
+var WSL0X=270.1,WSL0Y=237.7,WSL1X=270.1,WSL1Y=189.7;
+var WSR0X=367.3,WSR0Y=286.3,WSR1X=367.3,WSR1Y=238.3;
+var WC0X=318.7,WC0Y=262,WC1Y=214;
+var HGX=445.6,HGY=281.2;
+var power=false,water=0.7,fan=2,hum=35,viewCut=true,leak=false,dryWarned=false;
+var roEl=document.querySelector("[data-readout]");
+function msg(t){$("fx-msg").textContent=t;}
+function producing(){return power&&water>0;}
+function renderWater(){
+  var f=water;
+  var slx=WSL0X+(WSL1X-WSL0X)*f,sly=WSL0Y+(WSL1Y-WSL0Y)*f;
+  var srx=WSR0X+(WSR1X-WSR0X)*f,sry=WSR0Y+(WSR1Y-WSR0Y)*f;
+  $("hu-water").setAttribute("points",WBLX+","+WBLY+" "+WBRX+","+WBRY+" "+srx.toFixed(1)+","+sry.toFixed(1)+" "+slx.toFixed(1)+","+sly.toFixed(1));
+  var top=$("hu-watertop");
+  top.setAttribute("cy",(WC0Y+(WC1Y-WC0Y)*f).toFixed(1));
+  top.setAttribute("opacity",f>0.02?"1":"0");
+  $("hu-waterpct").textContent=Math.round(f*100)+"%";
+  var sl=$("hu-waterslider");
+  if(document.activeElement!==sl)sl.value=Math.round(f*100);
+}
+function renderHum(){
+  var hv=Math.round(hum);
+  $("hu-humnum").textContent=hv+"%";
+  var deg=-120+(hum-20)/70*240;
+  $("hu-needle").setAttribute("transform","rotate("+deg.toFixed(1)+" "+HGX+" "+HGY+")");
+}
+function renderState(){
+  $("hu-led").setAttribute("fill",power?"#30a46c":"#c3cbd1");
+  $("btn-power").textContent=power?"⏻ 关机":"⏻ 开机";
+  var fb=$("hu-fanblades");
+  fb.style.animationPlayState=producing()?"running":"paused";
+  fb.style.animationDuration=(1.35/fan)+"s";
+  document.querySelectorAll(".hu-ripple").forEach(function(r){r.classList.toggle("on",producing());});
+  $("hu-leak").setAttribute("opacity",leak?"1":"0");
+  var st=power?(water>0?"工作中":"没水停机"):"待机";
+  var line=st+" · 湿度 "+Math.round(hum)+"% · 水量 "+Math.round(water*100)+"% · 风速 "+(fan===1?"低":fan===2?"中":"高");
+  $("fx-readline").textContent=line;
+  if(roEl)roEl.textContent="湿度 "+Math.round(hum)+"%";
+}
+function setPower(on){
+  if(on&&water<=0){msg("⚠️ 水箱是空的，先注水再开机——换能片没水干烧会烧坏！");return;}
+  power=on;dryWarned=false;
+  msg(on?"开机！换能片高频震荡，水面冒起白雾，风扇把雾送出出雾口。":"已关机。雾慢慢散去，湿度会一点点回落。");
+  renderState();
+}
+$("btn-power").addEventListener("click",function(){setPower(!power);});
+$("btn-view").addEventListener("click",function(){
+  viewCut=!viewCut;
+  var sh=$("hu-shell");
+  if(viewCut){sh.setAttribute("fill","rgba(150,195,235,.12)");sh.setAttribute("fill-opacity","0.12");$("hu-water-g").setAttribute("opacity","1");$("hu-membrane-g").setAttribute("opacity","1");$("btn-view").textContent="👁 外观模式";msg("剖视模式：看得见水箱里的水、换能片和 MAX 水位线。");}
+  else{sh.setAttribute("fill","#dfe9f2");sh.setAttribute("fill-opacity","0.97");$("hu-water-g").setAttribute("opacity","0");$("hu-membrane-g").setAttribute("opacity","0");$("btn-view").textContent="🔪 剖视模式";msg("外观模式：这就是它摆在桌上的样子——内部机关全藏起来了。切回剖视模式看它怎么工作。");}
+  renderState();
+});
+$("hu-waterslider").addEventListener("input",function(){
+  water=+$("hu-waterslider").value/100;
+  if(water>0.95&&!leak){leak=true;msg("⚠️ 水加太满了！超过 MAX 最高水位线，水从漫水口溢出来——底座都漏水了。加到 MAX 线以下就好。");}
+  else if(water<=0.95&&leak){leak=false;msg("水位回到 MAX 线以下，不漏了。记住：注水别贪多。");}
+  renderWater();renderState();
+});
+document.querySelectorAll(".hu-fanbtn").forEach(function(b){
+  b.addEventListener("click",function(){
+    fan=+b.dataset.fan;
+    document.querySelectorAll(".hu-fanbtn").forEach(function(x){x.classList.toggle("active",x===b);});
+    msg("风速调到「"+(fan===1?"低":fan===2?"中":"高")+"」："+(fan===3?"雾喷得最远，湿度涨得最快，耗水也最快。":fan===1?"雾柔和省水，湿度慢慢涨。":"中档，速度和耗水都适中。"));
+    renderState();
+  });
+});
+function doReset(){
+  power=false;water=0.7;fan=2;hum=35;leak=false;dryWarned=false;
+  if(!viewCut)$("btn-view").click();
+  document.querySelectorAll(".hu-fanbtn").forEach(function(x){x.classList.toggle("active",+x.dataset.fan===2);});
+  $("hu-waterslider").value=70;
+  renderWater();renderHum();renderState();
+  msg("已重置。点「⏻ 开机」，或按步骤 1–5 往下走。");
+}
+$("btn-reset").addEventListener("click",doReset);
+// 雾气粒子
+var mists=[];
+(function(){
+  var ns="http://www.w3.org/2000/svg",g=$("hu-mist"),i,c;
+  for(i=0;i<26;i++){
+    c=document.createElementNS(ns,"circle");
+    c.setAttribute("fill","rgba(190,220,248,.75)");c.setAttribute("stroke","none");c.setAttribute("opacity","0");
+    g.appendChild(c);
+    mists.push({el:c,age:Math.random(),life:2.2+Math.random()*1.6,drift:(Math.random()-0.3),r0:2.5+Math.random()*3});
+  }
+})();
+var raf=null,lastTs=0;
+function frame(ts){
+  var dt=Math.min(0.05,lastTs?(ts-lastTs)/1000:0.016);lastTs=ts;
+  var speed=reduceMotion?4:1,i,m;
+  var prod=producing();
+  if(prod){
+    water=Math.max(0,water-dt*0.0055*fan*speed);
+    if(water<=0&&!dryWarned){
+      dryWarned=true;power=false;
+      msg("⚠️ 水箱空了！换能片没水干烧会损坏——已自动停机。注水后才能再开机。");
+    }
+    var target=34+fan*12;
+    hum+=(target-hum)*Math.min(1,dt*0.10*speed);
+    renderWater();
+  }else{
+    hum+=(35-hum)*Math.min(1,dt*0.03*speed);
+  }
+  renderHum();renderState();
+  for(i=0;i<mists.length;i++){
+    m=mists[i];
+    m.age+=dt*(prod?1:0.55)*speed;
+    if(m.age>m.life){m.age=0;m.life=2.2+Math.random()*1.6;m.drift=(Math.random()-0.3);}
+    var k=m.age/m.life;
+    if(!prod&&power===false&&k>0.98){m.el.setAttribute("opacity","0");continue;}
+    var rise=k*(46+fan*10),spread=k*k*(30+fan*16)*0.9+m.drift*k*22;
+    var x=OUTX+spread,y=OUTY-rise+Math.sin(k*5+i)*2.2;
+    var r=m.r0+k*10;
+    var op=prod?Math.sin(Math.min(1,k)*Math.PI)*0.75:(power?Math.sin(Math.min(1,k)*Math.PI)*0.3:Math.max(0,0.5-k)*0.4);
+    m.el.setAttribute("cx",x.toFixed(1));m.el.setAttribute("cy",y.toFixed(1));
+    m.el.setAttribute("r",r.toFixed(1));m.el.setAttribute("opacity",op.toFixed(2));
+  }
+  raf=requestAnimationFrame(frame);
+}
+function startLoop(){if(!raf)raf=requestAnimationFrame(frame);}
+function stopLoop(){if(raf){cancelAnimationFrame(raf);raf=null;lastTs=0;}}
+if(window.IntersectionObserver&&$("fx-stage")){
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)startLoop();else stopLoop();});},{threshold:0.05}).observe($("fx-stage"));
+} else { startLoop(); }
+function onStep(i){
+  if(i===1||i===2||i===3){if(!power&&water>0)setPower(true);}
+  if(i===4){
+    if(!power&&water>0)setPower(true);
+    var sl=$("hu-waterslider");sl.value=100;sl.dispatchEvent(new Event("input"));
+    msg("⚠️ 这是演示翻车：水加到 100% 超过 MAX 线——底座漏水了！把注水量滑杆拉回 95% 以下就不漏。");
+  }
+}
+document.addEventListener("keydown",function(e){
+  if(e.key>="1"&&e.key<="5")holdStep(+e.key-1);
+  else if(e.key==="r"||e.key==="R")doReset();
+});
+var QUIZ=[
+  {q:"1. 超声波加湿器喷出的「雾」是怎么来的？",opts:["把水加热烧开变成水蒸气","换能片高频振动，把水打碎成微米级小水滴","用风扇把水吹成水花"],ans:1,why:"超声波加湿器不加热：换能片每秒振动约170万次，把水打成 1~5 微米的小水滴飘出来。看得见的白雾是小水滴，真正的水蒸气是看不见的气态水。"},
+  {q:"2. 给加湿器注水、用水，下面哪条是对的？",opts:["水加得越满越好，省得老加水","注水不超过 MAX 最高水位线，尽量用纯净水","必须加自来水，矿物质对身体好"],ans:1,why:"超 MAX 线会从漫水口漏水；自来水的矿物质会被打成「白粉」飘散、还让换能片结垢，所以尽量用纯净水，水没了要及时关机防干烧。"}
+];
+(function buildQuiz(){
+  var host=$("quiz-body");if(!host)return;
+  QUIZ.forEach(function(item){
+    var d=document.createElement("div");
+    d.innerHTML='<div class="quiz-q">'+item.q+'</div><div class="quiz-opts"></div><div class="quiz-why"></div>';
+    var opts=d.querySelector(".quiz-opts"),why=d.querySelector(".quiz-why"),done=false;
+    item.opts.forEach(function(op,oi){
+      var b=document.createElement("button");b.className="quiz-opt";b.textContent=op;
+      b.addEventListener("click",function(){
+        if(done)return;done=true;
+        b.classList.add(oi===item.ans?"right":"wrong");
+        if(oi!==item.ans)opts.children[item.ans].classList.add("right");
+        why.textContent=(oi===item.ans?"\u2713 答对了！":"\u2717 答错了。")+item.why;why.style.display="block";
+      });
+      opts.appendChild(b);
+    });
+    host.appendChild(d);
+  });
+})();
+renderWater();renderHum();renderState();
+renderStep(0);
+
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var __step=0,__hold=-1;
+function renderStep(i){
+  __step=i;
+  var btns=document.querySelectorAll(".fx-stepbtn");
+  btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
+  var s=STEPS[i];
+  $("fx-steptext").innerHTML="<b>"+s.t.replace(/^\d+\s*[·、]\s*/,"")+"</b>　"+s.html;
+  if(typeof onStep==="function")onStep(i);
+}
+function holdStep(i){__hold=i;renderStep(i);}
+function releaseHold(){__hold=-1;}
+document.querySelectorAll(".fx-stepbtn").forEach(function(b){
+  b.addEventListener("click",function(){holdStep(+b.dataset.step);});
+});
+(function initTips(){
+  var tip=$("fx-tip"),stage=$("fx-stage");
+  if(!tip||!stage||typeof TIPS==="undefined")return;
+  function show(id,x,y){
+    var t=TIPS[id];if(!t)return;
+    tip.innerHTML="<b>"+t[0]+"</b><span>"+t[1]+"</span>";
+    tip.style.display="block";
+    var r=stage.getBoundingClientRect();
+    tip.style.left=Math.min(r.width-250,Math.max(8,x-r.left+14))+"px";
+    tip.style.top=Math.max(8,y-r.top-10)+"px";
+  }
+  document.querySelectorAll(".fx-part").forEach(function(el){
+    el.addEventListener("pointerenter",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointermove",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointerleave",function(){tip.style.display="none";});
+    el.addEventListener("click",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+  });
+})();
+</script></body></html>

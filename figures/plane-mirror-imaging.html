@@ -1,0 +1,725 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><title>平面镜成像探究实验 · 交互式等距插图</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(740px,100% - 32px);margin:64px auto 96px}
+/* 平板断点：iPad 竖屏 768px 起放宽版心；iPad 横屏/桌面 1100px 起再放宽，阅读行宽设上限 */
+@media (min-width:768px){
+.iso-page{width:min(940px,100% - 48px)}
+.iso-plate{padding-left:32px;padding-right:32px}
+}
+@media (min-width:1100px){
+.iso-page{width:min(1080px,100% - 64px)}
+}
+
+
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.fx-slider{display:flex;align-items:center;gap:10px;justify-content:center;font-size:14px;color:var(--anatomy-strong);margin:6px 0}
+.fx-slider input{width:min(300px,52vw);accent-color:#e5484d}
+.fx-slider b{font-variant-numeric:tabular-nums;min-width:64px;text-align:left}
+.fx-subhead{max-width:640px;margin:26px auto 8px;font-size:15px;font-weight:700;color:var(--anatomy-strong);text-align:center}
+.fx-micro{display:block;margin:0 auto;max-width:520px;width:100%}
+.fx-map{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0 4px}
+#ms-state{background:#fff7ed;border:1px solid #f5a524;border-radius:10px;max-width:640px;margin-left:auto;margin-right:auto;padding:10px 16px}
+.quiz-qwrap{max-width:640px;margin:10px auto;padding:12px 16px;background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:10px}
+.quiz-q{font-size:13.5px;font-weight:700;color:var(--anatomy-strong);margin-bottom:8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;padding:7px 14px;border-radius:18px;border:1px solid var(--anatomy-lo);background:var(--anatomy-card);color:var(--anatomy-text);cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e8f7ef;color:#1c7a4d}
+.quiz-opt.wrong{border-color:#e5484d;background:#fdeeee;color:#b3272e}
+.quiz-why{font-size:12.5px;color:var(--anatomy-muted);margin-top:8px;line-height:1.6}
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.iso-swatch[data-mark="pm-ray"] path{stroke:#e8590c}
+.iso-swatch[data-mark="pm-ext"] path{stroke:#7048e8;stroke-dasharray:3 2}
+.iso-swatch[data-mark="pm-ghost"] path{stroke:#74a9cf}
+.iso-swatch[data-mark="pm-mea"] path{stroke:#f08c00;stroke-dasharray:3 2}
+.fx-controls .fx-readline,.fx-controls .fx-msg{flex:1 1 100%}
+.pm-group{flex:1 1 100%;max-width:640px;margin:0 auto}
+.pm-btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+.pm-hint{font-size:12.5px;color:var(--anatomy-muted)}
+.pm-sub.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.pm-sliderrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:620px;margin:10px auto 2px}
+.pm-sliderrow label{font-size:13px;color:var(--anatomy-strong);white-space:nowrap}
+.pm-sliderrow input[type=range]{flex:1 1 160px;min-width:0;accent-color:#3e63dd;cursor:pointer;height:28px;touch-action:none}
+.pm-lval{font-size:13.5px;font-weight:700;color:var(--anatomy-strong);font-variant-numeric:tabular-nums;min-width:56px}
+.pm-say{max-width:600px;margin:12px auto 0;padding:10px 16px;border-radius:10px;background:#eef4ff;border:1px solid #b9cdf5;font-size:13.5px;line-height:1.65;color:#274b8f;text-align:center;min-height:24px}
+.pm-trapq{text-align:center;font-size:15px;font-weight:700;color:var(--anatomy-strong);margin:2px 0 10px}
+.pm-sayfb{max-width:560px;margin:12px auto 0;padding:10px 16px;border-radius:10px;background:#fff7e6;border:1px solid #f0c36d;font-size:13.5px;line-height:1.65;color:#7a5b1e;text-align:center;min-height:24px}
+.pm-sayfb.ok{background:#e6f6ea;border-color:#8fd0a8;color:#1f7a48}
+.fx-btn.right{border-color:#30a46c;background:#e6f6ea;color:#1f7a48}
+.fx-btn.wrong{border-color:#e5484d;background:#ffecec;color:#e5484d}
+.pm-pit{max-width:640px;margin:10px auto 0;padding:10px 16px;border-radius:10px;background:#fff7e6;border:1px solid #f0c36d;font-size:13px;line-height:1.65;color:#7a5b1e;text-align:center}
+.pm-drag{touch-action:none;cursor:grab}
+.pm-drag:active{cursor:grabbing}
+.quiz{margin:22px 0 8px;padding:16px;border:1px solid var(--anatomy-faint);border-radius:12px;background:var(--anatomy-card)}
+.quiz-title{font-size:15px;font-weight:700;color:var(--anatomy-strong);margin-bottom:10px}
+.quiz-q{font-size:14px;color:var(--anatomy-strong);margin:10px 0 8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);background:var(--anatomy-page);border:1px solid var(--anatomy-lo);border-radius:8px;padding:6px 14px;cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e6f6ea;color:#1f7a48;font-weight:700}
+.quiz-opt.wrong{border-color:#e5484d;background:#ffecec;color:#e5484d}
+.quiz-why{font-size:13px;color:var(--anatomy-text);margin:8px 0 4px;display:none}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><nav class="kg-back"><a href="../index.html">← 返回知识馆</a></nav>
+<header class="fx-pagehead"><h1>平面镜成像探究实验</h1><p>中考光学权重最高的母题：等效替代法——用一支未点燃的蜡烛 B，「量」出看不见摸不着的虚像</p></header>
+<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 40</span><span class="iso-plate-corner" data-corner="title">平面镜成像探究实验</span><span class="iso-plate-corner" data-corner="hint">拖蜡烛 A、B 对位 · 数字键 1–5 切换步骤</span><span class="iso-plate-corner" data-corner="readout" data-readout>点「发出光线」，看虚像怎样在板后「长」出来</span></div><div class="iso-stage" id="fx-stage" tabindex="0" role="group" aria-label="平面镜成像实验台：玻璃板前点燃的蜡烛 A、板后的虚像与未点燃的蜡烛 B，可拖动蜡烛观察对称成像与等效替代重合"><div class="fx-tip" id="fx-tip"></div><svg id="pm-svg" xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 740 520" role="img" aria-label="平面镜成像实验台：白纸上竖立薄玻璃板，前面是点燃的蜡烛 A，板后有虚像和未点燃的蜡烛 B"><path class="iso-halo" d="M176.8 335.7L177.3 333.1L178.8 330.7L181.2 328.5L184.4 326.5L243.2 297.1L247.2 295.5L251.7 294.3L256.5 293.5L261.6 293.3L266.7 293.5L271.5 294.3L276 295.5L280 297.1L518.8 416.5L522 418.5L524.5 420.7L525.9 423.2L526.4 425.7L525.9 428.2L524.5 430.7L522 432.9L518.8 434.9L460 464.3L456.1 465.9L451.6 467.1L446.7 467.8L441.7 468.1L436.6 467.8L431.7 467.1L427.2 465.9L423.3 464.3L184.4 344.9L181.2 342.9L178.8 340.6L177.3 338.2Z"/><g class="iso-solid"><path class="iso-fill" d="M248.8 311L248.8 308.9L250 307L252.4 305.4L255.7 304.2L259.6 303.5L263.6 303.5L267.5 304.2L270.8 305.4L273.2 307L274.4 308.9L274.4 347L273.2 348.9L270.8 350.5L267.5 351.7L263.6 352.4L259.6 352.4L255.7 351.7L252.4 350.5L250 348.9L248.8 347Z"/><path class="iso-top" d="M270.8 350.5L267.5 351.7L263.6 352.4L259.6 352.4L255.7 351.7L252.4 350.5L250 348.9L248.8 347L248.8 344.9L250 343L252.4 341.4L255.7 340.2L259.6 339.5L263.6 339.5L267.5 340.2L270.8 341.4L273.2 343L274.4 344.9L274.4 347L273.2 348.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M274.4 347L273.2 348.9L270.8 350.5L267.5 351.7L263.6 352.4L259.6 352.4L255.7 351.7L252.4 350.5L250 348.9L248.8 347"/><path class="iso-line iso-edge" data-tone="lo" d="M248.8 347L248.8 344.9L250 343L252.4 341.4L255.7 340.2L259.6 339.5L263.6 339.5L267.5 340.2L270.8 341.4L273.2 343L274.4 344.9L274.4 347"/></g><g class="iso-solid"><path class="iso-fill" d="M480.3 424.7L481.5 422.7L483.9 421.1L487.2 419.9L491.1 419.3L495.1 419.3L499 419.9L502.3 421.1L504.7 422.7L505.9 424.7L505.9 462.7L504.7 464.6L502.3 466.3L499 467.5L495.1 468.1L491.1 468.1L487.2 467.5L483.9 466.3L481.5 464.6L480.3 462.7Z"/><path class="iso-top" d="M502.3 466.3L499 467.5L495.1 468.1L491.1 468.1L487.2 467.5L483.9 466.3L481.5 464.6L480.3 462.7L480.3 460.7L481.5 458.7L483.9 457.1L487.2 455.9L491.1 455.3L495.1 455.3L499 455.9L502.3 457.1L504.7 458.7L505.9 460.7L505.9 462.7L504.7 464.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M505.9 462.7L504.7 464.6L502.3 466.3L499 467.5L495.1 468.1L491.1 468.1L487.2 467.5L483.9 466.3L481.5 464.6L480.3 462.7"/><path class="iso-line iso-edge" data-tone="lo" d="M480.3 462.7L480.3 460.7L481.5 458.7L483.9 457.1L487.2 455.9L491.1 455.3L495.1 455.3L499 455.9L502.3 457.1L504.7 458.7L505.9 460.7L505.9 462.7"/></g><g class="iso-solid"><path class="iso-fill" d="M197.3 336.7L197.3 334.7L198.6 332.7L201 331.1L204.3 329.9L208.1 329.3L212.2 329.3L216.1 329.9L219.3 331.1L221.7 332.7L223 334.7L223 372.7L221.7 374.6L219.3 376.3L216.1 377.5L212.2 378.1L208.1 378.1L204.3 377.5L201 376.3L198.6 374.6L197.3 372.7Z"/><path class="iso-top" d="M219.3 376.3L216.1 377.5L212.2 378.1L208.1 378.1L204.3 377.5L201 376.3L198.6 374.6L197.3 372.7L197.3 370.7L198.6 368.7L201 367.1L204.3 365.9L208.1 365.3L212.2 365.3L216.1 365.9L219.3 367.1L221.7 368.7L223 370.7L223 372.7L221.7 374.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M223 372.7L221.7 374.6L219.3 376.3L216.1 377.5L212.2 378.1L208.1 378.1L204.3 377.5L201 376.3L198.6 374.6L197.3 372.7"/><path class="iso-line iso-edge" data-tone="lo" d="M197.3 372.7L197.3 370.7L198.6 368.7L201 367.1L204.3 365.9L208.1 365.3L212.2 365.3L216.1 365.9L219.3 367.1L221.7 368.7L223 370.7L223 372.7"/></g><g class="iso-solid"><path class="iso-fill" d="M428.8 450.4L430.1 448.5L432.5 446.8L435.8 445.6L439.6 445L443.7 445L447.6 445.6L450.8 446.8L453.2 448.5L454.5 450.4L454.5 486.4L454.5 488.4L453.2 490.4L450.8 492L447.6 493.2L443.7 493.8L439.6 493.8L435.8 493.2L432.5 492L430.1 490.4L428.8 488.4L428.8 486.4Z"/><path class="iso-top" d="M450.8 492L447.6 493.2L443.7 493.8L439.6 493.8L435.8 493.2L432.5 492L430.1 490.4L428.8 488.4L428.8 486.4L430.1 484.5L432.5 482.8L435.8 481.6L439.6 481L443.7 481L447.6 481.6L450.8 482.8L453.2 484.5L454.5 486.4L454.5 488.4L453.2 490.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M454.5 488.4L453.2 490.4L450.8 492L447.6 493.2L443.7 493.8L439.6 493.8L435.8 493.2L432.5 492L430.1 490.4L428.8 488.4"/><path class="iso-line iso-edge" data-tone="lo" d="M428.8 488.4L428.8 486.4L430.1 484.5L432.5 482.8L435.8 481.6L439.6 481L443.7 481L447.6 481.6L450.8 482.8L453.2 484.5L454.5 486.4L454.5 488.4"/></g><g class="iso-solid"><path class="iso-fill" d="M176.8 241.2L177.3 238.6L178.8 236.2L181.2 233.9L184.4 232L243.2 202.6L247.2 201L251.7 199.8L256.5 199L261.6 198.8L266.7 199L271.5 199.8L276 201L280 202.6L518.8 322L522 324L524.5 326.2L525.9 328.7L526.4 331.2L525.9 333.7L524.5 336.2L522 338.4L518.8 340.4L460 369.8L456.1 371.4L451.6 372.6L446.7 373.3L441.7 373.6L436.6 373.3L431.7 372.6L427.2 371.4L423.3 369.8L184.4 250.3L181.2 248.4L178.8 246.1L177.3 243.7Z"/><path class="iso-top" d="M518.8 322L522 324L524.5 326.2L525.9 328.7L526.4 331.2L525.9 333.7L524.5 336.2L522 338.4L518.8 340.4L460 369.8L456.1 371.4L451.6 372.6L446.7 373.3L441.7 373.6L436.6 373.3L431.7 372.6L427.2 371.4L423.3 369.8L184.4 250.3L181.2 248.4L178.8 246.1L177.3 243.7L176.8 241.2L177.3 238.6L178.8 236.2L181.2 233.9L184.4 232L243.2 202.6L247.2 201L251.7 199.8L256.5 199L261.6 198.8L266.7 199L271.5 199.8L276 201L280 202.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M526.4 331.2L525.9 333.7L524.5 336.2L522 338.4L518.8 340.4L460 369.8L456.1 371.4L451.6 372.6L446.7 373.3L441.7 373.6L436.6 373.3L431.7 372.6L427.2 371.4L423.3 369.8L184.4 250.3L181.2 248.4L178.8 246.1L177.3 243.7L176.8 241.2"/><path class="iso-line iso-bevel" data-tone="faint" d="M526.4 331.2L522.9 333.4L521.6 335.6L519.5 337.5L516.5 339.3L457.9 368.6L454.4 370.1L450.4 371.1L446.1 371.8L441.7 372L437.2 371.8L432.9 371.1L428.9 370.1L425.4 368.6L186.7 249.3L183.8 247.5L181.7 245.5L180.4 243.4L176.8 241.2"/><path class="iso-line iso-edge" data-tone="mid" d="M176.8 241.2L177.3 238.6L178.8 236.2L181.2 233.9L184.4 232L243.2 202.6L247.2 201L251.7 199.8L256.5 199L261.6 198.8L266.7 199L271.5 199.8L276 201L280 202.6L518.8 322L522 324L524.5 326.2L525.9 328.7L526.4 331.2"/></g><path class="iso-line" data-tone="faint" d="M507.8 291.5L509.1 292.3L510 293.2L510.6 294.2L510.8 295.2L510.6 296.2L510 297.2L509.1 298.1L507.8 298.9L449 328.3L447.4 328.9L445.6 329.4L443.7 329.7L441.7 329.8L439.6 329.7L437.7 329.4L435.9 328.9L434.3 328.3L195.5 208.8L194.2 208L193.2 207.1L192.6 206.2L192.4 205.2L192.6 204.1L193.2 203.2L194.2 202.3L195.5 201.5L254.3 172.1L255.8 171.4L257.6 171L259.6 170.7L261.6 170.6L263.6 170.7L265.6 171L267.4 171.4L269 172.1Z"/><text class="iso-face-text" data-tone="faint" transform="matrix(1.837 0.919 -1.837 0.919 224.857 222.183)" font-size="5" text-anchor="start">实验台</text><g class="iso-solid"><path class="iso-fill" d="M238 234.8L238.2 234.1L238.7 233.5L239.6 233L320.4 192.6L321.5 192.1L322.7 191.9L324.1 191.8L325.4 191.9L326.7 192.1L327.7 192.6L474.7 266.1L475.5 266.6L476.1 267.2L476.2 267.9L476.2 269.5L476.1 270.1L475.5 270.8L474.7 271.3L393.9 311.7L392.8 312.1L391.6 312.4L390.2 312.5L388.9 312.4L387.6 312.1L386.5 311.7L239.6 238.2L238.7 237.7L238.2 237.1L238 236.4Z"/><path class="iso-shade" data-shade="0" d="M476.2 269.5L476.1 270.1L476.1 268.6L476.2 267.9ZM476.1 270.1L475.5 270.8L475.5 269.2L476.1 268.6ZM475.5 270.8L474.7 271.3L474.7 269.7L475.5 269.2ZM474.7 271.3L393.9 311.7L393.9 310.1L474.7 269.7ZM393.9 311.7L392.8 312.1L392.8 310.6L393.9 310.1Z"/><path class="iso-shade" data-shade="1" d="M392.8 312.1L391.6 312.4L391.6 310.8L392.8 310.6ZM391.6 312.4L390.2 312.5L390.2 310.9L391.6 310.8Z"/><path class="iso-shade" data-shade="2" d="M390.2 312.5L388.9 312.4L388.9 310.8L390.2 310.9ZM388.9 312.4L387.6 312.1L387.6 310.6L388.9 310.8Z"/><path class="iso-shade" data-shade="3" d="M387.6 312.1L386.5 311.7L386.5 310.1L387.6 310.6ZM386.5 311.7L239.6 238.2L239.6 236.7L386.5 310.1ZM239.6 238.2L238.7 237.7L238.7 236.1L239.6 236.7ZM238.7 237.7L238.2 237.1L238.2 235.5L238.7 236.1ZM238.2 237.1L238 236.4L238 234.8L238.2 235.5Z"/><path class="iso-top" d="M474.7 266.1L475.5 266.6L476.1 267.2L476.2 267.9L476.1 268.6L475.5 269.2L474.7 269.7L393.9 310.1L392.8 310.6L391.6 310.8L390.2 310.9L388.9 310.8L387.6 310.6L386.5 310.1L239.6 236.7L238.7 236.1L238.2 235.5L238 234.8L238.2 234.1L238.7 233.5L239.6 233L320.4 192.6L321.5 192.1L322.7 191.9L324.1 191.8L325.4 191.9L326.7 192.1L327.7 192.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M476.2 267.9L476.1 268.6L475.5 269.2L474.7 269.7L393.9 310.1L392.8 310.6L391.6 310.8L390.2 310.9L388.9 310.8L387.6 310.6L386.5 310.1L239.6 236.7L238.7 236.1L238.2 235.5L238 234.8"/><path class="iso-line iso-bevel" data-tone="faint" d="M476.2 267.9L474.6 268.4L474.2 268.8L473.6 269.2L392.9 309.6L392 309.9L391.2 310.1L390.2 310.1L389.3 310.1L388.4 309.9L387.6 309.6L240.7 236.1L240.1 235.7L239.7 235.3L238 234.8"/><path class="iso-line iso-edge" data-tone="hi" d="M238 234.8L238.2 234.1L238.7 233.5L239.6 233L320.4 192.6L321.5 192.1L322.7 191.9L324.1 191.8L325.4 191.9L326.7 192.1L327.7 192.6L474.7 266.1L475.5 266.6L476.1 267.2L476.2 267.9M476.2 269.5L476.1 270.1L475.5 270.8L474.7 271.3L393.9 311.7L392.8 312.1L391.6 312.4L390.2 312.5L388.9 312.4L387.6 312.1L386.5 311.7L239.6 238.2L238.7 237.7L238.2 237.1L238 236.4M476.2 267.9L476.2 269.5M238 234.8L238 236.4"/></g><path class="iso-line" data-tone="faint" d="M467.4 267.9L390.2 306.5L246.9 234.8L324.1 196.2Z"/><path class="iso-line" data-tone="faint" data-dashed="" d="M280 212.7L434.3 289.8"/><path class="iso-line" data-tone="faint" d="M244.1 234.2L239.6 236.5"/><path class="iso-line" data-tone="faint" d="M262.5 243.4L257.9 245.7"/><path class="iso-line" data-tone="faint" d="M280.9 252.6L276.3 254.9"/><path class="iso-line" data-tone="faint" d="M299.3 261.8L294.7 264.1"/><path class="iso-line" data-tone="faint" d="M317.6 271L313 273.3"/><path class="iso-line" data-tone="faint" d="M336 280.2L331.4 282.5"/><path class="iso-line" data-tone="faint" d="M354.4 289.4L349.8 291.7"/><path class="iso-line" data-tone="faint" d="M372.8 298.6L368.2 300.8"/><path class="iso-line" data-tone="faint" d="M391.1 307.7L386.5 310"/><text class="iso-face-text" data-tone="faint" transform="matrix(1.837 0.919 -1.837 0.919 381.024 294.305)" font-size="5" text-anchor="start">白纸</text><g class="iso-solid"><path class="iso-fill" d="M304.6 225L304.7 224.6L304.9 224.3L305.3 224.1L309.7 221.8L310.3 221.6L310.9 221.5L311.6 221.5L312.2 221.5L312.9 221.6L313.4 221.8L320.8 225.5L321.2 225.8L321.4 226.1L321.5 226.4L321.5 230L321.4 230.4L321.2 230.7L320.8 231L316.4 233.2L315.8 233.4L315.2 233.5L314.5 233.5L313.8 233.5L313.2 233.4L312.7 233.2L305.3 229.5L304.9 229.2L304.7 228.9L304.6 228.6Z"/><path class="iso-shade" data-shade="0" d="M321.5 230L321.4 230.4L321.4 226.8L321.5 226.4ZM321.4 230.4L321.2 230.7L321.2 227.1L321.4 226.8ZM321.2 230.7L320.8 231L320.8 227.4L321.2 227.1ZM320.8 231L316.4 233.2L316.4 229.6L320.8 227.4ZM316.4 233.2L315.8 233.4L315.8 229.8L316.4 229.6Z"/><path class="iso-shade" data-shade="1" d="M315.8 233.4L315.2 233.5L315.2 229.9L315.8 229.8ZM315.2 233.5L314.5 233.5L314.5 229.9L315.2 229.9Z"/><path class="iso-shade" data-shade="2" d="M314.5 233.5L313.8 233.5L313.8 229.9L314.5 229.9ZM313.8 233.5L313.2 233.4L313.2 229.8L313.8 229.9Z"/><path class="iso-shade" data-shade="3" d="M313.2 233.4L312.7 233.2L312.7 229.6L313.2 229.8ZM312.7 233.2L305.3 229.5L305.3 225.9L312.7 229.6ZM305.3 229.5L304.9 229.2L304.9 225.6L305.3 225.9ZM304.9 229.2L304.7 228.9L304.7 225.3L304.9 225.6ZM304.7 228.9L304.6 228.6L304.6 225L304.7 225.3Z"/><path class="iso-top" d="M320.8 225.5L321.2 225.8L321.4 226.1L321.5 226.4L321.4 226.8L321.2 227.1L320.8 227.4L316.4 229.6L315.8 229.8L315.2 229.9L314.5 229.9L313.8 229.9L313.2 229.8L312.7 229.6L305.3 225.9L304.9 225.6L304.7 225.3L304.6 225L304.7 224.6L304.9 224.3L305.3 224.1L309.7 221.8L310.3 221.6L310.9 221.5L311.6 221.5L312.2 221.5L312.9 221.6L313.4 221.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M321.5 226.4L321.4 226.8L321.2 227.1L320.8 227.4L316.4 229.6L315.8 229.8L315.2 229.9L314.5 229.9L313.8 229.9L313.2 229.8L312.7 229.6L305.3 225.9L304.9 225.6L304.7 225.3L304.6 225"/><path class="iso-line iso-bevel" data-tone="faint" d="M321.5 226.4L319.4 226.5L319.4 226.6L319.2 226.7L315 228.8L314.8 228.9L314.6 228.9L314.5 228.9L314.4 228.9L314.3 228.9L314 228.8L306.9 225.2L306.7 225.1L306.7 225L304.6 225"/><path class="iso-line iso-edge" data-tone="lo" d="M304.6 225L304.7 224.6L304.9 224.3L305.3 224.1L309.7 221.8L310.3 221.6L310.9 221.5L311.6 221.5L312.2 221.5L312.9 221.6L313.4 221.8L320.8 225.5L321.2 225.8L321.4 226.1L321.5 226.4M321.5 230L321.4 230.4L321.2 230.7L320.8 231L316.4 233.2L315.8 233.4L315.2 233.5L314.5 233.5L313.8 233.5L313.2 233.4L312.7 233.2L305.3 229.5L304.9 229.2L304.7 228.9L304.6 228.6M321.5 226.4L321.5 230M304.6 225L304.6 228.6"/></g><g class="iso-solid"><path class="iso-fill" d="M392.8 269.1L392.8 268.7L393.1 268.4L393.5 268.1L397.9 265.9L398.5 265.7L399.1 265.6L399.8 265.6L400.4 265.6L401.1 265.7L401.6 265.9L408.9 269.6L409.4 269.9L409.6 270.2L409.7 270.5L409.7 274.1L409.6 274.5L409.4 274.8L408.9 275.1L404.5 277.3L404 277.5L403.4 277.6L402.7 277.6L402 277.6L401.4 277.5L400.9 277.3L393.5 273.6L393.1 273.3L392.8 273L392.8 272.7Z"/><path class="iso-shade" data-shade="0" d="M409.7 274.1L409.6 274.5L409.6 270.9L409.7 270.5ZM409.6 274.5L409.4 274.8L409.4 271.2L409.6 270.9ZM409.4 274.8L408.9 275.1L408.9 271.5L409.4 271.2ZM408.9 275.1L404.5 277.3L404.5 273.7L408.9 271.5ZM404.5 277.3L404 277.5L404 273.9L404.5 273.7Z"/><path class="iso-shade" data-shade="1" d="M404 277.5L403.4 277.6L403.4 274L404 273.9ZM403.4 277.6L402.7 277.6L402.7 274L403.4 274Z"/><path class="iso-shade" data-shade="2" d="M402.7 277.6L402 277.6L402 274L402.7 274ZM402 277.6L401.4 277.5L401.4 273.9L402 274Z"/><path class="iso-shade" data-shade="3" d="M401.4 277.5L400.9 277.3L400.9 273.7L401.4 273.9ZM400.9 277.3L393.5 273.6L393.5 270L400.9 273.7ZM393.5 273.6L393.1 273.3L393.1 269.7L393.5 270ZM393.1 273.3L392.8 273L392.8 269.4L393.1 269.7ZM392.8 273L392.8 272.7L392.8 269.1L392.8 269.4Z"/><path class="iso-top" d="M408.9 269.6L409.4 269.9L409.6 270.2L409.7 270.5L409.6 270.9L409.4 271.2L408.9 271.5L404.5 273.7L404 273.9L403.4 274L402.7 274L402 274L401.4 273.9L400.9 273.7L393.5 270L393.1 269.7L392.8 269.4L392.8 269.1L392.8 268.7L393.1 268.4L393.5 268.1L397.9 265.9L398.5 265.7L399.1 265.6L399.8 265.6L400.4 265.6L401.1 265.7L401.6 265.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M409.7 270.5L409.6 270.9L409.4 271.2L408.9 271.5L404.5 273.7L404 273.9L403.4 274L402.7 274L402 274L401.4 273.9L400.9 273.7L393.5 270L393.1 269.7L392.8 269.4L392.8 269.1"/><path class="iso-line iso-bevel" data-tone="faint" d="M409.7 270.5L407.6 270.6L407.6 270.7L407.4 270.8L403.2 272.9L403 273L402.8 273L402.7 273L402.6 273L402.4 273L402.2 272.9L395.1 269.3L394.9 269.2L394.9 269.1L392.8 269.1"/><path class="iso-line iso-edge" data-tone="lo" d="M392.8 269.1L392.8 268.7L393.1 268.4L393.5 268.1L397.9 265.9L398.5 265.7L399.1 265.6L399.8 265.6L400.4 265.6L401.1 265.7L401.6 265.9L408.9 269.6L409.4 269.9L409.6 270.2L409.7 270.5M409.7 274.1L409.6 274.5L409.4 274.8L408.9 275.1L404.5 277.3L404 277.5L403.4 277.6L402.7 277.6L402 277.6L401.4 277.5L400.9 277.3L393.5 273.6L393.1 273.3L392.8 273L392.8 272.7M409.7 270.5L409.7 274.1M392.8 269.1L392.8 272.7"/></g><g id="pm-dynback"></g><g id="pm-ghost" opacity="0.55" style="display:none"><g class="iso-solid"><path class="iso-fill" d="M312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231L328.2 258.7L327.9 259.7L327.1 260.7L325.9 261.5L324.3 262.1L322.4 262.5L320.4 262.6L318.4 262.5L316.5 262.1L314.9 261.5L313.6 260.7L312.9 259.7L312.6 258.7Z"/><path class="iso-shade" data-shade="0" d="M325.9 261.5L324.3 262.1L324.3 234.4L325.9 233.8ZM328.2 258.7L327.9 259.7L327.9 232L328.2 231ZM327.9 259.7L327.1 260.7L327.1 233L327.9 232ZM327.1 260.7L325.9 261.5L325.9 233.8L327.1 233Z"/><path class="iso-shade" data-shade="1" d="M324.3 262.1L322.4 262.5L322.4 234.8L324.3 234.4ZM322.4 262.5L320.4 262.6L320.4 234.9L322.4 234.8Z"/><path class="iso-shade" data-shade="2" d="M320.4 262.6L318.4 262.5L318.4 234.8L320.4 234.9ZM318.4 262.5L316.5 262.1L316.5 234.4L318.4 234.8Z"/><path class="iso-shade" data-shade="3" d="M316.5 262.1L314.9 261.5L314.9 233.8L316.5 234.4ZM314.9 261.5L313.6 260.7L313.6 233L314.9 233.8ZM313.6 260.7L312.9 259.7L312.9 232L313.6 233ZM312.9 259.7L312.6 258.7L312.6 231L312.9 232Z"/><path class="iso-top" d="M325.9 233.8L324.3 234.4L322.4 234.8L320.4 234.9L318.4 234.8L316.5 234.4L314.9 233.8L313.6 233L312.9 232L312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231L327.9 232L327.1 233Z"/><path class="iso-line iso-crease" data-tone="faint" d="M328.2 231L327.9 232L327.1 233L325.9 233.8L324.3 234.4L322.4 234.8L320.4 234.9L318.4 234.8L316.5 234.4L314.9 233.8L313.6 233L312.9 232L312.6 231"/><path class="iso-line iso-edge" data-tone="lo" d="M312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231M328.2 258.7L327.9 259.7L327.1 260.7L325.9 261.5L324.3 262.1L322.4 262.5L320.4 262.6L318.4 262.5L316.5 262.1L314.9 261.5L313.6 260.7L312.9 259.7L312.6 258.7M312.6 231L312.6 258.7M328.2 231L328.2 258.7"/></g><path class="iso-line" data-tone="lo" d="M320.4 231L320.4 228.1"/><path class="iso-line" data-tone="faint" data-dashed="" d="M320.4 258.7L320.4 228.8"/><text x="311.9" y="251" text-anchor="middle" font-size="9" fill="#5b8ab5" font-family="ui-sans-serif,system-ui,sans-serif">虚像</text></g><g id="pm-ghost2" opacity="0.4" style="display:none"><g class="iso-solid"><path class="iso-fill" d="M312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231L328.2 258.7L327.9 259.7L327.1 260.7L325.9 261.5L324.3 262.1L322.4 262.5L320.4 262.6L318.4 262.5L316.5 262.1L314.9 261.5L313.6 260.7L312.9 259.7L312.6 258.7Z"/><path class="iso-shade" data-shade="0" d="M325.9 261.5L324.3 262.1L324.3 234.4L325.9 233.8ZM328.2 258.7L327.9 259.7L327.9 232L328.2 231ZM327.9 259.7L327.1 260.7L327.1 233L327.9 232ZM327.1 260.7L325.9 261.5L325.9 233.8L327.1 233Z"/><path class="iso-shade" data-shade="1" d="M324.3 262.1L322.4 262.5L322.4 234.8L324.3 234.4ZM322.4 262.5L320.4 262.6L320.4 234.9L322.4 234.8Z"/><path class="iso-shade" data-shade="2" d="M320.4 262.6L318.4 262.5L318.4 234.8L320.4 234.9ZM318.4 262.5L316.5 262.1L316.5 234.4L318.4 234.8Z"/><path class="iso-shade" data-shade="3" d="M316.5 262.1L314.9 261.5L314.9 233.8L316.5 234.4ZM314.9 261.5L313.6 260.7L313.6 233L314.9 233.8ZM313.6 260.7L312.9 259.7L312.9 232L313.6 233ZM312.9 259.7L312.6 258.7L312.6 231L312.9 232Z"/><path class="iso-top" d="M325.9 233.8L324.3 234.4L322.4 234.8L320.4 234.9L318.4 234.8L316.5 234.4L314.9 233.8L313.6 233L312.9 232L312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231L327.9 232L327.1 233Z"/><path class="iso-line iso-crease" data-tone="faint" d="M328.2 231L327.9 232L327.1 233L325.9 233.8L324.3 234.4L322.4 234.8L320.4 234.9L318.4 234.8L316.5 234.4L314.9 233.8L313.6 233L312.9 232L312.6 231"/><path class="iso-line iso-edge" data-tone="lo" d="M312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231M328.2 258.7L327.9 259.7L327.1 260.7L325.9 261.5L324.3 262.1L322.4 262.5L320.4 262.6L318.4 262.5L316.5 262.1L314.9 261.5L313.6 260.7L312.9 259.7L312.6 258.7M312.6 231L312.6 258.7M328.2 231L328.2 258.7"/></g><path class="iso-line" data-tone="lo" d="M320.4 231L320.4 228.1"/><path class="iso-line" data-tone="faint" data-dashed="" d="M320.4 258.7L320.4 228.8"/><text x="311.9" y="251" text-anchor="middle" font-size="9" fill="#5b8ab5" font-family="ui-sans-serif,system-ui,sans-serif">虚像</text></g><g style="display:none" id="pm-b" data-tip="candleB" class="fx-part pm-drag"><g class="iso-solid"><path class="iso-fill" d="M312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231L328.2 258.7L327.9 259.7L327.1 260.7L325.9 261.5L324.3 262.1L322.4 262.5L320.4 262.6L318.4 262.5L316.5 262.1L314.9 261.5L313.6 260.7L312.9 259.7L312.6 258.7Z"/><path class="iso-shade" data-shade="0" d="M325.9 261.5L324.3 262.1L324.3 234.4L325.9 233.8ZM328.2 258.7L327.9 259.7L327.9 232L328.2 231ZM327.9 259.7L327.1 260.7L327.1 233L327.9 232ZM327.1 260.7L325.9 261.5L325.9 233.8L327.1 233Z"/><path class="iso-shade" data-shade="1" d="M324.3 262.1L322.4 262.5L322.4 234.8L324.3 234.4ZM322.4 262.5L320.4 262.6L320.4 234.9L322.4 234.8Z"/><path class="iso-shade" data-shade="2" d="M320.4 262.6L318.4 262.5L318.4 234.8L320.4 234.9ZM318.4 262.5L316.5 262.1L316.5 234.4L318.4 234.8Z"/><path class="iso-shade" data-shade="3" d="M316.5 262.1L314.9 261.5L314.9 233.8L316.5 234.4ZM314.9 261.5L313.6 260.7L313.6 233L314.9 233.8ZM313.6 260.7L312.9 259.7L312.9 232L313.6 233ZM312.9 259.7L312.6 258.7L312.6 231L312.9 232Z"/><path class="iso-top" d="M325.9 233.8L324.3 234.4L322.4 234.8L320.4 234.9L318.4 234.8L316.5 234.4L314.9 233.8L313.6 233L312.9 232L312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231L327.9 232L327.1 233Z"/><path class="iso-line iso-crease" data-tone="faint" d="M328.2 231L327.9 232L327.1 233L325.9 233.8L324.3 234.4L322.4 234.8L320.4 234.9L318.4 234.8L316.5 234.4L314.9 233.8L313.6 233L312.9 232L312.6 231"/><path class="iso-line iso-edge" data-tone="mid" d="M312.6 231L312.9 230L313.6 229.1L314.9 228.3L316.5 227.7L318.4 227.3L320.4 227.1L322.4 227.3L324.3 227.7L325.9 228.3L327.1 229.1L327.9 230L328.2 231M328.2 258.7L327.9 259.7L327.1 260.7L325.9 261.5L324.3 262.1L322.4 262.5L320.4 262.6L318.4 262.5L316.5 262.1L314.9 261.5L313.6 260.7L312.9 259.7L312.6 258.7M312.6 231L312.6 258.7M328.2 231L328.2 258.7"/></g><path class="iso-line" data-tone="lo" d="M320.4 231L320.4 228.1"/><text x="310.8" y="275.1" text-anchor="middle" font-size="11" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">B</text></g><g id="pm-plate"></g><g id="pm-a" data-tip="candleA" class="fx-part pm-drag"><g class="iso-solid"><path class="iso-fill" d="M364 205.3L364.3 204.3L365.1 203.4L366.3 202.5L367.9 201.9L369.8 201.5L371.8 201.4L373.9 201.5L375.7 201.9L377.3 202.5L378.6 203.4L379.4 204.3L379.6 205.3L379.6 233L379.4 234L378.6 234.9L377.3 235.7L375.7 236.4L373.9 236.7L371.8 236.9L369.8 236.7L367.9 236.4L366.3 235.7L365.1 234.9L364.3 234L364 233Z"/><path class="iso-shade" data-shade="0" d="M377.3 235.7L375.7 236.4L375.7 208.7L377.3 208.1ZM379.6 233L379.4 234L379.4 206.3L379.6 205.3ZM379.4 234L378.6 234.9L378.6 207.3L379.4 206.3ZM378.6 234.9L377.3 235.7L377.3 208.1L378.6 207.3Z"/><path class="iso-shade" data-shade="1" d="M375.7 236.4L373.9 236.7L373.9 209.1L375.7 208.7ZM373.9 236.7L371.8 236.9L371.8 209.2L373.9 209.1Z"/><path class="iso-shade" data-shade="2" d="M371.8 236.9L369.8 236.7L369.8 209.1L371.8 209.2ZM369.8 236.7L367.9 236.4L367.9 208.7L369.8 209.1Z"/><path class="iso-shade" data-shade="3" d="M367.9 236.4L366.3 235.7L366.3 208.1L367.9 208.7ZM366.3 235.7L365.1 234.9L365.1 207.3L366.3 208.1ZM365.1 234.9L364.3 234L364.3 206.3L365.1 207.3ZM364.3 234L364 233L364 205.3L364.3 206.3Z"/><path class="iso-top" d="M377.3 208.1L375.7 208.7L373.9 209.1L371.8 209.2L369.8 209.1L367.9 208.7L366.3 208.1L365.1 207.3L364.3 206.3L364 205.3L364.3 204.3L365.1 203.4L366.3 202.5L367.9 201.9L369.8 201.5L371.8 201.4L373.9 201.5L375.7 201.9L377.3 202.5L378.6 203.4L379.4 204.3L379.6 205.3L379.4 206.3L378.6 207.3Z"/><path class="iso-line iso-crease" data-tone="faint" d="M379.6 205.3L379.4 206.3L378.6 207.3L377.3 208.1L375.7 208.7L373.9 209.1L371.8 209.2L369.8 209.1L367.9 208.7L366.3 208.1L365.1 207.3L364.3 206.3L364 205.3"/><path class="iso-line iso-edge" data-tone="mid" d="M364 205.3L364.3 204.3L365.1 203.4L366.3 202.5L367.9 201.9L369.8 201.5L371.8 201.4L373.9 201.5L375.7 201.9L377.3 202.5L378.6 203.4L379.4 204.3L379.6 205.3M379.6 233L379.4 234L378.6 234.9L377.3 235.7L375.7 236.4L373.9 236.7L371.8 236.9L369.8 236.7L367.9 236.4L366.3 235.7L365.1 234.9L364.3 234L364 233M364 205.3L364 233M379.6 205.3L379.6 233"/></g><path class="iso-line" data-tone="lo" d="M371.8 205.3L371.8 202.4"/><circle cx="371.8" cy="196.5" r="10.5" fill="rgba(255,176,66,.28)"/><path d="M371.8 187 C 376.8 193.5 375.2 200.1 371.8 202.5 C 368.4 200.1 366.8 193.5 371.8 187 Z" fill="#ff9f2e"/><path d="M371.8 192 C 374.4 195.5 373.6 198.9 371.8 200.5 C 370 198.9 369.2 195.5 371.8 192 Z" fill="#ffd43b"/><text x="362.3" y="249.3" text-anchor="middle" font-size="11" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">A</text></g><g id="pm-eye" class="fx-part" data-tip="eye"><ellipse cx="463.7" cy="172.8" rx="12" ry="8" fill="#fff" stroke="#57575a" stroke-width="1.2"/><circle cx="463.7" cy="172.8" r="4.4" fill="#333336"/><circle cx="465.1" cy="171.4" r="1.4" fill="#fff"/><text x="463.7" y="194.8" text-anchor="middle" font-size="9.5" fill="#57575a" font-family="ui-sans-serif,system-ui,sans-serif">观察者</text></g><g id="pm-dynfront"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="pm-ray" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>光线（真实光路）</span><span class="iso-key"><svg class="iso-swatch" data-mark="pm-ext" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>反向延长线</span><span class="iso-key"><svg class="iso-swatch" data-mark="pm-ghost" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>虚像（半透明）</span><span class="iso-key"><svg class="iso-swatch" data-mark="pm-mea" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>测量线</span></span><span class="iso-caption">像与物关于镜面完全对称：等大、等距、连线垂直镜面。虚像由反射光的反向延长线交汇而成，那里并没有光到达。</span></figcaption></figure>
+<div class="fx-steps"><button class="fx-stepbtn active" data-step="0">1 · 成像本质</button><button class="fx-stepbtn" data-step="1">2 · 对称几何</button><button class="fx-stepbtn" data-step="2">3 · 等效替代</button><button class="fx-stepbtn" data-step="3">4 · 翻车实验室</button><button class="fx-stepbtn" data-step="4">5 · 避坑法则</button></div><div class="fx-steptext" id="fx-steptext"></div>
+<div class="fx-controls">
+<div class="pm-group" id="pm-g1">
+  <div class="pm-btnrow">
+    <button class="fx-btn primary" id="pm-light">发出光线</button>
+    <button class="fx-btn" id="pm-relight" style="display:none">再看一次</button>
+  </div>
+</div>
+<div class="pm-group" id="pm-g2" style="display:none">
+  <div class="pm-btnrow">
+    <button class="fx-btn" id="pm-measure">隐藏测量</button>
+    <span class="pm-hint">直接拖动图中的蜡烛 A</span>
+  </div>
+</div>
+<div class="pm-group" id="pm-g3" style="display:none">
+  <div class="pm-btnrow">
+    <button class="fx-btn primary" id="pm-random">随机摆 A</button>
+    <span class="pm-hint">拖动板后的蜡烛 B，让它与虚像完全重合</span>
+  </div>
+</div>
+<div class="pm-group" id="pm-g4" style="display:none">
+  <div class="pm-btnrow">
+    <button class="fx-btn pm-sub active" id="pm-sub-a">a · 换成镜子</button>
+    <button class="fx-btn pm-sub" id="pm-sub-b">b · 玻璃加厚</button>
+    <button class="fx-btn pm-sub" id="pm-sub-c">c · 玻璃倾斜</button>
+  </div>
+  <div class="pm-sliderrow" id="pm-thickrow" style="display:none"><label for="pm-thick">玻璃厚度</label><input type="range" id="pm-thick" min="1" max="10" step="0.5" value="6"><span class="pm-lval" id="pm-thickval">6.0 mm</span></div>
+  <div class="pm-say" id="pm-saybox"></div>
+</div>
+<div class="pm-group" id="pm-g5" style="display:none">
+  <div class="pm-trapq">① 判断说法：「入射角等于反射角」——</div>
+  <div class="pm-btnrow">
+    <button class="fx-btn" id="pm-say-a">完全正确</button>
+    <button class="fx-btn" id="pm-say-b">说反了，应是「反射角等于入射角」</button>
+    <button class="fx-btn" id="pm-say-c">不对，两角根本不相等</button>
+  </div>
+  <div class="pm-sayfb" id="pm-sayfb">先有入射、再有反射——动动脑筋，选一个。</div>
+  <div class="pm-trapq" style="margin-top:14px">② 人走近镜子：拖滑杆，看「像高」和「视角」谁在变</div>
+  <div class="pm-sliderrow"><label for="pm-dist">人到镜面距离</label><input type="range" id="pm-dist" min="8" max="38" step="1" value="22"><span class="pm-lval" id="pm-distval">22 cm</span></div>
+</div>
+<div class="fx-readline" id="fx-readline"></div>
+<div class="fx-msg" id="fx-msg"></div></div>
+
+<div class="fx-eq">像与物：大小相等 · 到镜面的距离相等 · 连线与镜面垂直 —— 关于镜面对称</div>
+<div class="pm-pit">⚠️ 避坑：说法要写「<b>反射角等于入射角</b>」（先有入射、才有反射，因果不能颠倒）；像的大小只由物体本身决定，人走近觉得像变大，只是<b>视角</b>变大了。</div>
+<div class="quiz" id="quiz"><div class="quiz-title">小测验</div><div id="quiz-body"></div></div></main><script type="module">var STEPS=[{"t":"1 · 成像本质","html":"点「发出光线」：烛焰的光经玻璃板<b>反射</b>进入眼睛。眼睛逆着反射光看过去，大脑默认「光沿直线传播」，便把反射光<b>反向延长线</b>的交点误认为光源——板后「长」出的烛影就是<b>虚像</b>：那里并没有光真的到达。"},{"t":"2 · 对称几何","html":"拖动蜡烛 A（前后、左右都行），盯住板后的像：它像照镜子一样<b>对称跟随</b>。看测量读数——<b>像距永远等于物距</b>，物像连线与镜面<b>垂直</b>、被镜面<b>等分</b>。这就是平面镜成像的「对称几何」。"},{"t":"3 · 等效替代","html":"虚像摸不着、量不了，怎么办？把<b>未点燃</b>的蜡烛 B 放到板后拖动，当 B 与虚像<b>完全重合</b>，B 的位置就是像的位置——这叫<b>等效替代法</b>。重合时读数会证明：像距＝物距、像高＝物高，<b>像与物等大</b>。"},{"t":"4 · 翻车实验室","html":"中考实验题的扣分点，全在这里亲手翻一遍：<b>换成镜子、玻璃加厚、玻璃倾斜</b>。每个场景想一想：为什么实验偏偏要用「薄玻璃板、还要与白纸垂直」？"},{"t":"5 · 避坑法则","html":"两个最爱挖的坑：①说法纠错——「入射角等于反射角」错在哪？②人走近镜子，像真的变大了吗？拖一拖滑杆，用读数说话。"}];
+var TIPS={"candleA":["蜡烛 A（物）","点燃的蜡烛，放在玻璃板前。它是「物」——板后与它关于镜面对称的位置，就是像的位置。"],"candleB":["蜡烛 B（替身）","与 A 完全相同、但未点燃。在板后移动它，直到与 A 的像完全重合——它就「量」出了像的位置和大小。"],"eye":["观察者的眼睛","眼睛只能逆着进入它的光线判断光源在哪——它不知道光在镜面拐了弯，于是被「骗」到了板后。"]};
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var OX=357.139,OY=252.929,EXX=1.837,EXY=0.919,EYX=-1.837,EYY=0.919,EZX=0,EZY=-2.25;
+var GBX=320.4,GBY=258.7;
+var TH8=8*Math.PI/180,C8=Math.cos(TH8),S8=Math.sin(TH8);
+var EYE3=[16,-42,25];
+function P3(x,y,z){return [OX+EXX*x+EYX*y+EZX*z, OY+EXY*x+EYY*y+EZY*z];}
+function f1(n){return Math.round(n*10)/10;}
+function mirrorPt(px,py,pz,nx,ny,nz,c){var d=px*nx+py*ny+pz*nz-c;return [px-2*d*nx,py-2*d*ny,pz-2*d*nz];}
+function imgOf(A,mode){
+  if(mode==="tilt")return mirrorPt(A.x,A.y,0.7, 0,C8,S8, 0);
+  return mirrorPt(A.x,A.y,0.7, 0,1,0, 0);
+}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v));}
+function line(p,q,color,w,dash,op){
+  return '<line x1="'+f1(p[0])+'" y1="'+f1(p[1])+'" x2="'+f1(q[0])+'" y2="'+f1(q[1])+'" stroke="'+color+'" stroke-width="'+w+'" fill="none" opacity="'+(op==null?1:op)+'"'+(dash?' stroke-dasharray="6 4"':"")+'/>';
+}
+function segP(P,Q,k){return [P[0]+(Q[0]-P[0])*k, P[1]+(Q[1]-P[1])*k];}
+function txt(p,str,size,fill,anchor,weight){
+  return '<text x="'+f1(p[0])+'" y="'+f1(p[1])+'" text-anchor="'+(anchor||"middle")+'" font-size="'+size+'" font-weight="'+(weight||400)+'" fill="'+fill+'" font-family="ui-sans-serif,system-ui,sans-serif">'+str+'</text>';
+}
+function poly(pts,fill,stroke,w){
+  return '<polygon points="'+pts.map(function(p){return f1(p[0])+","+f1(p[1]);}).join(" ")+'" fill="'+fill+'"'+(stroke?' stroke="'+stroke+'" stroke-width="'+(w||1)+'"':"")+'/>';
+}
+function flameAt(p){
+  var x=p[0],y=p[1];
+  return '<circle cx="'+f1(x)+'" cy="'+f1(y)+'" r="10.5" fill="rgba(255,176,66,.30)"/>'
+    +'<path d="M'+f1(x)+' '+f1(y-9.5)+' C '+f1(x+5)+' '+f1(y-3)+' '+f1(x+3.4)+' '+f1(y+3.6)+' '+f1(x)+' '+f1(y+6)+' C '+f1(x-3.4)+' '+f1(y+3.6)+' '+f1(x-5)+' '+f1(y-3)+' '+f1(x)+' '+f1(y-9.5)+' Z" fill="#ff9f2e"/>'
+    +'<path d="M'+f1(x)+' '+f1(y-4.5)+' C '+f1(x+2.6)+' '+f1(y-1)+' '+f1(x+1.8)+' '+f1(y+2.4)+' '+f1(x)+' '+f1(y+4)+' C '+f1(x-1.8)+' '+f1(y+2.4)+' '+f1(x-2.6)+' '+f1(y-1)+' '+f1(x)+' '+f1(y-4.5)+' Z" fill="#ffd43b"/>';
+}
+// ── 状态 ──
+var A={x:-6,y:-14}, B={x:-6,y:14};
+var step=0, sub="a", measureOn=true, thickMm=6;
+var litT=0, litAnim=null, litDone=false, locked=false;
+var roEl=document.querySelector("[data-readout]");
+function msg(t){$("fx-msg").textContent=t;}
+function setRo(t){$("fx-readline").textContent=t;if(roEl)roEl.textContent=t;}
+function plateTheta(){return sub==="c"&&step===3?TH8:0;}
+function plateTw(){return step===3&&sub==="b"?0.6+thickMm*0.55:1.2;}
+function curImg(){
+  if(step===3&&sub==="c")return imgOf(A,"tilt");
+  if(step===3&&sub==="b"){var tw=plateTw();return mirrorPt(A.x,A.y,0.7, 0,1,0, -tw/2);}
+  var r=imgOf(A,"glass");return [r[0],r[1],r[2]];
+}
+function ghostAngle(){
+  var s2=Math.sin(2*TH8),c2=Math.cos(2*TH8);
+  var vx=EYX*(-s2)+EZX*c2, vy=EYY*(-s2)+EZY*c2;
+  return Math.atan2(vx,-vy)*180/Math.PI;
+}
+// ── 玻璃板 / 平面镜 ──
+function platePoint(x,s,z,th,tw){
+  var ct=Math.cos(th),st=Math.sin(th);
+  return P3(x, -z*st+s*ct, z*ct+s*st);
+}
+function renderPlate(){
+  var th=plateTheta(), tw=plateTw(), s=[];
+  var isMirror=step===3&&sub==="a";
+  if(isMirror){ // 板后变暗：盖住 B 与虚像所在的纸面后半
+    s.push(poly([P3(-42,0.8,1.05),P3(42,0.8,1.05),P3(42,24,1.05),P3(-42,24,1.05)],"rgba(18,18,28,0.52)"));
+  }
+  var fF=isMirror?"#4a4f55":"rgba(165,210,240,0.20)", fB=isMirror?"#33373c":"rgba(165,210,240,0.10)", ec=isMirror?"#23262a":"#7fb2d9";
+  function quad(sv){return poly([platePoint(-30,sv,0,th,tw),platePoint(30,sv,0,th,tw),platePoint(30,sv,32,th,tw),platePoint(-30,sv,32,th,tw)],sv<0?fF:fB,ec,1);}
+  s.push(quad(tw/2));
+  if(isMirror){ // 背光面斜线（画在背离 A 的一面）
+    for(var hx=-28;hx<26;hx+=5)for(var hz=1.5;hz<29;hz+=5.4)
+      s.push(line(platePoint(hx,tw/2,hz,th,tw),platePoint(hx+3.4,tw/2,hz+3.4,th,tw),"#191c1f",1.1));
+    var lp=platePoint(0,-tw/2,35.5,th,tw);
+    s.push(txt(lp,"平面镜（不透光）",10.5,"#333336","middle",700));
+  }
+  s.push(quad(-tw/2));
+  s.push(poly([platePoint(-30,-tw/2,32,th,tw),platePoint(30,-tw/2,32,th,tw),platePoint(30,tw/2,32,th,tw),platePoint(-30,tw/2,32,th,tw)],isMirror?"#3a3e44":"rgba(190,225,248,0.35)",ec,1));
+  s.push(line(platePoint(-30,-tw/2,0,th,tw),platePoint(30,-tw/2,0,th,tw),isMirror?"#23262a":"#5b8ab5",1.6));
+  if(step===3&&sub==="b"){ // 两个反射面标注
+    var a1=platePoint(31,-tw/2,26,th,tw), a2=platePoint(31,tw/2,26,th,tw);
+    s.push(txt([a1[0]+4,a1[1]],"前表面",9,"#5b8ab5","start",400));
+    s.push(txt([a2[0]+4,a2[1]+11],"后表面",9,"#5b8ab5","start",400));
+  }
+  $("pm-plate").innerHTML=s.join("");
+}
+// ── 主渲染 ──
+function render(){
+  renderPlate();
+  var img=curImg();
+  var showA=step!==4, showEye=step===0;
+  var showGhost=false, showGhost2=false, showB=false;
+  if(step===0&&litT>0.55)showGhost=true;
+  if(step===1||step===2)showGhost=true;
+  if(step===3&&sub==="b"){showGhost=true;showGhost2=true;showB=true;}
+  if(step===3&&sub==="c"){showGhost=true;showB=true;}
+  if(step===2)showB=true;
+  $("pm-a").style.display=showA?"":"none";
+  $("pm-eye").style.display=showEye?"":"none";
+  $("pm-b").style.display=showB?"":"none";
+  $("pm-ghost").style.display=showGhost?"":"none";
+  $("pm-ghost2").style.display=showGhost2?"":"none";
+  // A 的平移
+  var aBase=P3(-6,-14,0.7), aNow=P3(A.x,A.y,0.7);
+  $("pm-a").setAttribute("transform","translate("+(f1(aNow[0]-aBase[0]))+" "+(f1(aNow[1]-aBase[1]))+")");
+  // B 的平移（与虚像同一烘焙原点，transform 可直接比对）
+  var bNow=P3(B.x,B.y,0.7), gBase=P3(-6,14,0.7);
+  $("pm-b").setAttribute("transform","translate("+(f1(bNow[0]-gBase[0]))+" "+(f1(bNow[1]-gBase[1]))+")");
+  // 虚像
+  var gNow=P3(img[0],img[1],img[2]);
+  var gt="translate("+(f1(gNow[0]-gBase[0]))+" "+(f1(gNow[1]-gBase[1]))+")";
+  if(step===3&&sub==="c")gt+=" rotate("+(f1(ghostAngle()))+" "+GBX+" "+GBY+")";
+  $("pm-ghost").setAttribute("transform",gt);
+  if(step===3&&sub==="b"){
+    var tw=plateTw(), im2=mirrorPt(A.x,A.y,0.7, 0,1,0, tw/2), g2=P3(im2[0],im2[1],im2[2]);
+    $("pm-ghost2").setAttribute("transform","translate("+(f1(g2[0]-gBase[0]))+" "+(f1(g2[1]-gBase[1]))+")");
+  }
+  var back=[],front=[];
+  // ── 步骤 1：光路（入射/反射实线在前层，反向延长虚线在后层）──
+  if(step===0&&litT>0){
+    var k1=clamp(litT/0.35,0,1), k2=clamp((litT-0.3)/0.35,0,1), k3=clamp((litT-0.6)/0.4,0,1);
+    $("pm-ghost").style.opacity=String(0.55*Math.max(k3,0.001));
+    var imgV=imgOf(A,"glass");
+    [[17.5],[15]].forEach(function(fz){
+      var F=[A.x,A.y,fz[0]], Fp=[imgV[0],imgV[1],fz[0]];
+      var t=(0-Fp[1])/(EYE3[1]-Fp[1]);
+      var R=[Fp[0]+(EYE3[0]-Fp[0])*t, 0, Fp[2]+(EYE3[2]-Fp[2])*t];
+      var pF=P3(F[0],F[1],F[2]), pR=P3(R[0],R[1],R[2]), pE=P3(EYE3[0],EYE3[1],EYE3[2]), pFp=P3(Fp[0],Fp[1],Fp[2]);
+      if(k1>0)front.push(line(pF,segP(pF,pR,k1),"#e8590c",2.4));
+      if(k2>0)front.push(line(pR,segP(pR,pE,k2),"#e8590c",2.4));
+      if(k3>0)back.push(line(pR,segP(pR,pFp,k3),"#7048e8",1.6,true,0.9));
+    });
+    if(k3>0.4){
+      var lp=P3(imgV[0],imgV[1],21);
+      front.push(txt([lp[0],lp[1]-8],"虚像（光并没有真的到达这里）",10,"#7048e8","middle",700));
+      var ep=P3(EYE3[0],EYE3[1],EYE3[2]);
+      front.push(txt([ep[0]+20,ep[1]+2],"眼睛逆着反射光看过去",9.5,"#e8590c","start",400));
+    }
+  } else { $("pm-ghost").style.opacity="0.55"; }
+  // ── 步骤 2：测量 ──
+  if(step===1&&measureOn){
+    var zL=0.95;
+    var pA=P3(A.x,A.y,zL), pM=P3(A.x,0,zL), pI=P3(A.x,-A.y,zL);
+    back.push(line(pA,pM,"#e8590c",2,true));
+    back.push(line(pM,pI,"#3e63dd",2,true));
+    back.push('<circle cx="'+f1(pM[0])+'" cy="'+f1(pM[1])+'" r="2.8" fill="#333336"/>');
+    var sq=[P3(A.x,0,zL),P3(A.x-2.6,0,zL),P3(A.x-2.6,-2.6,zL),P3(A.x,-2.6,zL)];
+    back.push('<polyline points="'+sq.map(function(p){return f1(p[0])+","+f1(p[1]);}).join(" ")+'" fill="none" stroke="#57575a" stroke-width="1.1"/>');
+    front.push(txt([(pA[0]+pM[0])/2,(pA[1]+pM[1])/2-6],"物距 u",10,"#e8590c","middle",700));
+    front.push(txt([(pM[0]+pI[0])/2,(pM[1]+pI[1])/2-6],"像距 v",10,"#3e63dd","middle",700));
+    front.push(txt([pI[0],pI[1]+16],"像",10,"#3e63dd","middle",700));
+  }
+  // ── 步骤 3：重合发光 ──
+  if(step===2&&locked){
+    var bp=P3(B.x,B.y,16.9);
+    front.push(flameAt(bp));
+    var bb=P3(B.x,B.y,0.9);
+    front.push('<circle cx="'+f1(bb[0])+'" cy="'+f1(bb[1])+'" r="13" fill="none" stroke="#30a46c" stroke-width="1.6" stroke-dasharray="5 3"/>');
+    front.push(txt([bb[0],bb[1]+26],"重合！",12,"#1f7a48","middle",700));
+  }
+  // ── 步骤 4c：像飘在纸面上方 ──
+  if(step===3&&sub==="c"){
+    var top=P3(img[0],img[1],img[2]), bot=P3(img[0],img[1],0.7);
+    front.push(line(top,bot,"#e5484d",1.8,true));
+    front.push(txt([(top[0]+bot[0])/2+8,(top[1]+bot[1])/2],"像飘在纸面上方 "+(img[2]-0.7).toFixed(1)+" cm",10.5,"#e5484d","start",700));
+    front.push(line(P3(img[0]-7,img[1],0.7),P3(img[0]+7,img[1],0.7),"#e5484d",1.2,true,0.7));
+  }
+  // ── 步骤 5：人走近镜子 ──
+  if(step===4){
+    var d=+$("pm-dist").value;
+    var px=2;
+    function person(yy,dashed,op){
+      var o=[];
+      var head=P3(px,yy,27.7), neck=P3(px,yy,24.5), hip=P3(px,yy,13), f1p=P3(px-2.4,yy,0.7), f2p=P3(px+2.4,yy,0.7);
+      var col=dashed?"#868e96":"#333336";
+      o.push('<circle cx="'+f1(head[0])+'" cy="'+f1(head[1])+'" r="5.5" fill="'+(dashed?"rgba(134,142,150,.25)":"#ffe3b3")+'" stroke="'+col+'" stroke-width="1.2"'+(dashed?' stroke-dasharray="3 2"':"")+'/>');
+      o.push(line(neck,hip,col,2,dashed,op));
+      o.push(line(hip,f1p,col,2,dashed,op));
+      o.push(line(hip,f2p,col,2,dashed,op));
+      return o;
+    }
+    back.push.apply(back,person(d,true,0.75));
+    front.push.apply(front,person(-d,false,1));
+    var eyeP=P3(px,-d,27.7), iT=P3(px,d,30.7), iB=P3(px,d,0.7);
+    front.push(line(eyeP,iT,"#7048e8",1.5,true,0.9));
+    front.push(line(eyeP,iB,"#7048e8",1.5,true,0.9));
+    var v1=[0,2*d,3], v2=[0,2*d,-27];
+    var dot=v1[0]*v2[0]+v1[1]*v2[1]+v1[2]*v2[2];
+    var ang=Math.acos(dot/Math.sqrt((v1[0]*v1[0]+v1[1]*v1[1]+v1[2]*v1[2])*(v2[0]*v2[0]+v2[1]*v2[1]+v2[2]*v2[2])))*180/Math.PI;
+    front.push(txt([eyeP[0]+12,eyeP[1]-12],"视角 "+ang.toFixed(1)+"°",11,"#7048e8","start",700));
+    front.push(txt([iT[0],iT[1]-10],"像（高 30 cm）",10,"#7048e8","middle",700));
+    setRo("人到镜面 "+d+" cm · 像高 30 cm（不随人动）· 视角 "+ang.toFixed(1)+"°");
+  }
+  $("pm-dynback").innerHTML=back.join("");
+  $("pm-dynfront").innerHTML=front.join("");
+  updateRo();
+}
+function updateRo(){
+  if(step===4)return; // 步骤 5 的读数在 render 里单独写
+  if(step===0){setRo(litDone?"虚像在板后约 "+Math.abs(A.y).toFixed(1)+" cm 处 · 那里没有光真正到达（虚像）":"点「发出光线」，看虚像怎样在板后「长」出来");return;}
+  if(step===1){var u=Math.abs(A.y);setRo("物距 u = "+u.toFixed(1)+" cm · 像距 v = "+u.toFixed(1)+" cm · u 恒等于 v");return;}
+  if(step===2){
+    if(locked)setRo("重合！像距 "+Math.abs(A.y).toFixed(1)+" cm ＝ 物距 "+Math.abs(A.y).toFixed(1)+" cm · 像高 ＝ 物高（像物等大）");
+    else{var im=curImg();var dd=Math.sqrt(Math.pow(B.x-im[0],2)+Math.pow(B.y-im[1],2));setRo("B 与像还差 "+dd.toFixed(1)+" cm（左右 "+Math.abs(B.x-im[0]).toFixed(1)+" · 前后 "+Math.abs(B.y-im[1]).toFixed(1)+"）· 拖 B 去重合");}
+    return;
+  }
+  if(step===3){
+    if(sub==="a")setRo("平面镜不透光：板后一片漆黑，像「在」却看不见、更没法用 B 定位");
+    else if(sub==="b"){var tw=plateTw();setRo("玻璃厚 "+thickMm.toFixed(1)+" mm → 前后两面各成一像，两像错开约 "+(2*tw).toFixed(1)+" cm（重影）");}
+    else{var im2=curImg();setRo("玻璃倾斜 8°：像飘到白纸上方 "+(im2[2]-0.7).toFixed(1)+" cm · B 在纸面上（高 0 cm），永远差这一截");}
+    return;
+  }
+}
+// ── 重合判定 ──
+function checkLock(announce){
+  if(step!==2){locked=false;return;}
+  var im=curImg();
+  var dd=Math.sqrt(Math.pow(B.x-im[0],2)+Math.pow(B.y-im[1],2));
+  var was=locked;
+  locked=dd<2.0;
+  if(locked&&!was)msg("重合！B 现在站的位置，就是虚像的位置——等效替代法「量」出了像位：像距＝物距，像物等大。");
+  if(!locked&&was)msg("B 离开了像位——像还留在原地，B 只是个「替身标尺」。");
+}
+function checkTiltGap(){
+  if(!(step===3&&sub==="c"))return;
+  var im=curImg();
+  var dd=Math.sqrt(Math.pow(B.x-im[0],2)+Math.pow(B.y-im[1],2));
+  if(dd<2.0)msg("平面位置对上了！但像飘在白纸上方 "+(im[2]-0.7).toFixed(1)+" cm，B 站在纸面上够不着——差的就是这个高度。玻璃板必须与白纸垂直！");
+}
+// ── 发光动画 ──
+function playLight(){
+  if(litAnim)cancelAnimationFrame(litAnim);litAnim=null;
+  litDone=false;$("pm-relight").style.display="none";
+  if(reduceMotion){litT=1;litDone=true;$("pm-relight").style.display="";render();msg("看延长线：它们在板后交汇成虚像——可那里并没有光到达，所以叫「虚」像。");return;}
+  var t0=null;
+  function fr(ts){
+    if(t0==null)t0=ts;
+    litT=Math.min(1,(ts-t0)/1400);
+    render();
+    if(litT<1){litAnim=requestAnimationFrame(fr);}
+    else{litAnim=null;litDone=true;$("pm-relight").style.display="";msg("看延长线：它们在板后交汇成虚像——可那里并没有光到达，所以叫「虚」像。");}
+  }
+  litAnim=requestAnimationFrame(fr);
+}
+// ── 拖拽 ──
+function svgDelta(e,last){
+  var svg=$("pm-svg"),r=svg.getBoundingClientRect();
+  var sdx=(e.clientX-last.x)/r.width*740, sdy=(e.clientY-last.y)/r.height*520;
+  var det=EXX*EYY-EYX*EXY;
+  return {x:(EYY*sdx-EYX*sdy)/det, y:(-EXY*sdx+EXX*sdy)/det, lx:e.clientX, ly:e.clientY};
+}
+function bindDrag(elId,getObj,setPos,canDrag){
+  var el=$(elId),drag=false,last=null;
+  el.addEventListener("pointerdown",function(e){
+    if(!canDrag())return;
+    drag=true;last={x:e.clientX,y:e.clientY};
+    try{el.setPointerCapture(e.pointerId);}catch(_){}
+    if(e.preventDefault)e.preventDefault();
+  });
+  el.addEventListener("pointermove",function(e){
+    if(!drag||!last)return;
+    var d=svgDelta(e,last);last={x:d.lx,y:d.ly};
+    var o=getObj();
+    setPos(o.x+d.x,o.y+d.y);
+  });
+  function up(){drag=false;last=null;}
+  el.addEventListener("pointerup",up);el.addEventListener("pointercancel",up);
+}
+bindDrag("pm-a",function(){return A;},function(nx,ny){
+  A.x=clamp(Math.round(nx*10)/10,-26,26);A.y=clamp(Math.round(ny*10)/10,-24,-5);
+  render();
+},function(){return step===1||step===2;});
+bindDrag("pm-b",function(){return B;},function(nx,ny){
+  B.x=clamp(Math.round(nx*10)/10,-26,26);B.y=clamp(Math.round(ny*10)/10,4,24);
+  if(step===2){checkLock(true);}
+  render();
+  if(step===3&&sub==="c")checkTiltGap();
+},function(){return step===2||(step===3&&(sub==="b"||sub==="c"));});
+// ── 步骤 / 子场景 ──
+var SAY={
+  a:"「考场说法」为什么不用平面镜？平面镜不透光，看不到板后面的蜡烛 B，没法确定像的位置；玻璃板透光，能同时看到像和 B。",
+  b:"「考场说法」为什么用薄玻璃板？厚玻璃板的前后两个表面都会反射成像，两个像错开形成重影，干扰定位——越薄，重影越小。",
+  c:"「考场说法」玻璃板必须与白纸垂直。不垂直时，像关于倾斜的镜面对称、偏离纸面，B 在纸面上怎么移都无法与像重合。"
+};
+function setupSub(s){
+  sub=s;
+  ["a","b","c"].forEach(function(k){$("pm-sub-"+k).classList.toggle("active",k===s);});
+  $("pm-thickrow").style.display=s==="b"?"":"none";
+  $("pm-saybox").innerHTML=SAY[s];
+  A={x:-6,y:-14};locked=false;
+  if(s==="a"){B={x:-6,y:14};msg("一键换镜：板后变黑了——像还在，却看不见 B，实验直接卡死。");}
+  if(s==="b"){var im=curImg();B={x:im[0],y:im[1]};msg("拖动厚度滑杆：玻璃越厚，两个像错得越开——这就是重影。");}
+  if(s==="c"){var im2=curImg();B={x:im2[0],y:im2[1]};msg("玻璃板倾斜 8°：B 已放在像的正下方——平面位置对上了，却永远差一个高度。拖拖看！");}
+  render();
+}
+function onStep(i){
+  step=i;
+  for(var g=1;g<=5;g++)$("pm-g"+g).style.display=i===g-1?"":"none";
+  if(litAnim)cancelAnimationFrame(litAnim);litAnim=null;
+  if(i===0){A={x:-6,y:-14};litT=0;litDone=false;$("pm-relight").style.display="none";msg("点「发出光线」，看光怎样「骗」过眼睛。");}
+  if(i===1){msg("拖动蜡烛 A，像寸步不离地对称跟随。");}
+  if(i===2){
+    var im=curImg();
+    B={x:clamp(im[0]+9,-26,26),y:clamp(im[1]+7,4,24)};locked=false;
+    msg("拖动板后的蜡烛 B，去和虚像重合。");
+  }
+  if(i===3)setupSub(sub);
+  if(i===4)msg("先判说法，再拖滑杆——像高纹丝不动，变的只有视角。");
+  render();
+}
+$("pm-light").addEventListener("click",playLight);
+$("pm-relight").addEventListener("click",playLight);
+$("pm-measure").addEventListener("click",function(){
+  measureOn=!measureOn;
+  this.textContent=measureOn?"隐藏测量":"显示测量";
+  render();
+});
+$("pm-random").addEventListener("click",function(){
+  A.x=Math.round((-20+Math.random()*40)*2)/2;
+  A.y=-Math.round((10+Math.random()*10)*2)/2;
+  var im=curImg();
+  B={x:clamp(im[0]+9,-26,26),y:clamp(im[1]+7,4,24)};locked=false;
+  render();
+  msg("A 换了新位置（物距 "+Math.abs(A.y).toFixed(1)+" cm）——再拖 B 去重合！");
+});
+$("pm-sub-a").addEventListener("click",function(){setupSub("a");});
+$("pm-sub-b").addEventListener("click",function(){setupSub("b");});
+$("pm-sub-c").addEventListener("click",function(){setupSub("c");});
+$("pm-thick").addEventListener("input",function(){
+  thickMm=+this.value;
+  $("pm-thickval").textContent=thickMm.toFixed(1)+" mm";
+  if(sub==="b"){var im=curImg();/* B 不自动跟随，留给学生观察两像分离 */}
+  render();
+});
+// ── 步骤 5 ① 说法纠错 ──
+function sayAnswer(k,btn){
+  ["pm-say-a","pm-say-b","pm-say-c"].forEach(function(id){$(id).classList.remove("right","wrong");$(id).disabled=false;});
+  var fb=$("pm-sayfb");fb.classList.remove("ok");
+  if(k==="b"){
+    btn.classList.add("right");
+    fb.classList.add("ok");
+    fb.innerHTML="✓ 对！两角大小相等，但<b>因果不能颠倒</b>：先有入射光线，才有反射光线，所以只能说「反射角等于入射角」。写反了，中考实验题要扣分。";
+  }else if(k==="a"){
+    btn.classList.add("wrong");
+    fb.innerHTML="✗ 大小是相等，可说法<b>因果颠倒</b>了：没有入射光，哪来的反射？规范说法是「反射角等于入射角」。再选一次！";
+  }else{
+    btn.classList.add("wrong");
+    fb.innerHTML="✗ 两角恰恰<b>相等</b>（反射定律）。这道题坑的不是大小，是说法顺序——再想想因果！";
+  }
+}
+$("pm-say-a").addEventListener("click",function(){sayAnswer("a",this);});
+$("pm-say-b").addEventListener("click",function(){sayAnswer("b",this);});
+$("pm-say-c").addEventListener("click",function(){sayAnswer("c",this);});
+// ── 步骤 5 ② 距离滑杆 ──
+$("pm-dist").addEventListener("input",function(){
+  $("pm-distval").textContent=this.value+" cm";
+  if(step===4)render();
+});
+$("fx-stage").addEventListener("keydown",function(e){
+  if(e.key>="1"&&e.key<="5")renderStep(+e.key-1);
+});
+// ── 小测验 ──
+var QUIZ=[
+  {q:"实验中为什么要用一支与 A 完全相同、且未点燃的蜡烛 B？",o:["与 A 相同才能比出像与物等大；未点燃是避免它自身的火焰与成像干扰观察、便于确认重合","未点燃是因为点燃的蜡烛会把玻璃板烤变形","相同的蜡烛只是为了让画面对称好看"],a:0,
+   w:"这正是等效替代法：用「替身」B 的位置和大小，代表看不见摸不着的虚像；B 点燃会多出一套光线和像，干扰判断。"},
+  {q:"玻璃板没有与白纸垂直（倾斜）时，会发生什么？",o:["像偏离纸面（飘在纸面上方一截），B 在纸面上怎么移动都无法与像完全重合","像会比物体大一圈","像会立刻消失"],a:0,
+   w:"像与物关于倾斜的镜面对称，像的落点离开了纸面——所以实验第一步就要保证玻璃板与白纸垂直。"}
+];
+var quizState={};
+function renderQuiz(){
+  var html="";
+  QUIZ.forEach(function(qq,qi){
+    var st=quizState[qi];
+    html+='<div class="quiz-q">'+(qi+1)+". "+qq.q+'</div><div class="quiz-opts">';
+    qq.o.forEach(function(op,oi){
+      var cls="";
+      if(st!=null){if(oi===qq.a)cls=" right";else if(oi===st)cls=" wrong";}
+      html+='<button class="quiz-opt'+cls+'" data-q="'+qi+'" data-o="'+oi+'">'+op+"</button>";
+    });
+    html+="</div>";
+    if(st!=null){
+      html+='<div class="quiz-why" style="display:block">'+(st===qq.a?"✓ 答对了！":"✗ 再想想。")+qq.w+"</div>";
+    }
+  });
+  $("quiz-body").innerHTML=html;
+}
+$("quiz-body").addEventListener("click",function(e){
+  var t=e.target;if(!t||!t.dataset||t.dataset.q==null)return;
+  quizState[+t.dataset.q]=+t.dataset.o;
+  renderQuiz();
+});
+renderQuiz();
+renderStep(0);
+render();
+
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var __step=0,__hold=-1;
+function renderStep(i){
+  __step=i;
+  var btns=document.querySelectorAll(".fx-stepbtn");
+  btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
+  var s=STEPS[i];
+  $("fx-steptext").innerHTML="<b>"+s.t.replace(/^\d+\s*[·、]\s*/,"")+"</b>　"+s.html;
+  if(typeof onStep==="function")onStep(i);
+}
+function holdStep(i){__hold=i;renderStep(i);}
+function releaseHold(){__hold=-1;}
+document.querySelectorAll(".fx-stepbtn").forEach(function(b){
+  b.addEventListener("click",function(){holdStep(+b.dataset.step);});
+});
+(function initTips(){
+  var tip=$("fx-tip"),stage=$("fx-stage");
+  if(!tip||!stage||typeof TIPS==="undefined")return;
+  function show(id,x,y){
+    var t=TIPS[id];if(!t)return;
+    tip.innerHTML="<b>"+t[0]+"</b><span>"+t[1]+"</span>";
+    tip.style.display="block";
+    var r=stage.getBoundingClientRect();
+    tip.style.left=Math.min(r.width-250,Math.max(8,x-r.left+14))+"px";
+    tip.style.top=Math.max(8,y-r.top-10)+"px";
+  }
+  document.querySelectorAll(".fx-part").forEach(function(el){
+    el.addEventListener("pointerenter",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointermove",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointerleave",function(){tip.style.display="none";});
+    el.addEventListener("click",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+  });
+})();
+</script></body></html>

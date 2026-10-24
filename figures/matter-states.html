@@ -1,0 +1,449 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><title>物质三态与物态变化 · 交互式等距插图</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(740px,100% - 32px);margin:64px auto 96px}
+/* 平板断点：iPad 竖屏 768px 起放宽版心；iPad 横屏/桌面 1100px 起再放宽，阅读行宽设上限 */
+@media (min-width:768px){
+.iso-page{width:min(940px,100% - 48px)}
+.iso-plate{padding-left:32px;padding-right:32px}
+}
+@media (min-width:1100px){
+.iso-page{width:min(1080px,100% - 64px)}
+}
+
+
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.fx-slider{display:flex;align-items:center;gap:10px;justify-content:center;font-size:14px;color:var(--anatomy-strong);margin:6px 0}
+.fx-slider input{width:min(300px,52vw);accent-color:#e5484d}
+.fx-slider b{font-variant-numeric:tabular-nums;min-width:64px;text-align:left}
+.fx-subhead{max-width:640px;margin:26px auto 8px;font-size:15px;font-weight:700;color:var(--anatomy-strong);text-align:center}
+.fx-micro{display:block;margin:0 auto;max-width:520px;width:100%}
+.fx-map{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0 4px}
+#ms-state{background:#fff7ed;border:1px solid #f5a524;border-radius:10px;max-width:640px;margin-left:auto;margin-right:auto;padding:10px 16px}
+.quiz-qwrap{max-width:640px;margin:10px auto;padding:12px 16px;background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:10px}
+.quiz-q{font-size:13.5px;font-weight:700;color:var(--anatomy-strong);margin-bottom:8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;padding:7px 14px;border-radius:18px;border:1px solid var(--anatomy-lo);background:var(--anatomy-card);color:var(--anatomy-text);cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e8f7ef;color:#1c7a4d}
+.quiz-opt.wrong{border-color:#e5484d;background:#fdeeee;color:#b3272e}
+.quiz-why{font-size:12.5px;color:var(--anatomy-muted);margin-top:8px;line-height:1.6}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><nav class="kg-back"><a href="../index.html">← 返回知识馆</a></nav>
+<header class="fx-pagehead"><h1>物质三态与物态变化</h1><p>温度滑杆从 -20°C 拉到 100°C：冰的点阵被拆开成水，水的粒子被拆散成蒸气——两次「温度停住」是全片高潮</p></header>
+<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 3</span><span class="iso-plate-corner" data-corner="title">物质三态与物态变化</span><span class="iso-plate-corner" data-corner="hint">拖温度滑杆 · 点加热/冷却看全过程 · 数字键 1–5 切步骤</span><span class="iso-plate-corner" data-corner="readout" data-readout>-20.0°C · 固态 · 冰 · 累计热量 0 kJ</span></div><div class="iso-stage" id="fx-stage" tabindex="0" role="group" aria-label="物态变化实验：拖温度滑杆或点加热冷却，看冰、水、水蒸气互相转化"><div class="fx-tip" id="fx-tip"></div><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 740 520" role="img" aria-label="物态变化实验：拖温度滑杆或点加热，看冰融化成水、沸腾成水蒸气"><g><path class="iso-halo" d="M168.1 363.1L168.5 361.3L169.6 359.5L171.3 357.9L173.7 356.4L312.6 287L315.4 285.8L318.7 284.9L322.2 284.4L325.9 284.2L329.6 284.4L333.2 284.9L336.4 285.8L339.3 287L566.3 400.5L568.7 401.9L570.4 403.6L571.5 405.3L571.9 407.2L571.5 409L570.4 410.8L568.7 412.4L566.3 413.9L427.4 483.3L424.6 484.5L421.3 485.4L417.8 485.9L414.1 486.1L410.4 485.9L406.8 485.4L403.6 484.5L400.7 483.3L173.7 369.8L171.3 368.4L169.6 366.7L168.5 365Z"/><g class="iso-solid"><path class="iso-fill" d="M316.6 295.6L317.5 294.2L319.2 293L321.6 292.1L324.4 291.7L327.4 291.7L330.2 292.1L332.6 293L334.3 294.2L335.3 295.6L335.3 323.2L334.3 324.6L332.6 325.8L330.2 326.7L327.4 327.2L324.4 327.2L321.6 326.7L319.2 325.8L317.5 324.6L316.6 323.2Z"/><path class="iso-top" d="M332.6 325.8L330.2 326.7L327.4 327.2L324.4 327.2L321.6 326.7L319.2 325.8L317.5 324.6L316.6 323.2L316.6 321.8L317.5 320.4L319.2 319.2L321.6 318.3L324.4 317.8L327.4 317.8L330.2 318.3L332.6 319.2L334.3 320.4L335.3 321.8L335.3 323.2L334.3 324.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M335.3 323.2L334.3 324.6L332.6 325.8L330.2 326.7L327.4 327.2L324.4 327.2L321.6 326.7L319.2 325.8L317.5 324.6L316.6 323.2"/><path class="iso-line iso-edge" data-tone="lo" d="M316.6 323.2L316.6 321.8L317.5 320.4L319.2 319.2L321.6 318.3L324.4 317.8L327.4 317.8L330.2 318.3L332.6 319.2L334.3 320.4L335.3 321.8L335.3 323.2"/></g><g class="iso-solid"><path class="iso-fill" d="M538.3 407.9L538.3 406.4L539.2 405L541 403.8L543.4 403L546.2 402.5L549.1 402.5L551.9 403L554.3 403.8L556.1 405L557 406.4L557 434.1L556.1 435.5L554.3 436.7L551.9 437.6L549.1 438L546.2 438L543.4 437.6L541 436.7L539.2 435.5L538.3 434.1Z"/><path class="iso-top" d="M554.3 436.7L551.9 437.6L549.1 438L546.2 438L543.4 437.6L541 436.7L539.2 435.5L538.3 434.1L538.3 432.6L539.2 431.2L541 430L543.4 429.2L546.2 428.7L549.1 428.7L551.9 429.2L554.3 430L556.1 431.2L557 432.6L557 434.1L556.1 435.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M557 434.1L556.1 435.5L554.3 436.7L551.9 437.6L549.1 438L546.2 438L543.4 437.6L541 436.7L539.2 435.5L538.3 434.1"/><path class="iso-line iso-edge" data-tone="lo" d="M538.3 434.1L538.3 432.6L539.2 431.2L541 430L543.4 429.2L546.2 428.7L549.1 428.7L551.9 429.2L554.3 430L556.1 431.2L557 432.6L557 434.1"/></g><g class="iso-solid"><path class="iso-fill" d="M183 362.4L183.9 361L185.7 359.8L188.1 358.9L190.9 358.4L193.8 358.4L196.6 358.9L199 359.8L200.8 361L201.7 362.4L201.7 388.5L201.7 390L200.8 391.4L199 392.6L196.6 393.5L193.8 393.9L190.9 393.9L188.1 393.5L185.7 392.6L183.9 391.4L183 390Z"/><path class="iso-top" d="M199 392.6L196.6 393.5L193.8 393.9L190.9 393.9L188.1 393.5L185.7 392.6L183.9 391.4L183 390L183 388.5L183.9 387.1L185.7 385.9L188.1 385.1L190.9 384.6L193.8 384.6L196.6 385.1L199 385.9L200.8 387.1L201.7 388.5L201.7 390L200.8 391.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M201.7 390L200.8 391.4L199 392.6L196.6 393.5L193.8 393.9L190.9 393.9L188.1 393.5L185.7 392.6L183.9 391.4L183 390"/><path class="iso-line iso-edge" data-tone="lo" d="M183 390L183 388.5L183.9 387.1L185.7 385.9L188.1 385.1L190.9 384.6L193.8 384.6L196.6 385.1L199 385.9L200.8 387.1L201.7 388.5L201.7 390"/></g><g class="iso-solid"><path class="iso-fill" d="M404.7 473.2L405.7 471.8L407.4 470.6L409.8 469.8L412.6 469.3L415.6 469.3L418.4 469.8L420.8 470.6L422.5 471.8L423.4 473.2L423.4 500.9L422.5 502.3L420.8 503.5L418.4 504.4L415.6 504.8L412.6 504.8L409.8 504.4L407.4 503.5L405.7 502.3L404.7 500.9Z"/><path class="iso-top" d="M420.8 503.5L418.4 504.4L415.6 504.8L412.6 504.8L409.8 504.4L407.4 503.5L405.7 502.3L404.7 500.9L404.7 499.4L405.7 498L407.4 496.8L409.8 495.9L412.6 495.5L415.6 495.5L418.4 495.9L420.8 496.8L422.5 498L423.4 499.4L423.4 500.9L422.5 502.3Z"/><path class="iso-line iso-crease" data-tone="faint" d="M423.4 500.9L422.5 502.3L420.8 503.5L418.4 504.4L415.6 504.8L412.6 504.8L409.8 504.4L407.4 503.5L405.7 502.3L404.7 500.9"/><path class="iso-line iso-edge" data-tone="lo" d="M404.7 500.9L404.7 499.4L405.7 498L407.4 496.8L409.8 495.9L412.6 495.5L415.6 495.5L418.4 495.9L420.8 496.8L422.5 498L423.4 499.4L423.4 500.9"/></g><g class="iso-solid"><path class="iso-fill" d="M168.1 294.4L168.5 292.6L169.6 290.8L171.3 289.2L173.7 287.7L312.6 218.3L315.4 217.1L318.7 216.2L322.2 215.7L325.9 215.5L329.6 215.7L333.2 216.2L336.4 217.1L339.3 218.3L566.3 331.8L568.7 333.2L570.4 334.9L571.5 336.6L571.9 338.5L571.5 340.3L570.4 342.1L568.7 343.7L566.3 345.2L427.4 414.6L424.6 415.8L421.3 416.7L417.8 417.2L414.1 417.4L410.4 417.2L406.8 416.7L403.6 415.8L400.7 414.6L173.7 301.1L171.3 299.6L169.6 298L168.5 296.2Z"/><path class="iso-top" d="M566.3 331.8L568.7 333.2L570.4 334.9L571.5 336.6L571.9 338.5L571.5 340.3L570.4 342.1L568.7 343.7L566.3 345.2L427.4 414.6L424.6 415.8L421.3 416.7L417.8 417.2L414.1 417.4L410.4 417.2L406.8 416.7L403.6 415.8L400.7 414.6L173.7 301.1L171.3 299.6L169.6 298L168.5 296.2L168.1 294.4L168.5 292.6L169.6 290.8L171.3 289.2L173.7 287.7L312.6 218.3L315.4 217.1L318.7 216.2L322.2 215.7L325.9 215.5L329.6 215.7L333.2 216.2L336.4 217.1L339.3 218.3Z"/><path class="iso-line iso-crease" data-tone="faint" d="M571.9 338.5L571.5 340.3L570.4 342.1L568.7 343.7L566.3 345.2L427.4 414.6L424.6 415.8L421.3 416.7L417.8 417.2L414.1 417.4L410.4 417.2L406.8 416.7L403.6 415.8L400.7 414.6L173.7 301.1L171.3 299.6L169.6 298L168.5 296.2L168.1 294.4"/><path class="iso-line iso-bevel" data-tone="faint" d="M571.9 338.5L569.3 340.1L568.4 341.7L566.8 343.1L564.7 344.4L425.9 413.8L423.3 414.8L420.4 415.6L417.3 416.1L414.1 416.2L410.8 416.1L407.7 415.6L404.8 414.8L402.2 413.8L175.3 300.3L173.2 299L171.6 297.6L170.7 296L168.1 294.4"/><path class="iso-line iso-edge" data-tone="mid" d="M168.1 294.4L168.5 292.6L169.6 290.8L171.3 289.2L173.7 287.7L312.6 218.3L315.4 217.1L318.7 216.2L322.2 215.7L325.9 215.5L329.6 215.7L333.2 216.2L336.4 217.1L339.3 218.3L566.3 331.8L568.7 333.2L570.4 334.9L571.5 336.6L571.9 338.5"/></g><path class="iso-line" data-tone="faint" d="M558.3 309.6L559.3 310.2L560 310.9L560.4 311.6L560.5 312.3L560.4 313L560 313.7L559.3 314.4L558.3 315L419.4 384.4L418.3 384.9L417 385.3L415.6 385.5L414.1 385.5L412.6 385.5L411.2 385.3L409.9 384.9L408.7 384.4L181.7 270.9L180.7 270.3L180 269.7L179.6 269L179.5 268.2L179.6 267.5L180 266.8L180.7 266.1L181.7 265.6L320.6 196.1L321.7 195.6L323 195.3L324.4 195.1L325.9 195L327.4 195.1L328.8 195.3L330.1 195.6L331.3 196.1Z"/><text class="iso-face-text" data-tone="faint" transform="matrix(1.336 0.668 -1.336 0.668 271.157 298.633)" font-size="5" text-anchor="start">物态变化实验台</text><g class="fx-part" data-tip="tank"><polygon points="276.5,138.8 356.6,178.9 356.6,277 276.5,237" fill="rgba(150,195,235,.10)" stroke="#8fb8dd" stroke-width="1"/><ellipse cx="316.6" cy="158.9" rx="40.1" ry="15.2" fill="rgba(150,195,235,.16)" stroke="#8fb8dd" stroke-width="1"/></g><polygon id="ms-liq" points="" fill="rgba(120,180,230,.38)" stroke="none"/><ellipse id="ms-liqtop" cx="316.6" cy="0" rx="36.1" ry="13.7" fill="rgba(120,180,230,.55)" stroke="none"/><text x="265.8" y="287.3" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">玻璃水箱 · 1kg 水</text><g id="ms-ice" class="fx-part" data-tip="ice" opacity="1"><polygon points="279.2,214.5 316.6,233.2 316.6,269.2 279.2,250.5" fill="#a9d3f2" stroke="#7fb3e8" stroke-width="1"/><polygon points="316.6,233.2 354,214.5 354,250.5 316.6,269.2" fill="#8fc2ec" stroke="#7fb3e8" stroke-width="1"/><polygon points="316.6,195.8 354,214.5 316.6,233.2 279.2,214.5" fill="#cfe8fa" stroke="#7fb3e8" stroke-width="1"/></g><g class="fx-part" data-tip="therm"><line x1="399.4" y1="254.5" x2="399.4" y2="169.4" stroke="#b9d4e8" stroke-width="7" stroke-linecap="round"/><circle cx="399.4" cy="256.5" r="6.5" fill="#e5484d" stroke="#b3272e" stroke-width="1"/><line id="ms-thfill" x1="399.4" y1="256.5" x2="399.4" y2="256.5" stroke="#e5484d" stroke-width="3.4" stroke-linecap="round"/></g><text x="383.4" y="273.9" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">温度计</text><g class="fx-part" data-tip="burner"><ellipse cx="316.6" cy="290.5" rx="16" ry="7" fill="#d8d8da" stroke="#8a8a8f" stroke-width="1"/><rect x="306.6" y="270.5" width="20" height="20" rx="3" fill="#b9c6d4" stroke="#8a8a8f" stroke-width="1"/><path id="ms-flame" d="M316.6 268.3 C 309.6 260.3 313.6 248.3 316.6 242.3 C 319.6 248.3 323.6 260.3 316.6 268.3 Z" fill="#f5a524" stroke="#d97f0e" stroke-width="1" style="display:none"/></g><text x="276.5" y="309.8" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">酒精灯</text><g id="ms-bubbles"></g><g id="ms-steam"></g></g></svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="blue" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>水箱液体 = 水（液面随熔化/沸腾升降）</span><span class="iso-key"><svg class="iso-swatch" data-mark="red" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>温度计红柱 = 实时温度</span><span class="iso-key"><svg class="iso-swatch" data-mark="milk" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>蓝色方块 = 冰（熔化时消失）</span></span><span class="iso-caption">1kg 水：-20→0°C 升温吸热 42kJ；0°C 熔化吸热 334kJ（温度不变）；0→100°C 吸热 418kJ；100°C 沸腾吸热 2257kJ（温度不变）。冷却倒放，全程放热。</span></figcaption></figure>
+<div class="fx-steps"><button class="fx-stepbtn active" data-step="0">1 · 三态认识</button><button class="fx-stepbtn" data-step="1">2 · 给冰加热</button><button class="fx-stepbtn" data-step="2">3 · 熔化（0°C 停住！）</button><button class="fx-stepbtn" data-step="3">4 · 给水加热</button><button class="fx-stepbtn" data-step="4">5 · 沸腾与可逆</button></div><div class="fx-steptext" id="fx-steptext"></div>
+<div class="fx-controls">
+<label class="fx-slider">温度 <input type="range" id="ms-temp" min="-20" max="100" step="1" value="-20" style="touch-action:none"> <b id="ms-tempv">-20°C</b></label>
+<button class="fx-btn primary" id="ms-heat">加热 ▶</button>
+<button class="fx-btn" id="ms-cool">◀ 冷却</button>
+<button class="fx-btn" id="ms-reset">重置</button>
+<div class="fx-readline" id="fx-readline"></div>
+<div class="fx-msg" id="ms-state" style="display:none"></div></div>
+
+<div class="fx-subhead">🔬 粒子微观放大窗</div>
+<svg id="ms-micro" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 230" class="iso-svg fx-micro" role="img" aria-label="粒子放大窗：固态点阵振动、液态流动、气态扩散">
+<rect x="4" y="4" width="352" height="222" rx="10" fill="#f4f8fc" stroke="#c9d9e8" stroke-width="1.5"/>
+<text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">粒子放大窗</text>
+<g id="ms-particles"></g>
+<text id="ms-microstate" x="180" y="216" text-anchor="middle" font-size="12" fill="#5b7a99" font-family="ui-sans-serif,system-ui,sans-serif"></text>
+</svg>
+<div class="fx-subhead">🗺 六种物态变化</div>
+<div class="fx-map" id="ms-map">
+<button class="fx-stepbtn" data-map="melt">熔化</button><button class="fx-stepbtn" data-map="freeze">凝固</button>
+<button class="fx-stepbtn" data-map="vapor">汽化</button><button class="fx-stepbtn" data-map="liqui">液化</button>
+<button class="fx-stepbtn" data-map="subli">升华</button><button class="fx-stepbtn" data-map="depo">凝华</button>
+</div>
+<div class="fx-steptext" id="ms-maptext">点上面的变化，看它是什么、吸热还是放热。本页用「加热 / 冷却」可以亲手演示熔化、凝固、汽化、液化。</div>
+<div class="fx-subhead">⚠️ 避坑卡</div>
+<div class="fx-steptext">🧊 <b>冰水混合物就是 0°C</b>——不是 -5°C 也不是 3°C，混合物的温度由熔点说了算。<br>♨️ <b>沸腾时温度不变</b>——继续加热，热量都拿去把液态粒子"拆散"成气态了，温度计一动不动。</div>
+<div class="fx-subhead">✏️ 小测验</div>
+<div id="quiz-body"></div></main><script type="module">var STEPS=[{"t":"1 · 三态认识","html":"先看<b>粒子放大窗</b>：冰的粒子排成整齐的点阵、只在原地振动；水的粒子到处流动；水蒸气的粒子四散飞奔。看懂三张「粒子快照」，再动手玩温度。"},{"t":"2 · 给冰加热","html":"从 -20°C 点<b>加热</b>：温度计红柱上升，点阵里的粒子振动越来越剧烈，但还排在原位。这段热量让<b>温度升高</b>了。"},{"t":"3 · 熔化（0°C 停住！）","html":"温度卡在 <b>0°C</b> 不动！点阵被「拆开」，粒子开始流动。热量没让温度升高——全拿去拆点阵了。这就是<b>熔化吸热</b>，冰水混合物恒为 0°C。"},{"t":"4 · 给水加热","html":"0°C 的水继续加热：液态粒子越跑越快，温度一路升到 <b>100°C</b>。这段热量又让温度升高了。"},{"t":"5 · 沸腾与可逆","html":"<b>100°C</b> 又停住了！大量气泡冒出，粒子四散成气——热量去「拆散」粒子了（<b>汽化吸热</b>）。点<b>冷却</b>倒放：蒸气→水（液化）→冰（凝固），全程放热。"}];
+var TIPS={"tank":["玻璃水箱","装着 1kg 水。加热：冰→水→水蒸气；冷却：倒着来。液面高度会跟着变。"],"therm":["温度计","实时温度。注意 0°C 和 100°C 时温度会「停住」——热量去改变粒子排列了。"],"burner":["酒精灯","点「加热」它就点火，点「冷却」它就熄灭。"],"ice":["冰块","固态水：粒子排成整齐点阵。熔化时它会「消失」——不是没了，是变成了看不见点阵的液态水。"]};
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// ===== Fig 3 · 物态变化：温度-热量-粒子联动模型 =====
+var T=-20, meltP=0, boilP=0, totalQ=0, dir=0, tNow=0, lastTs=null;
+var CICE=2.1, CW=4.18, LF=334, LV=2257, DQ=6; // kJ/(帧@60fps)
+var LQKA=-1.6359999999999997, LQKB=263.56, LQX0=280.5, LQX1=352.6;
+var TH_A=-0.7091666666666666, TH_YB=254.5, TH_TOPZ=56;
+function clamp(v,a,b){return v<a?a:(v>b?b:v);}
+function addHeat(dQ){
+  totalQ+=dQ;
+  var q=Math.abs(dQ);
+  if(dQ>0){
+    while(q>1e-9){
+      if(T<0){var n1=(0-T)*CICE;if(q>=n1){q-=n1;T=0;}else{T+=q/CICE;q=0;}}
+      else if(T===0&&meltP<1){var n2=(1-meltP)*LF;if(q>=n2){q-=n2;meltP=1;}else{meltP+=q/LF;q=0;}}
+      else if(T<100&&meltP>=1){var n3=(100-T)*CW;if(q>=n3){q-=n3;T=100;}else{T+=q/CW;q=0;}}
+      else if(T===100&&boilP<1){var n4=(1-boilP)*LV;if(q>=n4){q-=n4;boilP=1;dir=0;}else{boilP+=q/LV;q=0;}}
+      else{dir=0;q=0;}
+    }
+  }else{
+    while(q>1e-9){
+      if(T===100&&boilP>0){var g1=boilP*LV;if(q>=g1){q-=g1;boilP=0;}else{boilP-=q/LV;q=0;}}
+      else if(T>0){var n5=T*CW;if(q>=n5){q-=n5;T=0;}else{T-=q/CW;q=0;}}
+      else if(T===0&&meltP>0){var g2=meltP*LF;if(q>=g2){q-=g2;meltP=0;}else{meltP-=q/LF;q=0;}}
+      else if(T>-20){var n6=(T+20)*CICE;if(q>=n6){q-=n6;T=-20;dir=0;}else{T-=q/CICE;q=0;}}
+      else{dir=0;q=0;}
+    }
+  }
+}
+function phase(){
+  if(T<0)return"固态 · 冰";
+  if(T===0&&meltP<1)return"熔化中 · 温度不变";
+  if(T===0&&meltP===1)return"冰水混合物 · 0°C";
+  if(T<100)return"液态 · 水";
+  if(boilP<1)return"沸腾中 · 温度不变";
+  return"气态 · 水蒸气";
+}
+function pparams(){
+  if(T<0)return{amp:3+(T+20)*0.12,spd:0.6,col:"#5b9bd5",op:1,lab:"固态 · 粒子排成点阵，只在原地振动"};
+  if(T===0&&meltP<1)return{amp:5.4+50*meltP,spd:0.6+0.5*meltP,col:"#4a90d9",op:1,lab:"熔化中 · 点阵被拆开，粒子开始流动"};
+  if(T<100)return{amp:55+(T/100)*15,spd:1+T/100*0.6,col:"#2f7fd0",op:1,lab:"液态 · 粒子到处流动，温度越高跑得越快"};
+  if(boilP<1)return{amp:70+40*boilP,spd:1.6+0.9*boilP,col:"#7ab8ec",op:0.9,lab:"沸腾中 · 大量粒子挣脱液体，四散成气"};
+  return{amp:115,spd:2.5,col:"#a8d0f0",op:0.75,lab:"气态 · 粒子四散飞奔，充满整个空间"};
+}
+// 粒子
+var P_N=36, parts=[];
+(function initParts(){
+  var g=document.getElementById("ms-particles");
+  for(var i=0;i<P_N;i++){
+    var c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+    var gx=60+(i%6)*48, gy=55+Math.floor(i/6)*25;
+    var p={el:c,gx:gx,gy:gy,phx:Math.random()*6.28,phy:Math.random()*6.28,w:0.8+Math.random()*0.4};
+    c.setAttribute("r","5");
+    g.appendChild(c);
+    parts.push(p);
+  }
+})();
+// 气泡 / 蒸汽
+var bubbles=[], steams=[];
+(function initFx(){
+  var bg=document.getElementById("ms-bubbles"), sg=document.getElementById("ms-steam");
+  var NS="http://www.w3.org/2000/svg";
+  for(var i=0;i<8;i++){var c=document.createElementNS(NS,"circle");c.setAttribute("r",String(3+(i%3)));c.setAttribute("fill","rgba(255,255,255,.85)");c.setAttribute("stroke","#7fb3e8");c.setAttribute("stroke-width","1");c.style.display="none";bg.appendChild(c);bubbles.push(c);}
+  for(var j=0;j<6;j++){var s=document.createElementNS(NS,"circle");s.setAttribute("r",String(4+(j%3)*2));s.setAttribute("fill","rgba(200,220,240,.5)");s.style.display="none";sg.appendChild(s);steams.push(s);}
+})();
+var BX0=292.5, BX1=340.6;
+var BYB=247.2, BYT=168.7;
+var SXX=316.6, SYY=149;
+function updateAll(t){
+  tNow=t;
+  var pp=pparams(), k=pp.amp/115;
+  for(var i=0;i<parts.length;i++){
+    var p=parts[i];
+    var wx=180+pp.amp*Math.sin(p.w*pp.spd*t+p.phx);
+    var wy=117+pp.amp*0.8*Math.sin(p.w*pp.spd*1.13*t+p.phy);
+    var x=p.gx*(1-k)+wx*k, y=p.gy*(1-k)+wy*k;
+    y=clamp(y,10,220);
+    p.el.setAttribute("cx",x.toFixed(1));p.el.setAttribute("cy",y.toFixed(1));
+    p.el.setAttribute("fill",pp.col);p.el.setAttribute("opacity",pp.op);
+  }
+  $("ms-microstate").textContent=pp.lab;
+  // 温度计
+  var y2=TH_YB+TH_A*(T+20);
+  $("ms-thfill").setAttribute("y2",y2.toFixed(1));
+  $("ms-tempv").textContent=Math.round(T)+"°C";
+  // 液面
+  var liqZ=16+28*meltP-14*boilP;
+  var ly=LQKA*liqZ+LQKB;
+  $("ms-liq").setAttribute("points",LQX0+","+ly.toFixed(1)+" "+LQX1+","+ly.toFixed(1)+" "+LQX1+","+(LQKA*4+LQKB).toFixed(1)+" "+LQX0+","+(LQKA*4+LQKB).toFixed(1));
+  var le=$("ms-liqtop");le.setAttribute("cy",ly.toFixed(1));
+  le.setAttribute("opacity",meltP<=0?0.25:1);
+  // 冰块
+  $("ms-ice").setAttribute("opacity",(1-meltP).toFixed(2));
+  // 火焰
+  $("ms-flame").style.display=dir===1?"block":"none";
+  // 气泡（沸腾中）
+  var boiling=(T===100&&boilP<1);
+  for(var bi=0;bi<bubbles.length;bi++){
+    var b=bubbles[bi];
+    if(boiling){b.style.display="block";var yy=BYB-((t*90+bi*53)%(BYB-BYT));b.setAttribute("cx",(BX0+(BX1-BX0)*((bi*37)%100)/100).toFixed(1));b.setAttribute("cy",yy.toFixed(1));}
+    else b.style.display="none";
+  }
+  // 蒸汽
+  for(var si=0;si<steams.length;si++){
+    var s=steams[si];
+    if(boilP>0.15){s.style.display="block";var sy2=SYY-((t*46+si*61)%110);s.setAttribute("cx",(SXX-24+si*10).toFixed(1));s.setAttribute("cy",sy2.toFixed(1));s.setAttribute("opacity",(0.15+0.5*boilP).toFixed(2));}
+    else s.style.display="none";
+  }
+  // 读数
+  $("fx-readline").innerHTML="<b>"+T.toFixed(1)+"°C</b> · "+phase()+" · 累计热量 "+totalQ.toFixed(0)+" kJ";
+  // 暂停提示
+  var st=$("ms-state");
+  if(T===0&&meltP<1){st.style.display="block";st.innerHTML="⏸ <b>温度停在 0°C！</b>热量都去「拆点阵」了——熔化吸热，温度不变。";}
+  else if(T===100&&boilP<1){st.style.display="block";st.innerHTML="⏸ <b>温度停在 100°C！</b>热量都去把液态粒子「拆散」成气了——汽化吸热，温度不变。";}
+  else{st.style.display="none";st.innerHTML="";}
+}
+function setState(tv,mp,bp){T=tv;meltP=mp;boilP=bp;dir=0;$("ms-temp").value=String(Math.round(tv));updateAll(tNow);}
+$("ms-temp").addEventListener("input",function(e){
+  var v=+e.target.value;dir=0;T=v;
+  if(v<0){meltP=0;boilP=0;}
+  else if(v===0){meltP=0.5;boilP=0;}
+  else if(v<100){meltP=1;boilP=0;}
+  else{meltP=1;boilP=0.5;}
+  updateAll(tNow);
+});
+$("ms-heat").addEventListener("click",function(){if(!(T===100&&boilP>=1))dir=1;});
+$("ms-cool").addEventListener("click",function(){if(T>-20)dir=-1;});
+$("ms-reset").addEventListener("click",function(){T=-20;meltP=0;boilP=0;totalQ=0;dir=0;$("ms-temp").value="-20";updateAll(tNow);});
+document.addEventListener("keydown",function(e){
+  if(e.key>="1"&&e.key<="5")renderStep(+e.key-1);
+  else if(e.key==="h"||e.key==="H")$("ms-heat").dispatchEvent(new Event("click"));
+});
+function onStep(i){
+  if(i===0)setState(-20,0,0);
+  else if(i===1)setState(-20,0,0);
+  else if(i===2)setState(0,0,0);
+  else if(i===3)setState(0,1,0);
+  else if(i===4)setState(100,1,0);
+}
+// 六种变化小地图
+var MAPINFO={
+  melt:["熔化","固态 → 液态（如冰→水）。<b>吸热</b>，温度不变。本页：加热到 0°C 亲手看。"],
+  freeze:["凝固","液态 → 固态（如水→冰）。<b>放热</b>，温度不变。本页：从 0°C 的水点「冷却」倒放。"],
+  vapor:["汽化","液态 → 气态（如水→水蒸气），包括蒸发和沸腾。<b>吸热</b>。本页：加热到 100°C 看沸腾。"],
+  liqui:["液化","气态 → 液态（如水蒸气→水）。<b>放热</b>。本页：从水蒸气点「冷却」，先看到蒸汽变回水。"],
+  subli:["升华","固态 → 气态，直接变（如樟脑丸放久变小、干冰冒「烟」、冻衣服变干）。<b>吸热</b>。"],
+  depo:["凝华","气态 → 固态，直接变（如霜、雾凇）。<b>放热</b>。"]
+};
+document.querySelectorAll("#ms-map button").forEach(function(b){
+  b.addEventListener("click",function(){
+    var m=MAPINFO[b.dataset.map];
+    $("ms-maptext").innerHTML="<b>"+m[0]+"</b>："+m[1];
+  });
+});
+// 小测验
+(function quiz(){
+  var host=$("quiz-body");
+  var items=[
+    {q:"Q1 · 一杯冰水混合物放在 0°C 的房间里，它的温度是？",opts:["-5°C","0°C","5°C"],ans:1,why:"冰水混合物恒为 0°C——温度由熔点说了算，不是凭感觉猜。"},
+    {q:"Q2 · 水沸腾时继续用大火加热，温度会怎样？",opts:["继续升高","保持 100°C 不变","慢慢下降"],ans:1,why:"沸腾时吸热不升温，热量都去把液态粒子拆散成气态了。"}
+  ];
+  var state=[];
+  items.forEach(function(item,qi){
+    var d=document.createElement("div");d.className="quiz-qwrap";
+    var q=document.createElement("div");q.className="quiz-q";q.textContent=item.q;d.appendChild(q);
+    var opts=document.createElement("div");opts.className="quiz-opts";
+    var btns=[];
+    item.opts.forEach(function(op,oi){
+      var b=document.createElement("button");b.className="quiz-opt";b.textContent=op;
+      b.dataset.q=String(qi);b.dataset.o=String(oi);
+      opts.appendChild(b);btns.push(b);
+    });
+    d.appendChild(opts);
+    var why=document.createElement("div");why.className="quiz-why";why.style.display="none";d.appendChild(why);
+    state.push({done:false,btns:btns,why:why});
+    host.appendChild(d);
+  });
+  host.addEventListener("click",function(e){
+    var t=e.target;
+    if(!t.dataset||t.dataset.o===undefined)return;
+    var qi=+t.dataset.q,oi=+t.dataset.o,st=state[qi];
+    if(st.done)return;st.done=true;
+    var ok=oi===items[qi].ans;
+    st.btns.forEach(function(b,bi){
+      if(bi===items[qi].ans)b.classList.add("right");
+      else if(bi===oi)b.classList.add("wrong");
+      b.disabled=true;
+    });
+    st.why.style.display="block";
+    st.why.textContent=(ok?"答对了！":"答错了。")+items[qi].why;
+  });
+})();
+function loop(ts){
+  // 固定步长：每帧推进 DQ kJ（与 ts 解耦，测试 pump 可复现）
+  if(dir!==0)addHeat(dir*DQ);
+  tNow+=1/60;
+  updateAll(tNow);
+  if(!reduceMotion)requestAnimationFrame(loop);
+}
+updateAll(0);
+renderStep(0);
+if(!reduceMotion)requestAnimationFrame(loop);
+
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var __step=0,__hold=-1;
+function renderStep(i){
+  __step=i;
+  var btns=document.querySelectorAll(".fx-stepbtn");
+  btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
+  var s=STEPS[i];
+  $("fx-steptext").innerHTML="<b>"+s.t.replace(/^\d+\s*[·、]\s*/,"")+"</b>　"+s.html;
+  if(typeof onStep==="function")onStep(i);
+}
+function holdStep(i){__hold=i;renderStep(i);}
+function releaseHold(){__hold=-1;}
+document.querySelectorAll(".fx-stepbtn").forEach(function(b){
+  b.addEventListener("click",function(){holdStep(+b.dataset.step);});
+});
+(function initTips(){
+  var tip=$("fx-tip"),stage=$("fx-stage");
+  if(!tip||!stage||typeof TIPS==="undefined")return;
+  function show(id,x,y){
+    var t=TIPS[id];if(!t)return;
+    tip.innerHTML="<b>"+t[0]+"</b><span>"+t[1]+"</span>";
+    tip.style.display="block";
+    var r=stage.getBoundingClientRect();
+    tip.style.left=Math.min(r.width-250,Math.max(8,x-r.left+14))+"px";
+    tip.style.top=Math.max(8,y-r.top-10)+"px";
+  }
+  document.querySelectorAll(".fx-part").forEach(function(el){
+    el.addEventListener("pointerenter",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointermove",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointerleave",function(){tip.style.display="none";});
+    el.addEventListener("click",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+  });
+})();
+</script></body></html>

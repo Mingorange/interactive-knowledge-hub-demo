@@ -1,0 +1,817 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><title>反射作图三步法 · 交互式等距插图</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(740px,100% - 32px);margin:64px auto 96px}
+/* 平板断点：iPad 竖屏 768px 起放宽版心；iPad 横屏/桌面 1100px 起再放宽，阅读行宽设上限 */
+@media (min-width:768px){
+.iso-page{width:min(940px,100% - 48px)}
+.iso-plate{padding-left:32px;padding-right:32px}
+}
+@media (min-width:1100px){
+.iso-page{width:min(1080px,100% - 64px)}
+}
+
+
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.fx-slider{display:flex;align-items:center;gap:10px;justify-content:center;font-size:14px;color:var(--anatomy-strong);margin:6px 0}
+.fx-slider input{width:min(300px,52vw);accent-color:#e5484d}
+.fx-slider b{font-variant-numeric:tabular-nums;min-width:64px;text-align:left}
+.fx-subhead{max-width:640px;margin:26px auto 8px;font-size:15px;font-weight:700;color:var(--anatomy-strong);text-align:center}
+.fx-micro{display:block;margin:0 auto;max-width:520px;width:100%}
+.fx-map{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0 4px}
+#ms-state{background:#fff7ed;border:1px solid #f5a524;border-radius:10px;max-width:640px;margin-left:auto;margin-right:auto;padding:10px 16px}
+.quiz-qwrap{max-width:640px;margin:10px auto;padding:12px 16px;background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:10px}
+.quiz-q{font-size:13.5px;font-weight:700;color:var(--anatomy-strong);margin-bottom:8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;padding:7px 14px;border-radius:18px;border:1px solid var(--anatomy-lo);background:var(--anatomy-card);color:var(--anatomy-text);cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e8f7ef;color:#1c7a4d}
+.quiz-opt.wrong{border-color:#e5484d;background:#fdeeee;color:#b3272e}
+.quiz-why{font-size:12.5px;color:var(--anatomy-muted);margin-top:8px;line-height:1.6}
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.iso-swatch[data-mark="rd-beam"] path{stroke:#e8590c}
+.iso-swatch[data-mark="rd-norm"] path{stroke:#7048e8;stroke-dasharray:3 2}
+.iso-swatch[data-mark="rd-mirror"] path{stroke:#5b8ab5;stroke-width:3}
+.iso-swatch[data-mark="rd-hatch"] path{stroke:#57575a}
+.fx-controls .fx-readline,.fx-controls .fx-msg{flex:1 1 100%}
+.rd-group{flex:1 1 100%;max-width:640px;margin:0 auto}
+.rd-btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+.rd-hint{font-size:12.5px;color:var(--anatomy-muted)}
+.rd-tool.done{border-color:#30a46c;background:#e6f6ea;color:#1f7a48;font-weight:700}
+.rd-checks{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.rd-ck{font-size:12.5px;color:var(--anatomy-muted);background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:14px;padding:4px 12px}
+.rd-ck.done{color:#1f7a48;border-color:#8fd0a8;background:#e6f6ea;font-weight:700}
+.rd-hit{touch-action:none;cursor:grab}
+.rd-hit:active{cursor:grabbing}
+.rd-pit{max-width:640px;margin:10px auto 0;padding:10px 16px;border-radius:10px;background:#fff7e6;border:1px solid #f0c36d;font-size:13px;line-height:1.65;color:#7a5b1e;text-align:center}
+.quiz{margin:22px 0 8px;padding:16px;border:1px solid var(--anatomy-faint);border-radius:12px;background:var(--anatomy-card)}
+.quiz-title{font-size:15px;font-weight:700;color:var(--anatomy-strong);margin-bottom:10px}
+.quiz-q{font-size:14px;color:var(--anatomy-strong);margin:10px 0 8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);background:var(--anatomy-page);border:1px solid var(--anatomy-lo);border-radius:8px;padding:6px 14px;cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e6f6ea;color:#1f7a48;font-weight:700}
+.quiz-opt.wrong{border-color:#e5484d;background:#ffecec;color:#e5484d}
+.quiz-why{font-size:13px;color:var(--anatomy-text);margin:8px 0 4px;display:none}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><nav class="kg-back"><a href="../index.html">← 返回知识馆</a></nav>
+<header class="fx-pagehead"><h1>反射作图三步法</h1><p>法线角平分模型：已知入射光和目标点，反推镜面位置——定光路、定法线、定镜面</p></header>
+<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 38</span><span class="iso-plate-corner" data-corner="title">反射作图三步法</span><span class="iso-plate-corner" data-corner="hint">拖太阳 / 拖镜面 · 数字键 1–5 切换步骤</span><span class="iso-plate-corner" data-corner="readout" data-readout>入射角 ＝ 反射角 · 法线与镜面成 90°（垂直）</span></div><div class="iso-stage" id="fx-stage" tabindex="0" role="group" aria-label="反射作图实验台：阳光射到 A 点，需放平面镜把光反射到目标 B；可拖动太阳改变入射角、拖动镜面旋转到与法线垂直锁定，并有随机场景作图挑战"><div class="fx-tip" id="fx-tip"></div><svg id="rd-svg" xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 740 520" role="img" aria-label="反射作图实验台：阳光从左上方射到镜架上的 A 点，需要放一块平面镜把光反射到目标 B，按定光路、定法线、定镜面三步作图"><path class="iso-halo" d="M180.8 341.3L181.3 338.9L182.7 336.6L185 334.4L188.1 332.6L258 297.6L261.8 296L266.1 294.9L270.7 294.2L275.5 294L280.4 294.2L285 294.9L289.3 296L293 297.6L544.9 423.5L548 425.4L550.3 427.5L551.7 429.9L552.2 432.3L551.7 434.7L550.3 437L548 439.1L544.9 441L475 476L471.2 477.5L466.9 478.7L462.3 479.4L457.5 479.6L452.6 479.4L448 478.7L443.7 477.5L440 476L188.1 350.1L185 348.2L182.7 346L181.3 343.7Z"/><g class="iso-solid"><path class="iso-fill" d="M263.3 310.8L263.3 308.9L264.5 307L266.8 305.5L269.9 304.3L273.6 303.7L277.5 303.7L281.2 304.3L284.3 305.5L286.6 307L287.8 308.9L287.8 345.1L286.6 346.9L284.3 348.5L281.2 349.6L277.5 350.2L273.6 350.2L269.9 349.6L266.8 348.5L264.5 346.9L263.3 345.1Z"/><path class="iso-top" d="M284.3 348.5L281.2 349.6L277.5 350.2L273.6 350.2L269.9 349.6L266.8 348.5L264.5 346.9L263.3 345.1L263.3 343.1L264.5 341.3L266.8 339.7L269.9 338.6L273.6 338L277.5 338L281.2 338.6L284.3 339.7L286.6 341.3L287.8 343.1L287.8 345.1L286.6 346.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M287.8 345.1L286.6 346.9L284.3 348.5L281.2 349.6L277.5 350.2L273.6 350.2L269.9 349.6L266.8 348.5L264.5 346.9L263.3 345.1"/><path class="iso-line iso-edge" data-tone="lo" d="M263.3 345.1L263.3 343.1L264.5 341.3L266.8 339.7L269.9 338.6L273.6 338L277.5 338L281.2 338.6L284.3 339.7L286.6 341.3L287.8 343.1L287.8 345.1"/></g><g class="iso-solid"><path class="iso-fill" d="M508.2 431.3L509.4 429.5L511.7 427.9L514.8 426.8L518.5 426.2L522.4 426.2L526.1 426.8L529.2 427.9L531.5 429.5L532.7 431.3L532.7 467.5L531.5 469.4L529.2 470.9L526.1 472.1L522.4 472.7L518.5 472.7L514.8 472.1L511.7 470.9L509.4 469.4L508.2 467.5Z"/><path class="iso-top" d="M529.2 470.9L526.1 472.1L522.4 472.7L518.5 472.7L514.8 472.1L511.7 470.9L509.4 469.4L508.2 467.5L508.2 465.6L509.4 463.7L511.7 462.2L514.8 461L518.5 460.4L522.4 460.4L526.1 461L529.2 462.2L531.5 463.7L532.7 465.6L532.7 467.5L531.5 469.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M532.7 467.5L531.5 469.4L529.2 470.9L526.1 472.1L522.4 472.7L518.5 472.7L514.8 472.1L511.7 470.9L509.4 469.4L508.2 467.5"/><path class="iso-line iso-edge" data-tone="lo" d="M508.2 467.5L508.2 465.6L509.4 463.7L511.7 462.2L514.8 461L518.5 460.4L522.4 460.4L526.1 461L529.2 462.2L531.5 463.7L532.7 465.6L532.7 467.5"/></g><g class="iso-solid"><path class="iso-fill" d="M200.4 340.3L201.5 338.5L203.8 336.9L207 335.8L210.6 335.2L214.5 335.2L218.2 335.8L221.3 336.9L223.6 338.5L224.8 340.3L224.8 374.6L224.8 376.6L223.6 378.4L221.3 380L218.2 381.1L214.5 381.7L210.6 381.7L207 381.1L203.8 380L201.5 378.4L200.4 376.6Z"/><path class="iso-top" d="M221.3 380L218.2 381.1L214.5 381.7L210.6 381.7L207 381.1L203.8 380L201.5 378.4L200.4 376.6L200.4 374.6L201.5 372.8L203.8 371.2L207 370.1L210.6 369.5L214.5 369.5L218.2 370.1L221.3 371.2L223.6 372.8L224.8 374.6L224.8 376.6L223.6 378.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M224.8 376.6L223.6 378.4L221.3 380L218.2 381.1L214.5 381.7L210.6 381.7L207 381.1L203.8 380L201.5 378.4L200.4 376.6"/><path class="iso-line iso-edge" data-tone="lo" d="M200.4 376.6L200.4 374.6L201.5 372.8L203.8 371.2L207 370.1L210.6 369.5L214.5 369.5L218.2 370.1L221.3 371.2L223.6 372.8L224.8 374.6L224.8 376.6"/></g><g class="iso-solid"><path class="iso-fill" d="M445.2 464.7L445.2 462.8L446.4 461L448.7 459.4L451.8 458.3L455.5 457.7L459.4 457.7L463.1 458.3L466.2 459.4L468.5 461L469.7 462.8L469.7 499L468.5 500.8L466.2 502.4L463.1 503.5L459.4 504.1L455.5 504.1L451.8 503.5L448.7 502.4L446.4 500.8L445.2 499Z"/><path class="iso-top" d="M466.2 502.4L463.1 503.5L459.4 504.1L455.5 504.1L451.8 503.5L448.7 502.4L446.4 500.8L445.2 499L445.2 497.1L446.4 495.2L448.7 493.7L451.8 492.5L455.5 491.9L459.4 491.9L463.1 492.5L466.2 493.7L468.5 495.2L469.7 497.1L469.7 499L468.5 500.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M469.7 499L468.5 500.8L466.2 502.4L463.1 503.5L459.4 504.1L455.5 504.1L451.8 503.5L448.7 502.4L446.4 500.8L445.2 499"/><path class="iso-line iso-edge" data-tone="lo" d="M445.2 499L445.2 497.1L446.4 495.2L448.7 493.7L451.8 492.5L455.5 491.9L459.4 491.9L463.1 492.5L466.2 493.7L468.5 495.2L469.7 497.1L469.7 499"/></g><g class="iso-solid"><path class="iso-fill" d="M180.8 251.3L181.3 248.9L182.7 246.6L185 244.5L188.1 242.6L258 207.6L261.8 206.1L266.1 204.9L270.7 204.2L275.5 204L280.4 204.2L285 204.9L289.3 206.1L293 207.6L544.9 333.5L548 335.4L550.3 337.6L551.7 339.9L552.2 342.3L551.7 344.7L550.3 347L548 349.2L544.9 351L475 386L471.2 387.6L466.9 388.7L462.3 389.4L457.5 389.6L452.6 389.4L448 388.7L443.7 387.6L440 386L188.1 260.1L185 258.2L182.7 256.1L181.3 253.7Z"/><path class="iso-top" d="M544.9 333.5L548 335.4L550.3 337.6L551.7 339.9L552.2 342.3L551.7 344.7L550.3 347L548 349.2L544.9 351L475 386L471.2 387.6L466.9 388.7L462.3 389.4L457.5 389.6L452.6 389.4L448 388.7L443.7 387.6L440 386L188.1 260.1L185 258.2L182.7 256.1L181.3 253.7L180.8 251.3L181.3 248.9L182.7 246.6L185 244.5L188.1 242.6L258 207.6L261.8 206.1L266.1 204.9L270.7 204.2L275.5 204L280.4 204.2L285 204.9L289.3 206.1L293 207.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M552.2 342.3L551.7 344.7L550.3 347L548 349.2L544.9 351L475 386L471.2 387.6L466.9 388.7L462.3 389.4L457.5 389.6L452.6 389.4L448 388.7L443.7 387.6L440 386L188.1 260.1L185 258.2L182.7 256.1L181.3 253.7L180.8 251.3"/><path class="iso-line iso-bevel" data-tone="faint" d="M552.2 342.3L548.8 344.4L547.5 346.5L545.5 348.3L542.7 350L473 384.9L469.6 386.3L465.8 387.3L461.7 388L457.5 388.2L453.2 388L449.1 387.3L445.4 386.3L442 384.9L190.3 259.1L187.5 257.4L185.5 255.5L184.2 253.5L180.8 251.3"/><path class="iso-line iso-edge" data-tone="mid" d="M180.8 251.3L181.3 248.9L182.7 246.6L185 244.5L188.1 242.6L258 207.6L261.8 206.1L266.1 204.9L270.7 204.2L275.5 204L280.4 204.2L285 204.9L289.3 206.1L293 207.6L544.9 333.5L548 335.4L550.3 337.6L551.7 339.9L552.2 342.3"/></g><path class="iso-line" data-tone="faint" d="M534.4 304.5L535.7 305.3L536.6 306.1L537.1 307.1L537.3 308L537.1 309L536.6 309.9L535.7 310.8L534.4 311.5L464.5 346.5L463 347.1L461.2 347.6L459.4 347.9L457.5 347.9L455.5 347.9L453.7 347.6L452 347.1L450.5 346.5L198.6 220.6L197.3 219.8L196.4 218.9L195.9 218L195.7 217.1L195.9 216.1L196.4 215.2L197.3 214.3L198.6 213.6L268.5 178.6L270 178L271.8 177.5L273.6 177.2L275.5 177.1L277.5 177.2L279.3 177.5L281 178L282.5 178.6Z"/><text class="iso-face-text" data-tone="faint" transform="matrix(1.749 0.875 -1.749 0.875 240.555 236.761)" font-size="5" text-anchor="start">实验台</text><g class="iso-solid"><path class="iso-fill" d="M279.3 156.7L279.3 156.5L279.6 156.3L281 155.6L281.3 155.5L281.7 155.5L282 155.5L282.4 155.6L284.5 156.7L284.7 156.8L284.8 157L284.8 172L284.7 172.2L284.5 172.4L283.1 173.1L282.7 173.2L282.4 173.2L282 173.2L281.7 173.1L279.6 172L279.3 171.9L279.3 171.7Z"/><path class="iso-shade" data-shade="0" d="M284.8 172L284.7 172.2L284.7 157.2L284.8 157ZM284.7 172.2L284.5 172.4L284.5 157.4L284.7 157.2ZM284.5 172.4L283.1 173.1L283.1 158.1L284.5 157.4ZM283.1 173.1L282.7 173.2L282.7 158.2L283.1 158.1Z"/><path class="iso-shade" data-shade="1" d="M282.7 173.2L282.4 173.2L282.4 158.2L282.7 158.2Z"/><path class="iso-shade" data-shade="2" d="M282.4 173.2L282 173.2L282 158.2L282.4 158.2Z"/><path class="iso-shade" data-shade="3" d="M282 173.2L281.7 173.1L281.7 158.1L282 158.2ZM281.7 173.1L279.6 172L279.6 157L281.7 158.1ZM279.6 172L279.3 171.9L279.3 156.9L279.6 157ZM279.3 171.9L279.3 171.7L279.3 156.7L279.3 156.9Z"/><path class="iso-top" d="M284.5 156.7L284.7 156.8L284.8 157L284.7 157.2L284.5 157.4L283.1 158.1L282.7 158.2L282.4 158.2L282 158.2L281.7 158.1L279.6 157L279.3 156.9L279.3 156.7L279.3 156.5L279.6 156.3L281 155.6L281.3 155.5L281.7 155.5L282 155.5L282.4 155.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M284.8 157L284.7 157.2L284.5 157.4L283.1 158.1L282.7 158.2L282.4 158.2L282 158.2L281.7 158.1L279.6 157L279.3 156.9L279.3 156.7"/><path class="iso-line iso-bevel" data-tone="faint" d="M284.8 157L283.3 156.9L283.3 156.9L282.1 157.5L282.2 157.5L282.4 157.5L282.6 157.5L282.6 157.5L280.7 156.5L280.7 156.6L279.3 156.7"/><path class="iso-line iso-edge" data-tone="lo" d="M279.3 156.7L279.3 156.5L279.6 156.3L281 155.6L281.3 155.5L281.7 155.5L282 155.5L282.4 155.6L284.5 156.7L284.7 156.8L284.8 157M284.8 172L284.7 172.2L284.5 172.4L283.1 173.1L282.7 173.2L282.4 173.2L282 173.2L281.7 173.1L279.6 172L279.3 171.9L279.3 171.7M284.8 157L284.8 172M279.3 156.7L279.3 171.7"/></g><g class="iso-solid"><path class="iso-fill" d="M300.3 167.2L300.3 167L300.6 166.8L302 166.1L302.3 166L302.7 166L303 166L303.4 166.1L305.5 167.2L305.7 167.3L305.7 167.5L305.7 182.5L305.7 182.7L305.5 182.9L304.1 183.6L303.7 183.7L303.4 183.7L303 183.7L302.7 183.6L300.6 182.5L300.3 182.3L300.3 182.2Z"/><path class="iso-shade" data-shade="0" d="M305.7 182.5L305.7 182.7L305.7 167.7L305.7 167.5ZM305.7 182.7L305.5 182.9L305.5 167.9L305.7 167.7ZM305.5 182.9L304.1 183.6L304.1 168.6L305.5 167.9ZM304.1 183.6L303.7 183.7L303.7 168.7L304.1 168.6Z"/><path class="iso-shade" data-shade="1" d="M303.7 183.7L303.4 183.7L303.4 168.7L303.7 168.7Z"/><path class="iso-shade" data-shade="2" d="M303.4 183.7L303 183.7L303 168.7L303.4 168.7Z"/><path class="iso-shade" data-shade="3" d="M303 183.7L302.7 183.6L302.7 168.6L303 168.7ZM302.7 183.6L300.6 182.5L300.6 167.5L302.7 168.6ZM300.6 182.5L300.3 182.3L300.3 167.3L300.6 167.5ZM300.3 182.3L300.3 182.2L300.3 167.2L300.3 167.3Z"/><path class="iso-top" d="M305.5 167.2L305.7 167.3L305.7 167.5L305.7 167.7L305.5 167.9L304.1 168.6L303.7 168.7L303.4 168.7L303 168.7L302.7 168.6L300.6 167.5L300.3 167.3L300.3 167.2L300.3 167L300.6 166.8L302 166.1L302.3 166L302.7 166L303 166L303.4 166.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M305.7 167.5L305.7 167.7L305.5 167.9L304.1 168.6L303.7 168.7L303.4 168.7L303 168.7L302.7 168.6L300.6 167.5L300.3 167.3L300.3 167.2"/><path class="iso-line iso-bevel" data-tone="faint" d="M305.7 167.5L304.3 167.4L304.3 167.4L303.1 168L303.2 168L303.4 168L303.5 168L303.6 168L301.7 167L301.7 167.1L300.3 167.2"/><path class="iso-line iso-edge" data-tone="lo" d="M300.3 167.2L300.3 167L300.6 166.8L302 166.1L302.3 166L302.7 166L303 166L303.4 166.1L305.5 167.2L305.7 167.3L305.7 167.5M305.7 182.5L305.7 182.7L305.5 182.9L304.1 183.6L303.7 183.7L303.4 183.7L303 183.7L302.7 183.6L300.6 182.5L300.3 182.3L300.3 182.2M305.7 167.5L305.7 182.5M300.3 167.2L300.3 182.2"/></g><g class="iso-solid"><path class="iso-fill" d="M321.3 177.7L321.3 177.5L321.5 177.3L322.9 176.6L323.3 176.5L323.6 176.5L324 176.5L324.3 176.6L326.4 177.7L326.7 177.8L326.7 178L326.7 193L326.7 193.2L326.4 193.4L325 194.1L324.7 194.2L324.3 194.2L324 194.2L323.6 194.1L321.5 193L321.3 192.8L321.3 192.7Z"/><path class="iso-shade" data-shade="0" d="M326.7 193L326.7 193.2L326.7 178.2L326.7 178ZM326.7 193.2L326.4 193.4L326.4 178.4L326.7 178.2ZM326.4 193.4L325 194.1L325 179.1L326.4 178.4ZM325 194.1L324.7 194.2L324.7 179.2L325 179.1Z"/><path class="iso-shade" data-shade="1" d="M324.7 194.2L324.3 194.2L324.3 179.2L324.7 179.2Z"/><path class="iso-shade" data-shade="2" d="M324.3 194.2L324 194.2L324 179.2L324.3 179.2Z"/><path class="iso-shade" data-shade="3" d="M324 194.2L323.6 194.1L323.6 179.1L324 179.2ZM323.6 194.1L321.5 193L321.5 178L323.6 179.1ZM321.5 193L321.3 192.8L321.3 177.8L321.5 178ZM321.3 192.8L321.3 192.7L321.3 177.7L321.3 177.8Z"/><path class="iso-top" d="M326.4 177.7L326.7 177.8L326.7 178L326.7 178.2L326.4 178.4L325 179.1L324.7 179.2L324.3 179.2L324 179.2L323.6 179.1L321.5 178L321.3 177.8L321.3 177.7L321.3 177.5L321.5 177.3L322.9 176.6L323.3 176.5L323.6 176.5L324 176.5L324.3 176.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M326.7 178L326.7 178.2L326.4 178.4L325 179.1L324.7 179.2L324.3 179.2L324 179.2L323.6 179.1L321.5 178L321.3 177.8L321.3 177.7"/><path class="iso-line iso-bevel" data-tone="faint" d="M326.7 178L325.3 177.9L325.3 177.9L324.1 178.5L324.2 178.5L324.3 178.5L324.5 178.5L324.6 178.5L322.7 177.5L322.7 177.6L321.3 177.7"/><path class="iso-line iso-edge" data-tone="lo" d="M321.3 177.7L321.3 177.5L321.5 177.3L322.9 176.6L323.3 176.5L323.6 176.5L324 176.5L324.3 176.6L326.4 177.7L326.7 177.8L326.7 178M326.7 193L326.7 193.2L326.4 193.4L325 194.1L324.7 194.2L324.3 194.2L324 194.2L323.6 194.1L321.5 193L321.3 192.8L321.3 192.7M326.7 178L326.7 193M321.3 177.7L321.3 192.7"/></g><g class="iso-solid"><path class="iso-fill" d="M342.2 188.2L342.3 188L342.5 187.8L343.9 187.1L344.3 187L344.6 187L345 187L345.3 187.1L347.4 188.2L347.6 188.3L347.7 188.5L347.7 203.5L347.6 203.7L347.4 203.8L346 204.5L345.7 204.7L345.3 204.7L345 204.7L344.6 204.5L342.5 203.5L342.3 203.3L342.2 203.1Z"/><path class="iso-shade" data-shade="0" d="M347.7 203.5L347.6 203.7L347.6 188.7L347.7 188.5ZM347.6 203.7L347.4 203.8L347.4 188.9L347.6 188.7ZM347.4 203.8L346 204.5L346 189.6L347.4 188.9ZM346 204.5L345.7 204.7L345.7 189.7L346 189.6Z"/><path class="iso-shade" data-shade="1" d="M345.7 204.7L345.3 204.7L345.3 189.7L345.7 189.7Z"/><path class="iso-shade" data-shade="2" d="M345.3 204.7L345 204.7L345 189.7L345.3 189.7Z"/><path class="iso-shade" data-shade="3" d="M345 204.7L344.6 204.5L344.6 189.6L345 189.7ZM344.6 204.5L342.5 203.5L342.5 188.5L344.6 189.6ZM342.5 203.5L342.3 203.3L342.3 188.3L342.5 188.5ZM342.3 203.3L342.2 203.1L342.2 188.2L342.3 188.3Z"/><path class="iso-top" d="M347.4 188.2L347.6 188.3L347.7 188.5L347.6 188.7L347.4 188.9L346 189.6L345.7 189.7L345.3 189.7L345 189.7L344.6 189.6L342.5 188.5L342.3 188.3L342.2 188.2L342.3 188L342.5 187.8L343.9 187.1L344.3 187L344.6 187L345 187L345.3 187.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M347.7 188.5L347.6 188.7L347.4 188.9L346 189.6L345.7 189.7L345.3 189.7L345 189.7L344.6 189.6L342.5 188.5L342.3 188.3L342.2 188.2"/><path class="iso-line iso-bevel" data-tone="faint" d="M347.7 188.5L346.3 188.4L346.3 188.4L345.1 189L345.1 189L345.3 189L345.5 189L345.6 189L343.7 188L343.7 188.1L342.2 188.2"/><path class="iso-line iso-edge" data-tone="lo" d="M342.2 188.2L342.3 188L342.5 187.8L343.9 187.1L344.3 187L344.6 187L345 187L345.3 187.1L347.4 188.2L347.6 188.3L347.7 188.5M347.7 203.5L347.6 203.7L347.4 203.8L346 204.5L345.7 204.7L345.3 204.7L345 204.7L344.6 204.5L342.5 203.5L342.3 203.3L342.2 203.1M347.7 188.5L347.7 203.5M342.2 188.2L342.2 203.1"/></g><g class="iso-solid"><path class="iso-fill" d="M363.2 198.6L363.3 198.5L363.5 198.3L364.9 197.6L365.2 197.5L365.6 197.5L366 197.5L366.3 197.6L368.4 198.6L368.6 198.8L368.7 199L368.7 214L368.6 214.2L368.4 214.3L367 215L366.7 215.2L366.3 215.2L365.9 215.2L365.6 215L363.5 214L363.3 213.8L363.2 213.6Z"/><path class="iso-shade" data-shade="0" d="M368.7 214L368.6 214.2L368.6 199.2L368.7 199ZM368.6 214.2L368.4 214.3L368.4 199.3L368.6 199.2ZM368.4 214.3L367 215L367 200L368.4 199.3ZM367 215L366.7 215.2L366.7 200.2L367 200Z"/><path class="iso-shade" data-shade="1" d="M366.7 215.2L366.3 215.2L366.3 200.2L366.7 200.2Z"/><path class="iso-shade" data-shade="2" d="M366.3 215.2L365.9 215.2L365.9 200.2L366.3 200.2Z"/><path class="iso-shade" data-shade="3" d="M365.9 215.2L365.6 215L365.6 200L365.9 200.2ZM365.6 215L363.5 214L363.5 199L365.6 200ZM363.5 214L363.3 213.8L363.3 198.8L363.5 199ZM363.3 213.8L363.2 213.6L363.2 198.6L363.3 198.8Z"/><path class="iso-top" d="M368.4 198.6L368.6 198.8L368.7 199L368.6 199.2L368.4 199.3L367 200L366.7 200.2L366.3 200.2L365.9 200.2L365.6 200L363.5 199L363.3 198.8L363.2 198.6L363.3 198.5L363.5 198.3L364.9 197.6L365.2 197.5L365.6 197.5L366 197.5L366.3 197.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M368.7 199L368.6 199.2L368.4 199.3L367 200L366.7 200.2L366.3 200.2L365.9 200.2L365.6 200L363.5 199L363.3 198.8L363.2 198.6"/><path class="iso-line iso-bevel" data-tone="faint" d="M368.7 199L367.3 198.9L367.3 198.9L366.1 199.5L366.1 199.5L366.3 199.4L366.5 199.5L366.6 199.5L364.7 198.5L364.7 198.6L363.2 198.6"/><path class="iso-line iso-edge" data-tone="lo" d="M363.2 198.6L363.3 198.5L363.5 198.3L364.9 197.6L365.2 197.5L365.6 197.5L366 197.5L366.3 197.6L368.4 198.6L368.6 198.8L368.7 199M368.7 214L368.6 214.2L368.4 214.3L367 215L366.7 215.2L366.3 215.2L365.9 215.2L365.6 215L363.5 214L363.3 213.8L363.2 213.6M368.7 199L368.7 214M363.2 198.6L363.2 213.6"/></g><g class="iso-solid"><path class="iso-fill" d="M384.2 209.1L384.3 209L384.5 208.8L385.9 208.1L386.2 208L386.6 207.9L387 208L387.3 208.1L389.4 209.1L389.6 209.3L389.7 209.5L389.7 224.5L389.6 224.7L389.4 224.8L388 225.5L387.7 225.6L387.3 225.7L386.9 225.6L386.6 225.5L384.5 224.5L384.3 224.3L384.2 224.1Z"/><path class="iso-shade" data-shade="0" d="M389.7 224.5L389.6 224.7L389.6 209.7L389.7 209.5ZM389.6 224.7L389.4 224.8L389.4 209.8L389.6 209.7ZM389.4 224.8L388 225.5L388 210.5L389.4 209.8ZM388 225.5L387.7 225.6L387.7 210.6L388 210.5Z"/><path class="iso-shade" data-shade="1" d="M387.7 225.6L387.3 225.7L387.3 210.7L387.7 210.6Z"/><path class="iso-shade" data-shade="2" d="M387.3 225.7L386.9 225.6L386.9 210.6L387.3 210.7Z"/><path class="iso-shade" data-shade="3" d="M386.9 225.6L386.6 225.5L386.6 210.5L386.9 210.6ZM386.6 225.5L384.5 224.5L384.5 209.5L386.6 210.5ZM384.5 224.5L384.3 224.3L384.3 209.3L384.5 209.5ZM384.3 224.3L384.2 224.1L384.2 209.1L384.3 209.3Z"/><path class="iso-top" d="M389.4 209.1L389.6 209.3L389.7 209.5L389.6 209.7L389.4 209.8L388 210.5L387.7 210.6L387.3 210.7L386.9 210.6L386.6 210.5L384.5 209.5L384.3 209.3L384.2 209.1L384.3 209L384.5 208.8L385.9 208.1L386.2 208L386.6 207.9L387 208L387.3 208.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M389.7 209.5L389.6 209.7L389.4 209.8L388 210.5L387.7 210.6L387.3 210.7L386.9 210.6L386.6 210.5L384.5 209.5L384.3 209.3L384.2 209.1"/><path class="iso-line iso-bevel" data-tone="faint" d="M389.7 209.5L388.3 209.4L388.3 209.4L387.1 210L387.1 210L387.3 209.9L387.5 210L387.6 210L385.7 209L385.7 209L384.2 209.1"/><path class="iso-line iso-edge" data-tone="lo" d="M384.2 209.1L384.3 209L384.5 208.8L385.9 208.1L386.2 208L386.6 207.9L387 208L387.3 208.1L389.4 209.1L389.6 209.3L389.7 209.5M389.7 224.5L389.6 224.7L389.4 224.8L388 225.5L387.7 225.6L387.3 225.7L386.9 225.6L386.6 225.5L384.5 224.5L384.3 224.3L384.2 224.1M389.7 209.5L389.7 224.5M384.2 209.1L384.2 224.1"/></g><g class="iso-solid"><path class="iso-fill" d="M405.2 219.6L405.3 219.4L405.5 219.3L406.9 218.6L407.2 218.5L407.6 218.4L408 218.5L408.3 218.6L410.4 219.6L410.6 219.8L410.7 220L410.7 235L410.6 235.2L410.4 235.3L409 236L408.7 236.1L408.3 236.2L407.9 236.1L407.6 236L405.5 235L405.3 234.8L405.2 234.6Z"/><path class="iso-shade" data-shade="0" d="M410.7 235L410.6 235.2L410.6 220.2L410.7 220ZM410.6 235.2L410.4 235.3L410.4 220.3L410.6 220.2ZM410.4 235.3L409 236L409 221L410.4 220.3ZM409 236L408.7 236.1L408.7 221.1L409 221Z"/><path class="iso-shade" data-shade="1" d="M408.7 236.1L408.3 236.2L408.3 221.2L408.7 221.1Z"/><path class="iso-shade" data-shade="2" d="M408.3 236.2L407.9 236.1L407.9 221.1L408.3 221.2Z"/><path class="iso-shade" data-shade="3" d="M407.9 236.1L407.6 236L407.6 221L407.9 221.1ZM407.6 236L405.5 235L405.5 220L407.6 221ZM405.5 235L405.3 234.8L405.3 219.8L405.5 220ZM405.3 234.8L405.2 234.6L405.2 219.6L405.3 219.8Z"/><path class="iso-top" d="M410.4 219.6L410.6 219.8L410.7 220L410.6 220.2L410.4 220.3L409 221L408.7 221.1L408.3 221.2L407.9 221.1L407.6 221L405.5 220L405.3 219.8L405.2 219.6L405.3 219.4L405.5 219.3L406.9 218.6L407.2 218.5L407.6 218.4L408 218.5L408.3 218.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M410.7 220L410.6 220.2L410.4 220.3L409 221L408.7 221.1L408.3 221.2L407.9 221.1L407.6 221L405.5 220L405.3 219.8L405.2 219.6"/><path class="iso-line iso-bevel" data-tone="faint" d="M410.7 220L409.3 219.9L409.3 219.9L408.1 220.5L408.1 220.5L408.3 220.4L408.5 220.5L408.6 220.5L406.7 219.5L406.7 219.5L405.2 219.6"/><path class="iso-line iso-edge" data-tone="lo" d="M405.2 219.6L405.3 219.4L405.5 219.3L406.9 218.6L407.2 218.5L407.6 218.4L408 218.5L408.3 218.6L410.4 219.6L410.6 219.8L410.7 220M410.7 235L410.6 235.2L410.4 235.3L409 236L408.7 236.1L408.3 236.2L407.9 236.1L407.6 236L405.5 235L405.3 234.8L405.2 234.6M410.7 220L410.7 235M405.2 219.6L405.2 234.6"/></g><g class="iso-solid"><path class="iso-fill" d="M426.2 230.1L426.3 229.9L426.5 229.8L427.9 229.1L428.2 229L428.6 228.9L429 229L429.3 229.1L431.4 230.1L431.6 230.3L431.7 230.5L431.7 245.5L431.6 245.7L431.4 245.8L430 246.5L429.7 246.6L429.3 246.7L428.9 246.6L428.6 246.5L426.5 245.5L426.3 245.3L426.2 245.1Z"/><path class="iso-shade" data-shade="0" d="M431.7 245.5L431.6 245.7L431.6 230.7L431.7 230.5ZM431.6 245.7L431.4 245.8L431.4 230.8L431.6 230.7ZM431.4 245.8L430 246.5L430 231.5L431.4 230.8ZM430 246.5L429.7 246.6L429.7 231.6L430 231.5Z"/><path class="iso-shade" data-shade="1" d="M429.7 246.6L429.3 246.7L429.3 231.7L429.7 231.6Z"/><path class="iso-shade" data-shade="2" d="M429.3 246.7L428.9 246.6L428.9 231.6L429.3 231.7Z"/><path class="iso-shade" data-shade="3" d="M428.9 246.6L428.6 246.5L428.6 231.5L428.9 231.6ZM428.6 246.5L426.5 245.5L426.5 230.5L428.6 231.5ZM426.5 245.5L426.3 245.3L426.3 230.3L426.5 230.5ZM426.3 245.3L426.2 245.1L426.2 230.1L426.3 230.3Z"/><path class="iso-top" d="M431.4 230.1L431.6 230.3L431.7 230.5L431.6 230.7L431.4 230.8L430 231.5L429.7 231.6L429.3 231.7L428.9 231.6L428.6 231.5L426.5 230.5L426.3 230.3L426.2 230.1L426.3 229.9L426.5 229.8L427.9 229.1L428.2 229L428.6 228.9L429 229L429.3 229.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M431.7 230.5L431.6 230.7L431.4 230.8L430 231.5L429.7 231.6L429.3 231.7L428.9 231.6L428.6 231.5L426.5 230.5L426.3 230.3L426.2 230.1"/><path class="iso-line iso-bevel" data-tone="faint" d="M431.7 230.5L430.2 230.4L430.3 230.4L429.1 231L429.1 231L429.3 230.9L429.5 231L429.5 231L427.6 230L427.7 230L426.2 230.1"/><path class="iso-line iso-edge" data-tone="lo" d="M426.2 230.1L426.3 229.9L426.5 229.8L427.9 229.1L428.2 229L428.6 228.9L429 229L429.3 229.1L431.4 230.1L431.6 230.3L431.7 230.5M431.7 245.5L431.6 245.7L431.4 245.8L430 246.5L429.7 246.6L429.3 246.7L428.9 246.6L428.6 246.5L426.5 245.5L426.3 245.3L426.2 245.1M431.7 230.5L431.7 245.5M426.2 230.1L426.2 245.1"/></g><g class="iso-solid"><path class="iso-fill" d="M447.2 240.6L447.3 240.4L447.5 240.3L448.9 239.6L449.2 239.5L449.6 239.4L450 239.5L450.3 239.6L452.4 240.6L452.6 240.8L452.7 241L452.7 256L452.6 256.2L452.4 256.3L451 257L450.7 257.1L450.3 257.2L449.9 257.1L449.6 257L447.5 256L447.3 255.8L447.2 255.6Z"/><path class="iso-shade" data-shade="0" d="M452.7 256L452.6 256.2L452.6 241.2L452.7 241ZM452.6 256.2L452.4 256.3L452.4 241.3L452.6 241.2ZM452.4 256.3L451 257L451 242L452.4 241.3ZM451 257L450.7 257.1L450.7 242.1L451 242Z"/><path class="iso-shade" data-shade="1" d="M450.7 257.1L450.3 257.2L450.3 242.2L450.7 242.1Z"/><path class="iso-shade" data-shade="2" d="M450.3 257.2L449.9 257.1L449.9 242.1L450.3 242.2Z"/><path class="iso-shade" data-shade="3" d="M449.9 257.1L449.6 257L449.6 242L449.9 242.1ZM449.6 257L447.5 256L447.5 241L449.6 242ZM447.5 256L447.3 255.8L447.3 240.8L447.5 241ZM447.3 255.8L447.2 255.6L447.2 240.6L447.3 240.8Z"/><path class="iso-top" d="M452.4 240.6L452.6 240.8L452.7 241L452.6 241.2L452.4 241.3L451 242L450.7 242.1L450.3 242.2L449.9 242.1L449.6 242L447.5 241L447.3 240.8L447.2 240.6L447.3 240.4L447.5 240.3L448.9 239.6L449.2 239.5L449.6 239.4L450 239.5L450.3 239.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M452.7 241L452.6 241.2L452.4 241.3L451 242L450.7 242.1L450.3 242.2L449.9 242.1L449.6 242L447.5 241L447.3 240.8L447.2 240.6"/><path class="iso-line iso-bevel" data-tone="faint" d="M452.7 241L451.2 240.9L451.2 240.9L450 241.5L450.1 241.5L450.3 241.4L450.5 241.5L450.5 241.5L448.6 240.5L448.6 240.5L447.2 240.6"/><path class="iso-line iso-edge" data-tone="lo" d="M447.2 240.6L447.3 240.4L447.5 240.3L448.9 239.6L449.2 239.5L449.6 239.4L450 239.5L450.3 239.6L452.4 240.6L452.6 240.8L452.7 241M452.7 256L452.6 256.2L452.4 256.3L451 257L450.7 257.1L450.3 257.2L449.9 257.1L449.6 257L447.5 256L447.3 255.8L447.2 255.6M452.7 241L452.7 256M447.2 240.6L447.2 255.6"/></g><g class="iso-solid"><path class="iso-fill" d="M468.2 251.1L468.3 250.9L468.5 250.8L469.9 250.1L470.2 250L470.6 249.9L471 250L471.3 250.1L473.4 251.1L473.6 251.3L473.7 251.5L473.7 266.5L473.6 266.7L473.4 266.8L472 267.5L471.7 267.6L471.3 267.7L470.9 267.6L470.6 267.5L468.5 266.5L468.3 266.3L468.2 266.1Z"/><path class="iso-shade" data-shade="0" d="M473.7 266.5L473.6 266.7L473.6 251.7L473.7 251.5ZM473.6 266.7L473.4 266.8L473.4 251.8L473.6 251.7ZM473.4 266.8L472 267.5L472 252.5L473.4 251.8ZM472 267.5L471.7 267.6L471.7 252.6L472 252.5Z"/><path class="iso-shade" data-shade="1" d="M471.7 267.6L471.3 267.7L471.3 252.7L471.7 252.6Z"/><path class="iso-shade" data-shade="2" d="M471.3 267.7L470.9 267.6L470.9 252.6L471.3 252.7Z"/><path class="iso-shade" data-shade="3" d="M470.9 267.6L470.6 267.5L470.6 252.5L470.9 252.6ZM470.6 267.5L468.5 266.5L468.5 251.5L470.6 252.5ZM468.5 266.5L468.3 266.3L468.3 251.3L468.5 251.5ZM468.3 266.3L468.2 266.1L468.2 251.1L468.3 251.3Z"/><path class="iso-top" d="M473.4 251.1L473.6 251.3L473.7 251.5L473.6 251.7L473.4 251.8L472 252.5L471.7 252.6L471.3 252.7L470.9 252.6L470.6 252.5L468.5 251.5L468.3 251.3L468.2 251.1L468.3 250.9L468.5 250.8L469.9 250.1L470.2 250L470.6 249.9L471 250L471.3 250.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M473.7 251.5L473.6 251.7L473.4 251.8L472 252.5L471.7 252.6L471.3 252.7L470.9 252.6L470.6 252.5L468.5 251.5L468.3 251.3L468.2 251.1"/><path class="iso-line iso-bevel" data-tone="faint" d="M473.7 251.5L472.2 251.4L472.2 251.4L471 252L471.1 251.9L471.3 251.9L471.5 251.9L471.5 252L469.6 251L469.6 251L468.2 251.1"/><path class="iso-line iso-edge" data-tone="lo" d="M468.2 251.1L468.3 250.9L468.5 250.8L469.9 250.1L470.2 250L470.6 249.9L471 250L471.3 250.1L473.4 251.1L473.6 251.3L473.7 251.5M473.7 266.5L473.6 266.7L473.4 266.8L472 267.5L471.7 267.6L471.3 267.7L470.9 267.6L470.6 267.5L468.5 266.5L468.3 266.3L468.2 266.1M473.7 251.5L473.7 266.5M468.2 251.1L468.2 266.1"/></g><g class="iso-solid"><path class="iso-fill" d="M489.2 261.6L489.3 261.4L489.5 261.3L490.9 260.6L491.2 260.5L491.6 260.4L492 260.5L492.3 260.6L494.4 261.6L494.6 261.8L494.7 262L494.7 277L494.6 277.2L494.4 277.3L493 278L492.7 278.1L492.3 278.2L491.9 278.1L491.6 278L489.5 277L489.3 276.8L489.2 276.6Z"/><path class="iso-shade" data-shade="0" d="M494.7 277L494.6 277.2L494.6 262.2L494.7 262ZM494.6 277.2L494.4 277.3L494.4 262.3L494.6 262.2ZM494.4 277.3L493 278L493 263L494.4 262.3ZM493 278L492.7 278.1L492.7 263.1L493 263Z"/><path class="iso-shade" data-shade="1" d="M492.7 278.1L492.3 278.2L492.3 263.2L492.7 263.1Z"/><path class="iso-shade" data-shade="2" d="M492.3 278.2L491.9 278.1L491.9 263.1L492.3 263.2Z"/><path class="iso-shade" data-shade="3" d="M491.9 278.1L491.6 278L491.6 263L491.9 263.1ZM491.6 278L489.5 277L489.5 262L491.6 263ZM489.5 277L489.3 276.8L489.3 261.8L489.5 262ZM489.3 276.8L489.2 276.6L489.2 261.6L489.3 261.8Z"/><path class="iso-top" d="M494.4 261.6L494.6 261.8L494.7 262L494.6 262.2L494.4 262.3L493 263L492.7 263.1L492.3 263.2L491.9 263.1L491.6 263L489.5 262L489.3 261.8L489.2 261.6L489.3 261.4L489.5 261.3L490.9 260.6L491.2 260.5L491.6 260.4L492 260.5L492.3 260.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M494.7 262L494.6 262.2L494.4 262.3L493 263L492.7 263.1L492.3 263.2L491.9 263.1L491.6 263L489.5 262L489.3 261.8L489.2 261.6"/><path class="iso-line iso-bevel" data-tone="faint" d="M494.7 262L493.2 261.9L493.2 261.8L492 262.4L492.1 262.4L492.3 262.4L492.5 262.4L492.5 262.4L490.6 261.5L490.6 261.5L489.2 261.6"/><path class="iso-line iso-edge" data-tone="lo" d="M489.2 261.6L489.3 261.4L489.5 261.3L490.9 260.6L491.2 260.5L491.6 260.4L492 260.5L492.3 260.6L494.4 261.6L494.6 261.8L494.7 262M494.7 277L494.6 277.2L494.4 277.3L493 278L492.7 278.1L492.3 278.2L491.9 278.1L491.6 278L489.5 277L489.3 276.8L489.2 276.6M494.7 262L494.7 277M489.2 261.6L489.2 276.6"/></g><g class="iso-solid"><path class="iso-fill" d="M510.2 272.1L510.3 271.9L510.5 271.8L511.9 271.1L512.2 271L512.6 270.9L512.9 271L513.3 271.1L515.4 272.1L515.6 272.3L515.7 272.5L515.7 287.5L515.6 287.7L515.4 287.8L514 288.5L513.6 288.6L513.3 288.7L512.9 288.6L512.6 288.5L510.5 287.5L510.3 287.3L510.2 287.1Z"/><path class="iso-shade" data-shade="0" d="M515.7 287.5L515.6 287.7L515.6 272.7L515.7 272.5ZM515.6 287.7L515.4 287.8L515.4 272.8L515.6 272.7ZM515.4 287.8L514 288.5L514 273.5L515.4 272.8ZM514 288.5L513.6 288.6L513.6 273.6L514 273.5Z"/><path class="iso-shade" data-shade="1" d="M513.6 288.6L513.3 288.7L513.3 273.7L513.6 273.6Z"/><path class="iso-shade" data-shade="2" d="M513.3 288.7L512.9 288.6L512.9 273.6L513.3 273.7Z"/><path class="iso-shade" data-shade="3" d="M512.9 288.6L512.6 288.5L512.6 273.5L512.9 273.6ZM512.6 288.5L510.5 287.5L510.5 272.5L512.6 273.5ZM510.5 287.5L510.3 287.3L510.3 272.3L510.5 272.5ZM510.3 287.3L510.2 287.1L510.2 272.1L510.3 272.3Z"/><path class="iso-top" d="M515.4 272.1L515.6 272.3L515.7 272.5L515.6 272.7L515.4 272.8L514 273.5L513.6 273.6L513.3 273.7L512.9 273.6L512.6 273.5L510.5 272.5L510.3 272.3L510.2 272.1L510.3 271.9L510.5 271.8L511.9 271.1L512.2 271L512.6 270.9L512.9 271L513.3 271.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M515.7 272.5L515.6 272.7L515.4 272.8L514 273.5L513.6 273.6L513.3 273.7L512.9 273.6L512.6 273.5L510.5 272.5L510.3 272.3L510.2 272.1"/><path class="iso-line iso-bevel" data-tone="faint" d="M515.7 272.5L514.2 272.4L514.2 272.3L513 272.9L513.1 272.9L513.3 272.9L513.5 272.9L513.5 272.9L511.6 272L511.6 272L510.2 272.1"/><path class="iso-line iso-edge" data-tone="lo" d="M510.2 272.1L510.3 271.9L510.5 271.8L511.9 271.1L512.2 271L512.6 270.9L512.9 271L513.3 271.1L515.4 272.1L515.6 272.3L515.7 272.5M515.7 287.5L515.6 287.7L515.4 287.8L514 288.5L513.6 288.6L513.3 288.7L512.9 288.6L512.6 288.5L510.5 287.5L510.3 287.3L510.2 287.1M515.7 272.5L515.7 287.5M510.2 272.1L510.2 287.1"/></g><g class="iso-solid"><path class="iso-fill" d="M531.2 282.6L531.2 282.4L531.5 282.3L532.9 281.6L533.2 281.5L533.6 281.4L533.9 281.5L534.3 281.6L536.4 282.6L536.6 282.8L536.6 283L536.6 298L536.6 298.1L536.4 298.3L535 299L534.6 299.1L534.3 299.2L533.9 299.1L533.6 299L531.5 298L531.2 297.8L531.2 297.6Z"/><path class="iso-shade" data-shade="0" d="M536.6 298L536.6 298.1L536.6 283.2L536.6 283ZM536.6 298.1L536.4 298.3L536.4 283.3L536.6 283.2ZM536.4 298.3L535 299L535 284L536.4 283.3ZM535 299L534.6 299.1L534.6 284.1L535 284Z"/><path class="iso-shade" data-shade="1" d="M534.6 299.1L534.3 299.2L534.3 284.2L534.6 284.1Z"/><path class="iso-shade" data-shade="2" d="M534.3 299.2L533.9 299.1L533.9 284.1L534.3 284.2Z"/><path class="iso-shade" data-shade="3" d="M533.9 299.1L533.6 299L533.6 284L533.9 284.1ZM533.6 299L531.5 298L531.5 283L533.6 284ZM531.5 298L531.2 297.8L531.2 282.8L531.5 283ZM531.2 297.8L531.2 297.6L531.2 282.6L531.2 282.8Z"/><path class="iso-top" d="M536.4 282.6L536.6 282.8L536.6 283L536.6 283.2L536.4 283.3L535 284L534.6 284.1L534.3 284.2L533.9 284.1L533.6 284L531.5 283L531.2 282.8L531.2 282.6L531.2 282.4L531.5 282.3L532.9 281.6L533.2 281.5L533.6 281.4L533.9 281.5L534.3 281.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M536.6 283L536.6 283.2L536.4 283.3L535 284L534.6 284.1L534.3 284.2L533.9 284.1L533.6 284L531.5 283L531.2 282.8L531.2 282.6"/><path class="iso-line iso-bevel" data-tone="faint" d="M536.6 283L535.2 282.9L535.2 282.8L534 283.4L534.1 283.4L534.3 283.4L534.4 283.4L534.5 283.4L532.6 282.5L532.6 282.5L531.2 282.6"/><path class="iso-line iso-edge" data-tone="lo" d="M531.2 282.6L531.2 282.4L531.5 282.3L532.9 281.6L533.2 281.5L533.6 281.4L533.9 281.5L534.3 281.6L536.4 282.6L536.6 282.8L536.6 283M536.6 298L536.6 298.1L536.4 298.3L535 299L534.6 299.1L534.3 299.2L533.9 299.1L533.6 299L531.5 298L531.2 297.8L531.2 297.6M536.6 283L536.6 298M531.2 282.6L531.2 297.6"/></g><path class="iso-line" data-tone="lo" d="M280.3 159L553.1 295.4"/><path class="iso-line" data-tone="lo" d="M280.3 165L553.1 301.4"/><path class="iso-line" data-tone="faint" data-dashed="" d="M244.1 201.2L495.9 327.1"/><g class="fx-part" data-tip="stand"><g class="iso-solid"><path class="iso-fill" d="M342.6 253.6L342.9 252.3L343.9 251.1L345.5 250.1L347.6 249.3L349.9 248.8L352.5 248.7L355.1 248.8L357.5 249.3L359.5 250.1L361.1 251.1L362.1 252.3L362.4 253.6L362.4 255.5L362.1 256.8L361.1 258L359.5 259L357.5 259.8L355.1 260.3L352.5 260.5L349.9 260.3L347.6 259.8L345.5 259L343.9 258L342.9 256.8L342.6 255.5Z"/><path class="iso-shade" data-shade="0" d="M359.5 259L357.5 259.8L357.5 257.9L359.5 257.1ZM362.4 255.5L362.1 256.8L362.1 254.9L362.4 253.6ZM362.1 256.8L361.1 258L361.1 256.1L362.1 254.9ZM361.1 258L359.5 259L359.5 257.1L361.1 256.1Z"/><path class="iso-shade" data-shade="1" d="M357.5 259.8L355.1 260.3L355.1 258.4L357.5 257.9ZM355.1 260.3L352.5 260.5L352.5 258.6L355.1 258.4Z"/><path class="iso-shade" data-shade="2" d="M352.5 260.5L349.9 260.3L349.9 258.4L352.5 258.6ZM349.9 260.3L347.6 259.8L347.6 257.9L349.9 258.4Z"/><path class="iso-shade" data-shade="3" d="M347.6 259.8L345.5 259L345.5 257.1L347.6 257.9ZM345.5 259L343.9 258L343.9 256.1L345.5 257.1ZM343.9 258L342.9 256.8L342.9 254.9L343.9 256.1ZM342.9 256.8L342.6 255.5L342.6 253.6L342.9 254.9Z"/><path class="iso-top" d="M359.5 257.1L357.5 257.9L355.1 258.4L352.5 258.6L349.9 258.4L347.6 257.9L345.5 257.1L343.9 256.1L342.9 254.9L342.6 253.6L342.9 252.3L343.9 251.1L345.5 250.1L347.6 249.3L349.9 248.8L352.5 248.7L355.1 248.8L357.5 249.3L359.5 250.1L361.1 251.1L362.1 252.3L362.4 253.6L362.1 254.9L361.1 256.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M362.4 253.6L362.1 254.9L361.1 256.1L359.5 257.1L357.5 257.9L355.1 258.4L352.5 258.6L349.9 258.4L347.6 257.9L345.5 257.1L343.9 256.1L342.9 254.9L342.6 253.6"/><path class="iso-line iso-edge" data-tone="lo" d="M342.6 253.6L342.9 252.3L343.9 251.1L345.5 250.1L347.6 249.3L349.9 248.8L352.5 248.7L355.1 248.8L357.5 249.3L359.5 250.1L361.1 251.1L362.1 252.3L362.4 253.6M362.4 255.5L362.1 256.8L361.1 258L359.5 259L357.5 259.8L355.1 260.3L352.5 260.5L349.9 260.3L347.6 259.8L345.5 259L343.9 258L342.9 256.8L342.6 255.5M342.6 253.6L342.6 255.5M362.4 253.6L362.4 255.5"/></g><g class="iso-solid"><path class="iso-fill" d="M348.8 239.7L349.1 239L349.9 238.4L351.1 238L352.5 237.8L353.9 238L355.1 238.4L355.9 239L356.2 239.7L356.2 253.6L355.9 254.3L355.1 254.9L353.9 255.3L352.5 255.5L351.1 255.3L349.9 254.9L349.1 254.3L348.8 253.6Z"/><path class="iso-shade" data-shade="0" d="M355.1 254.9L353.9 255.3L353.9 241.4L355.1 241ZM356.2 253.6L355.9 254.3L355.9 240.4L356.2 239.7ZM355.9 254.3L355.1 254.9L355.1 241L355.9 240.4Z"/><path class="iso-shade" data-shade="1" d="M353.9 255.3L352.5 255.5L352.5 241.5L353.9 241.4Z"/><path class="iso-shade" data-shade="2" d="M352.5 255.5L351.1 255.3L351.1 241.4L352.5 241.5Z"/><path class="iso-shade" data-shade="3" d="M351.1 255.3L349.9 254.9L349.9 241L351.1 241.4ZM349.9 254.9L349.1 254.3L349.1 240.4L349.9 241ZM349.1 254.3L348.8 253.6L348.8 239.7L349.1 240.4Z"/><path class="iso-top" d="M355.1 241L353.9 241.4L352.5 241.5L351.1 241.4L349.9 241L349.1 240.4L348.8 239.7L349.1 239L349.9 238.4L351.1 238L352.5 237.8L353.9 238L355.1 238.4L355.9 239L356.2 239.7L355.9 240.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M356.2 239.7L355.9 240.4L355.1 241L353.9 241.4L352.5 241.5L351.1 241.4L349.9 241L349.1 240.4L348.8 239.7"/><path class="iso-line iso-edge" data-tone="mid" d="M348.8 239.7L349.1 239L349.9 238.4L351.1 238L352.5 237.8L353.9 238L355.1 238.4L355.9 239L356.2 239.7M356.2 253.6L355.9 254.3L355.1 254.9L353.9 255.3L352.5 255.5L351.1 255.3L349.9 254.9L349.1 254.3L348.8 253.6M348.8 239.7L348.8 253.6M356.2 239.7L356.2 253.6"/></g></g><text x="352.5" y="232" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">A 点 · 放镜处</text><g id="rd-dyn"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="rd-beam" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>入射 / 反射光线</span><span class="iso-key"><svg class="iso-swatch" data-mark="rd-norm" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>法线（虚线）</span><span class="iso-key"><svg class="iso-swatch" data-mark="rd-mirror" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>平面镜镜面</span><span class="iso-key"><svg class="iso-swatch" data-mark="rd-hatch" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>背光侧斜短线</span></span><span class="iso-caption">作图三步：先连 A→B 定光路，再画夹角的角平分线定法线，最后过 A 作法线的垂线定镜面——镜面斜短线画在背光侧。</span></figcaption></figure>
+<div class="fx-steps"><button class="fx-stepbtn active" data-step="0">1 · 认识反射</button><button class="fx-stepbtn" data-step="1">2 · 定光路</button><button class="fx-stepbtn" data-step="2">3 · 定法线</button><button class="fx-stepbtn" data-step="3">4 · 定镜面</button><button class="fx-stepbtn" data-step="4">5 · 作图挑战</button></div><div class="fx-steptext" id="fx-steptext"></div>
+<div class="fx-controls">
+<div class="rd-group" id="rd-g1">
+  <div class="rd-btnrow"><span class="rd-hint">拖动图中的太阳（或镜面场景里的光源圆盘），改变入射方向</span></div>
+</div>
+<div class="rd-group" id="rd-g2" style="display:none">
+  <div class="rd-btnrow">
+    <button class="fx-btn primary" id="rd-connect">连接 A→B</button>
+    <button class="fx-btn" id="rd-reverse">光路可逆</button>
+    <button class="fx-btn" id="rd-reset2">重来</button>
+  </div>
+</div>
+<div class="rd-group" id="rd-g3" style="display:none">
+  <div class="rd-btnrow">
+    <button class="fx-btn primary" id="rd-normal">画法线</button>
+    <button class="fx-btn" id="rd-reset3">重画</button>
+  </div>
+</div>
+<div class="rd-group" id="rd-g4" style="display:none">
+  <div class="rd-btnrow">
+    <button class="fx-btn" id="rd-reset4">重新摆放镜面</button>
+    <span class="rd-hint">拖动图中的镜面旋转，直到与法线垂直</span>
+  </div>
+</div>
+<div class="rd-group" id="rd-g5" style="display:none">
+  <div class="rd-btnrow">
+    <button class="fx-btn rd-tool" id="rd-tool1">① 连光路</button>
+    <button class="fx-btn rd-tool" id="rd-tool2">② 画法线</button>
+    <button class="fx-btn rd-tool" id="rd-tool3">③ 放镜面</button>
+    <button class="fx-btn" id="rd-new">换一个场景</button>
+  </div>
+  <div class="rd-checks">
+    <span class="rd-ck" id="rd-ck1">☐ 光线箭头指向目标 B</span>
+    <span class="rd-ck" id="rd-ck2">☐ 法线画成虚线</span>
+    <span class="rd-ck" id="rd-ck3">☐ 镜面 ⊥ 法线 · 斜线在背光侧</span>
+  </div>
+</div>
+<div class="fx-readline" id="fx-readline"></div>
+<div class="fx-msg" id="fx-msg"></div></div>
+
+<div class="fx-eq">法线 = 入射光线与反射光线夹角的角平分线 · 镜面 ⊥ 法线 · 光路可逆</div>
+<div class="rd-pit">⚠️ 作图采分点：法线必须画<b>虚线</b>；光线箭头必须沿光的传播方向、<b>指向目标</b>；镜面的斜短线必须画在<b>背光侧</b>——画错一处，扣一处分。</div>
+<div class="quiz" id="quiz"><div class="quiz-title">小测验</div><div id="quiz-body"></div></div></main><script type="module">var STEPS=[{"t":"1 · 认识反射","html":"镜面已经摆好（法线垂直于镜面）。<b>拖动太阳</b>改变入射方向：入射线、法线、反射线三线共面，盯住读数——<b>反射角永远等于入射角</b>，法线永远垂直于镜面。"},{"t":"2 · 定光路","html":"母题来了：阳光方向固定、A 点固定，要把光<b>恰好反射到目标 B</b>。反射光线不用猜——<b>目标在哪，它就指向哪</b>。点「连接 A→B」画出反射光线；再点「光路可逆」，看光从 B 沿原路返回太阳。"},{"t":"3 · 定法线","html":"点「画法线」，看法线从入射线与反射线的<b>夹角平分线</b>上长出来（虚线绘制）。核心口诀：<b>法线永远是入射光线与反射光线夹角的角平分线</b>。"},{"t":"4 · 定镜面","html":"镜面出现了，但角度不对，反射光打偏了（灰色虚线是目标光路）。<b>拖动镜面旋转</b>，看反射光扫向目标——当镜面转到<b>与法线垂直</b>时会自动「咔哒」锁定，背光侧刷上斜短线。口诀：<b>镜面是法线的垂线</b>。"},{"t":"5 · 作图挑战","html":"新场景：太阳角度和 B 的位置都随机变了。用三个工具<b>按顺序</b>作图：①连光路 ②画法线 ③放镜面（拖到与法线垂直锁定）。顺序错了会被拦住——这就是考场上的标准作图流程。"}];
+var TIPS={"stand":["镜架","立柱顶端就是 A 点，平面镜将绕着 A 点转动。先定光路、再定法线、最后定的镜面必须与法线垂直。"]};
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var OX=370,OY=264.285,EXX=1.749,EXY=0.875,EYX=-1.749,EYY=0.875,EZX=0,EZY=-2.142;
+var AV=[-10,0,6.5], BF=[44,0,26];
+var EPSF=50, MU1=-20; // 母题太阳高度角 / 步骤1 镜面角（法线角 70°）
+function P3(x,y,z){return [OX+EXX*x+EYX*y+EZX*z, OY+EXY*x+EYY*y+EZY*z];}
+function f1(n){return Math.round(n*10)/10;}
+function fmt(n){return (Math.round(n*10)/10).toFixed(1);}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v));}
+function vNorm(v){var l=Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])||1;return [v[0]/l,v[1]/l,v[2]/l];}
+function incDir(eps){var e=eps*Math.PI/180;return [Math.cos(e),0,-Math.sin(e)];}
+function dirTo(a,b){return vNorm([b[0]-a[0],b[1]-a[1],b[2]-a[2]]);}
+function reflect(i,n){var d=i[0]*n[0]+i[1]*n[1]+i[2]*n[2];return [i[0]-2*d*n[0],i[1]-2*d*n[1],i[2]-2*d*n[2]];}
+function normalOf(eps,B){var i=incDir(eps),r=dirTo(AV,B);return vNorm([r[0]-i[0],0,r[2]-i[2]]);}
+function muStarOf(eps,B){var n=normalOf(eps,B);return Math.atan2(-n[0],n[2])*180/Math.PI;}
+function nOfMu(mu){var m=mu*Math.PI/180;return [-Math.sin(m),0,Math.cos(m)];}
+function mOfMu(mu){var m=mu*Math.PI/180;return [Math.cos(m),0,Math.sin(m)];}
+function angOf(v){return Math.atan2(v[2],v[0])*180/Math.PI;}
+function angBetween(u,v){var d=u[0]*v[0]+u[1]*v[1]+u[2]*v[2];d=clamp(d,-1,1);return Math.acos(d)*180/Math.PI;}
+function fold180(a){while(a>90)a-=180;while(a<-90)a+=180;return a;}
+function line(p,q,color,w,dash,op){
+  return '<line x1="'+f1(p[0])+'" y1="'+f1(p[1])+'" x2="'+f1(q[0])+'" y2="'+f1(q[1])+'" stroke="'+color+'" stroke-width="'+w+'" fill="none" opacity="'+(op==null?1:op)+'"'+(dash?' stroke-dasharray="6 4"':"")+'/>';
+}
+function arrowAt(E,dirS,color){
+  var len=Math.sqrt(dirS[0]*dirS[0]+dirS[1]*dirS[1])||1;
+  var ux=dirS[0]/len,uy=dirS[1]/len,px=-uy,py=ux;
+  var b1=[E[0]-ux*10+px*4,E[1]-uy*10+py*4],b2=[E[0]-ux*10-px*4,E[1]-uy*10-py*4];
+  return '<polygon points="'+f1(E[0])+','+f1(E[1])+' '+f1(b1[0])+','+f1(b1[1])+' '+f1(b2[0])+','+f1(b2[1])+'" fill="'+color+'"/>';
+}
+function txt(p,str,size,fill,anchor,weight){
+  return '<text x="'+f1(p[0])+'" y="'+f1(p[1])+'" text-anchor="'+(anchor||"middle")+'" font-size="'+size+'" font-weight="'+(weight||400)+'" fill="'+fill+'" font-family="ui-sans-serif,system-ui,sans-serif">'+str+'</text>';
+}
+function poly(pts,fill,stroke,w){
+  return '<polygon points="'+pts.map(function(p){return f1(p[0])+","+f1(p[1]);}).join(" ")+'" fill="'+fill+'"'+(stroke?' stroke="'+stroke+'" stroke-width="'+(w||1)+'"':"")+'/>';
+}
+function arcA(rr,a1,a2,color){
+  var pts=[];
+  var stepSgn=a2>=a1?4:-4;
+  for(var a=a1;stepSgn>0?a<=a2+0.01:a>=a2-0.01;a+=stepSgn){
+    var rad=a*Math.PI/180;
+    var p=P3(AV[0]+rr*Math.cos(rad),0,AV[2]+rr*Math.sin(rad));
+    pts.push(f1(p[0])+","+f1(p[1]));
+  }
+  return '<polyline points="'+pts.join(" ")+'" fill="none" stroke="'+color+'" stroke-width="1.4"/>';
+}
+function rightAngleMark(mu,sc){
+  var m=mOfMu(mu),n=nOfMu(mu);
+  function Q(a,b){return P3(AV[0]+m[0]*a*sc+n[0]*b*sc,0,AV[2]+m[2]*a*sc+n[2]*b*sc);}
+  var pts=[Q(1,0),Q(1,1),Q(0,1)];
+  return '<polyline points="'+pts.map(function(p){return f1(p[0])+","+f1(p[1]);}).join(" ")+'" fill="none" stroke="#57575a" stroke-width="1.1"/>';
+}
+function beam(p,q){
+  return line(p,q,"#e8590c",5,false,0.16)+line(p,q,"#e8590c",2.4);
+}
+function sunAt(S,draggable){
+  var c=P3(S[0],S[1],S[2]),s=[];
+  s.push('<circle cx="'+f1(c[0])+'" cy="'+f1(c[1])+'" r="13" fill="rgba(255,190,40,.30)"/>');
+  s.push('<circle cx="'+f1(c[0])+'" cy="'+f1(c[1])+'" r="8.5" fill="#ffd43b" stroke="#d9930d" stroke-width="1.4"/>');
+  s.push('<circle cx="'+f1(c[0])+'" cy="'+f1(c[1])+'" r="3.6" fill="#fff3bf"/>');
+  for(var k=0;k<8;k++){
+    var a=k*Math.PI/4+0.4,ca=Math.cos(a),sa=Math.sin(a);
+    s.push('<line x1="'+f1(c[0]+ca*11)+'" y1="'+f1(c[1]+sa*11)+'" x2="'+f1(c[0]+ca*16)+'" y2="'+f1(c[1]+sa*16)+'" stroke="#d9930d" stroke-width="1.4"/>');
+  }
+  s.push(txt([c[0],c[1]-24],"太阳",10,"#8a6d1a","middle",700));
+  if(draggable)s.push('<circle id="rd-sunhit" class="rd-hit" cx="'+f1(c[0])+'" cy="'+f1(c[1])+'" r="21" fill="rgba(0,0,0,0)"/>');
+  return s.join("");
+}
+function targetAt(B,hit){
+  var s=[],r=dirTo(AV,B);
+  var mr=[-r[2],0,r[0]];
+  function discPt(rad,t){return P3(B[0]+rad*Math.sin(t)*mr[0], B[1]+rad*Math.cos(t), B[2]+rad*Math.sin(t)*mr[2]);}
+  function disc(rad,fill,stroke){
+    var pts=[];
+    for(var t=0;t<=Math.PI*2+0.01;t+=Math.PI/10)pts.push(discPt(rad,t));
+    return poly(pts,fill,stroke,1.2);
+  }
+  var g0=P3(B[0],B[1],0);
+  s.push(line(P3(B[0],B[1],0.4),P3(B[0],B[1],B[2]-5),"#6f747c",3));
+  s.push('<circle cx="'+f1(g0[0])+'" cy="'+f1(g0[1])+'" r="3.4" fill="#83888f"/>');
+  s.push(disc(7.6,hit?"#e6f6ea":"#fbfbfa",hit?"#30a46c":"#83888f"));
+  s.push(disc(5.2,hit?"#b2dfbc":"#f3b8b8",null));
+  s.push(disc(2.9,hit?"#30a46c":"#e5484d",null));
+  var bp=P3(B[0],B[1],B[2]+10.5);
+  s.push(txt(bp,hit?"目标 B · 命中！":"目标 B",10.5,hit?"#1f7a48":"#333336","middle",700));
+  return s.join("");
+}
+function drawMirror(mu,hatch,glow,withHit){
+  var m=mOfMu(mu),n=nOfMu(mu),Lm=8,Wm=7,th=0.9,s=[];
+  function C(su,sv,sw){return P3(AV[0]+m[0]*su+n[0]*sv, AV[1]+sw, AV[2]+m[2]*su+n[2]*sv);}
+  var b00=C(-Lm,-th,-Wm),b10=C(Lm,-th,-Wm),b11=C(Lm,-th,Wm),b01=C(-Lm,-th,Wm);
+  var f00=C(-Lm,th,-Wm),f10=C(Lm,th,-Wm),f11=C(Lm,th,Wm),f01=C(-Lm,th,Wm);
+  s.push(poly([b00,b10,b11,b01],"#9aa3ab","#6f747c",1));
+  if(hatch){
+    var hg="";
+    for(var su=-6.9;su<=6.9;su+=2.3){
+      [-Wm+0.4,Wm-0.4].forEach(function(sw){
+        var p1=C(su,-th-0.25,sw),p2=C(su+1.6,-th-2.1,sw);
+        hg+=line(p1,p2,"#57575a",1.3);
+      });
+    }
+    s.push('<g class="rd-hatch">'+hg+'</g>');
+  }
+  s.push(poly([b00,f00,f10,b10],"#c3ccd4",null));
+  s.push(poly([b10,f10,f11,b11],"#aeb8c2",null));
+  s.push(poly([b11,f11,f01,b01],"#c3ccd4",null));
+  s.push(poly([b01,f01,f00,b00],"#aeb8c2",null));
+  s.push(poly([f00,f10,f11,f01],glow?"#cfeeff":"#dcebf7",glow?"#30a46c":"#5b8ab5",glow?2.2:1.3));
+  var cp=P3(AV[0],AV[1],AV[2]);
+  s.push('<circle cx="'+f1(cp[0])+'" cy="'+f1(cp[1])+'" r="2.8" fill="#333336"/>');
+  if(withHit)s.push('<polygon id="rd-mirrorhit" class="rd-hit" points="'+[f00,f10,f11,f01].map(function(p){return f1(p[0])+","+f1(p[1]);}).join(" ")+'" fill="rgba(0,0,0,0)"/>');
+  return s.join("");
+}
+function partialPath(pts,frac){
+  var segs=[],total=0,i;
+  for(i=0;i<pts.length-1;i++){
+    var dx=pts[i+1][0]-pts[i][0],dy=pts[i+1][1]-pts[i][1];
+    var L=Math.sqrt(dx*dx+dy*dy);segs.push(L);total+=L;
+  }
+  var want=frac*total,out=[],head=null,headDir=null,acc=0;
+  for(i=0;i<segs.length;i++){
+    if(want<=acc)break;
+    var p=pts[i],q=pts[i+1],L=segs[i];
+    var take=Math.min(L,want-acc),k=L>0?take/L:0;
+    var e=[p[0]+(q[0]-p[0])*k,p[1]+(q[1]-p[1])*k];
+    out.push([p,e]);head=e;headDir=[q[0]-p[0],q[1]-p[1]];acc+=take;
+    if(k<1)break;
+  }
+  return {segs:out,head:head,headDir:headDir};
+}
+// ── 状态 ──
+var step=0;
+var eps1=55;                                     // 步骤 1：太阳高度角
+var growT=0,connected=false,revT=0,reversed=false,anim=null;   // 步骤 2
+var normT=0,normalDrawn=false;                                   // 步骤 3
+var muStarF=muStarOf(EPSF,BF);
+var mu4start=clamp(Math.round((muStarF-34)*2)/2,-52,40), mu4=mu4start, locked4=false; // 步骤 4
+var ch=null;                                       // 步骤 5 挑战
+var roEl=document.querySelector("[data-readout]");
+function msg(t){$("fx-msg").textContent=t;}
+function setRo(t){$("fx-readline").textContent=t;if(roEl)roEl.textContent=t;}
+function sunPos(eps){var i=incDir(eps);return [AV[0]-i[0]*56,0,AV[2]-i[2]*56];}
+function cancelAnim(){if(anim)cancelAnimationFrame(anim);anim=null;}
+function animate(dur,fn,done){
+  cancelAnim();
+  if(reduceMotion){fn(1);if(done)done();return;}
+  var t0=null;
+  function fr(ts){
+    if(t0==null)t0=ts;
+    var k=Math.min(1,(ts-t0)/dur);
+    fn(k);
+    if(k<1){anim=requestAnimationFrame(fr);}else{anim=null;if(done)done();}
+  }
+  anim=requestAnimationFrame(fr);
+}
+// ── 主渲染 ──
+function render(){
+  var s=[];
+  var iF=incDir(EPSF);
+  if(step===0){
+    var i=incDir(eps1),n=nOfMu(MU1),r=reflect(i,n);
+    var S=sunPos(eps1),pS=P3(S[0],S[1],S[2]),pA=P3(AV[0],AV[1],AV[2]);
+    var pR=P3(AV[0]+r[0]*60,0,AV[2]+r[2]*60);
+    s.push(beam(pS,pA));s.push(arrowAt(pA,[pA[0]-pS[0],pA[1]-pS[1]],"#e8590c"));
+    s.push(beam(pA,pR));s.push(arrowAt(pR,[pR[0]-pA[0],pR[1]-pA[1]],"#e8590c"));
+    var nTop=P3(AV[0]+n[0]*30,0,AV[2]+n[2]*30),nBot=P3(AV[0]-n[0]*7,0,AV[2]-n[2]*7);
+    s.push(line(nBot,nTop,"#7048e8",1.5,true));
+    s.push(txt([nTop[0]+6,nTop[1]-4],"法线 N",10,"#7048e8","start",700));
+    var aI=angOf([-i[0],0,-i[2]]),aN=angOf(n),aR=angOf(r);
+    s.push(arcA(13,Math.min(aI,aN),Math.max(aI,aN),"#7048e8"));
+    s.push(arcA(13,Math.min(aN,aR),Math.max(aN,aR),"#7048e8"));
+    var inc=angBetween([-i[0],0,-i[2]],n);
+    var tI=P3(AV[0]+17*Math.cos((aI+aN)/2*Math.PI/180),0,AV[2]+17*Math.sin((aI+aN)/2*Math.PI/180));
+    var tR=P3(AV[0]+17*Math.cos((aN+aR)/2*Math.PI/180),0,AV[2]+17*Math.sin((aN+aR)/2*Math.PI/180));
+    s.push(txt([tI[0],tI[1]],fmt(inc)+"°",10.5,"#7048e8","middle",700));
+    s.push(txt([tR[0],tR[1]],fmt(inc)+"°",10.5,"#7048e8","middle",700));
+    s.push(rightAngleMark(MU1,4.2));
+    s.push(drawMirror(MU1,true,false,false));
+    s.push(sunAt(S,true));
+    var lp=P3(AV[0]+30*Math.cos((aI)*Math.PI/180),0,AV[2]+30*Math.sin(aI*Math.PI/180));
+    s.push(txt([lp[0]-16,lp[1]+14],"入射光线",9.5,"#e8590c","middle",400));
+    setRo("入射角 "+fmt(inc)+"° ＝ 反射角 "+fmt(inc)+"° · 法线与镜面成 90°（垂直）");
+  }
+  if(step===1||step===2){
+    var S2=sunPos(EPSF),pS2=P3(S2[0],S2[1],S2[2]),pA2=P3(AV[0],AV[1],AV[2]),pB2=P3(BF[0],BF[1],BF[2]);
+    s.push(beam(pS2,pA2));s.push(arrowAt(pA2,[pA2[0]-pS2[0],pA2[1]-pS2[1]],"#e8590c"));
+    if(step===1){
+      if(growT>0){
+        var pp=partialPath([pA2,pB2],growT);
+        pp.segs.forEach(function(sg){s.push(line(sg[0],sg[1],"#e8590c",5,false,0.16));s.push(line(sg[0],sg[1],"#e8590c",2.4));});
+        if(pp.head&&growT>0.03)s.push(arrowAt(pp.head,pp.headDir,"#e8590c"));
+      }
+      if(revT>0){
+        var rp=partialPath([pB2,pA2,pS2],revT);
+        rp.segs.forEach(function(sg){s.push(line(sg[0],sg[1],"#3e63dd",2.2));});
+        if(rp.head)s.push(arrowAt(rp.head,rp.headDir,"#3e63dd"));
+      }
+      s.push(targetAt(BF,connected));
+      setRo(connected?"反射光线 A→B 已连通 · 箭头指向 B · 试试点「光路可逆」":"阳光到达 A 点——反射光线该指向哪？点「连接 A→B」");
+    }else{
+      s.push(beam(pA2,pB2));s.push(arrowAt(pB2,[pB2[0]-pA2[0],pB2[1]-pA2[1]],"#e8590c"));
+      s.push(targetAt(BF,true));
+      var nF=normalOf(EPSF,BF);
+      if(normT>0){
+        var e1=P3(AV[0]+nF[0]*36*normT,0,AV[2]+nF[2]*36*normT),e0=P3(AV[0]-nF[0]*8*normT,0,AV[2]-nF[2]*8*normT);
+        s.push(line(e0,e1,"#7048e8",1.6,true));
+      }
+      if(normalDrawn){
+        var nTp=P3(AV[0]+nF[0]*40,0,AV[2]+nF[2]*40);
+        s.push(txt(nTp,"法线 N",10.5,"#7048e8","middle",700));
+        var aI2=angOf([-iF[0],0,-iF[2]]),aN2=angOf(nF),aR2=angOf(dirTo(AV,BF));
+        s.push(arcA(13,Math.min(aI2,aN2),Math.max(aI2,aN2),"#7048e8"));
+        s.push(arcA(16.5,Math.min(aI2,aN2),Math.max(aI2,aN2),"#7048e8"));
+        s.push(arcA(13,Math.min(aN2,aR2),Math.max(aN2,aR2),"#7048e8"));
+        s.push(arcA(16.5,Math.min(aN2,aR2),Math.max(aN2,aR2),"#7048e8"));
+        var incF=angBetween([-iF[0],0,-iF[2]],nF);
+        var tI2=P3(AV[0]+21*Math.cos((aI2+aN2)/2*Math.PI/180),0,AV[2]+21*Math.sin((aI2+aN2)/2*Math.PI/180));
+        var tR2=P3(AV[0]+21*Math.cos((aN2+aR2)/2*Math.PI/180),0,AV[2]+21*Math.sin((aN2+aR2)/2*Math.PI/180));
+        s.push(txt([tI2[0],tI2[1]],"入射角 "+fmt(incF)+"°",10,"#7048e8","middle",700));
+        s.push(txt([tR2[0],tR2[1]],"反射角 "+fmt(incF)+"°",10,"#7048e8","middle",700));
+        setRo("法线已画出（虚线）：入射角 "+fmt(incF)+"° ＝ 反射角 "+fmt(incF)+"° · 法线平分两线夹角");
+      }else{
+        setRo("点「画法线」，看角平分线怎样长出来");
+      }
+    }
+    s.push(sunAt(S2,false));
+  }
+  if(step===3){
+    var S4=sunPos(EPSF),pS4=P3(S4[0],S4[1],S4[2]),pA4=P3(AV[0],AV[1],AV[2]),pB4=P3(BF[0],BF[1],BF[2]);
+    var n4=normalOf(EPSF,BF);
+    var nTop4=P3(AV[0]+n4[0]*36,0,AV[2]+n4[2]*36),nBot4=P3(AV[0]-n4[0]*8,0,AV[2]-n4[2]*8);
+    s.push(line(pA4,pB4,"#868e96",1.6,true,0.8));
+    s.push(line(nBot4,nTop4,"#7048e8",1.5,true));
+    s.push(txt([nTop4[0]+4,nTop4[1]-4],"法线 N",10,"#7048e8","start",700));
+    s.push(beam(pS4,pA4));s.push(arrowAt(pA4,[pA4[0]-pS4[0],pA4[1]-pS4[1]],"#e8590c"));
+    var rL=reflect(iF,nOfMu(mu4));
+    var pRL=P3(AV[0]+rL[0]*62,0,AV[2]+rL[2]*62);
+    s.push(beam(pA4,pRL));s.push(arrowAt(pRL,[pRL[0]-pA4[0],pRL[1]-pA4[1]],"#e8590c"));
+    if(locked4)s.push(rightAngleMark(mu4,4.2));
+    s.push(drawMirror(mu4,locked4,locked4,true));
+    s.push(targetAt(BF,locked4));
+    s.push(sunAt(S4,false));
+    var dev4=Math.abs(fold180(mu4-muStarF));
+    var angMN=90-dev4;
+    if(locked4)setRo("🔒 已锁定！镜面与法线夹角 90.0°（垂直）· 反射光命中 B · 斜线已在背光侧");
+    else setRo("镜面与法线夹角 "+fmt(angMN)+"°（目标 90°）· 还差 "+fmt(dev4)+"° · 反射光还没打中 B");
+  }
+  if(step===4&&ch){
+    var Sc=sunPos(ch.eps),pSc=P3(Sc[0],Sc[1],Sc[2]),pAc=P3(AV[0],AV[1],AV[2]),pBc=P3(ch.B[0],ch.B[1],ch.B[2]);
+    s.push(beam(pSc,pAc));s.push(arrowAt(pAc,[pAc[0]-pSc[0],pAc[1]-pSc[1]],"#e8590c"));
+    if(ch.stage>=1){
+      s.push(line(pAc,pBc,"#868e96",1.6,true,0.8));
+      s.push(arrowAt(pBc,[pBc[0]-pAc[0],pBc[1]-pAc[1]],"#868e96"));
+      if(ch.stage===1)s.push(beam(pAc,pBc));
+    }
+    if(ch.stage>=2){
+      var nc=normalOf(ch.eps,ch.B);
+      var nTc=P3(AV[0]+nc[0]*36,0,AV[2]+nc[2]*36),nBc=P3(AV[0]-nc[0]*8,0,AV[2]-nc[2]*8);
+      s.push(line(nBc,nTc,"#7048e8",1.6,true));
+      s.push(txt([nTc[0]+4,nTc[1]-4],"法线 N",10,"#7048e8","start",700));
+    }
+    if(ch.stage>=3){
+      var rC=reflect(incDir(ch.eps),nOfMu(ch.mu));
+      var pRC=P3(AV[0]+rC[0]*62,0,AV[2]+rC[2]*62);
+      s.push(beam(pAc,pRC));s.push(arrowAt(pRC,[pRC[0]-pAc[0],pRC[1]-pAc[1]],"#e8590c"));
+      if(ch.locked)s.push(rightAngleMark(ch.mu,4.2));
+      s.push(drawMirror(ch.mu,ch.locked,ch.locked,true));
+    }
+    s.push(targetAt(ch.B,ch.locked||ch.stage===1));
+    s.push(sunAt(Sc,false));
+    if(ch.done)setRo("🎉 挑战完成 · 用时 "+ch.elapsed+" 秒 · 三项作图规范全部达标");
+    else if(ch.stage===0)setRo("第 1 步：点「① 连光路」，把反射光线连到 B");
+    else if(ch.stage===1)setRo("光路已定 · 第 2 步：点「② 画法线」");
+    else if(ch.stage===2)setRo("法线已定 · 第 3 步：点「③ 放镜面」，再拖到与法线垂直");
+    else{var devC=Math.abs(fold180(ch.mu-ch.muStar));setRo("拖镜面：与法线夹角 "+fmt(90-devC)+"°（目标 90°）· 还差 "+fmt(devC)+"°");}
+  }
+  $("rd-dyn").innerHTML=s.join("");
+}
+// ── 角度应用（拖拽与测试钩共用同一代码路径）──
+function applySun(eps){
+  eps1=clamp(Math.round(eps*10)/10,42,70);
+  if(step===0)render();
+}
+function applyMirror(mu){
+  if(step===3){
+    mu=clamp(Math.round(mu*10)/10,-52,40);
+    var dev=Math.abs(fold180(mu-muStarF));
+    if(dev<=3){mu4=muStarF;if(!locked4){locked4=true;msg("咔哒——锁定！镜面与法线垂直，反射光正中目标 B，背光侧斜线刷上。记住作图顺序：先定光路、再定法线、最后定镜面（法线的垂线）。");} }
+    else{mu4=mu;locked4=false;}
+    render();
+  }else if(step===4&&ch&&ch.stage>=3&&!ch.done){
+    mu=clamp(Math.round(mu*10)/10,-52,40);
+    var dev2=Math.abs(fold180(mu-ch.muStar));
+    if(dev2<=3){
+      ch.mu=ch.muStar;
+      if(!ch.locked){
+        ch.locked=true;ch.done=true;
+        ch.elapsed=Math.round((Date.now()-ch.t0)/100)/10;
+        $("rd-ck3").textContent="✓ 镜面 ⊥ 法线 · 斜线在背光侧";
+        $("rd-ck3").classList.add("done");
+        msg("🎉 作图完成！用时 "+ch.elapsed+" 秒。三步顺序正确，规范检查全过：箭头指向 B ✓ 法线虚线 ✓ 斜线在背光侧 ✓。点「换一个场景」再练一局！");
+      }
+    }else{ch.mu=mu;ch.locked=false;}
+    render();
+  }
+}
+// ── 拖拽（事件委托在动态层父组上，子元素重建不丢监听）──
+var dragMode=null;
+function pointerWorld(e){
+  var svg=$("rd-svg"),rect=svg.getBoundingClientRect();
+  var px=(e.clientX-rect.left)/rect.width*740, py=(e.clientY-rect.top)/rect.height*520;
+  var pA=P3(AV[0],AV[1],AV[2]);
+  var dsx=px-pA[0],dsy=py-pA[1];
+  var det=EXX*EZY-EZX*EXY;
+  var dx=(dsx*EZY-EZX*dsy)/det, dz=(EXX*dsy-EXY*dsx)/det;
+  return [AV[0]+dx,0,AV[2]+dz];
+}
+$("rd-dyn").addEventListener("pointerdown",function(e){
+  var tid=e.target&&e.target.id;
+  dragMode=null;
+  if(step===0&&tid==="rd-sunhit")dragMode="sun";
+  else if((step===3||(step===4&&ch&&ch.stage>=3))&&tid==="rd-mirrorhit")dragMode="mirror";
+  if(!dragMode)return;
+  try{$("rd-dyn").setPointerCapture(e.pointerId);}catch(_){}
+  if(e.preventDefault)e.preventDefault();
+});
+$("rd-dyn").addEventListener("pointermove",function(e){
+  if(!dragMode)return;
+  var W=pointerWorld(e);
+  if(dragMode==="sun"){
+    var eps=Math.atan2(W[2]-AV[2],AV[0]-W[0])*180/Math.PI;
+    applySun(eps);
+  }else{
+    var mu=Math.atan2(W[2]-AV[2],W[0]-AV[0])*180/Math.PI;
+    applyMirror(fold180(mu));
+  }
+});
+function dragEnd(){dragMode=null;}
+$("rd-dyn").addEventListener("pointerup",dragEnd);
+$("rd-dyn").addEventListener("pointercancel",dragEnd);
+// ── 步骤切换 ──
+function onStep(i){
+  step=i;
+  cancelAnim();
+  for(var g=1;g<=5;g++)$("rd-g"+g).style.display=i===g-1?"":"none";
+  if(i===0){msg("拖动太阳：入射角怎么变，反射角就怎么变——永远相等。");}
+  if(i===1){growT=0;connected=false;revT=0;reversed=false;msg("先想：反射光线应该指向哪？点「连接 A→B」。");}
+  if(i===2){normT=0;normalDrawn=false;msg("光路已定。接下来定法线——它藏在两条光线的夹角里。");}
+  if(i===3){mu4=mu4start;locked4=false;msg("拖动镜面旋转，看反射光线扫过靶面——转到与法线垂直时锁定。");}
+  if(i===4){newChallenge();msg("挑战开始！按 ①连光路 → ②画法线 → ③放镜面 的顺序作图。");}
+  render();
+}
+// ── 步骤 2 按钮 ──
+$("rd-connect").addEventListener("click",function(){
+  if(step!==1||connected)return;
+  reversed=false;revT=0;
+  animate(900,function(k){growT=k;render();},function(){
+    connected=true;growT=1;render();
+    msg("反射光线画好了：它由 A 指向 B，箭头朝向 B。再点「光路可逆」——光还能从 B 回到太阳吗？");
+  });
+});
+$("rd-reverse").addEventListener("click",function(){
+  if(step!==1)return;
+  if(!connected){msg("先点「连接 A→B」把光路连通，再看光路可逆。");return;}
+  animate(1700,function(k){revT=k;render();},function(){
+    reversed=true;revT=1;render();
+    msg("光路可逆：光能从太阳经 A 到 B，就能从 B 沿同一条路返回太阳——光走的路，正着反着都成立。");
+  });
+});
+$("rd-reset2").addEventListener("click",function(){
+  if(step!==1)return;
+  cancelAnim();growT=0;connected=false;revT=0;reversed=false;render();
+  msg("已重置。点「连接 A→B」重新画反射光线。");
+});
+// ── 步骤 3 按钮 ──
+$("rd-normal").addEventListener("click",function(){
+  if(step!==2||normalDrawn)return;
+  animate(850,function(k){normT=k;render();},function(){
+    normalDrawn=true;normT=1;render();
+    msg("法线长出来了（虚线）：它把入射线与反射线的夹角正好平分——两边的角相等，图上双弧标记就是证据。");
+  });
+});
+$("rd-reset3").addEventListener("click",function(){
+  if(step!==2)return;
+  cancelAnim();normT=0;normalDrawn=false;render();
+  msg("已擦掉法线。点「画法线」重画。");
+});
+// ── 步骤 4 按钮 ──
+$("rd-reset4").addEventListener("click",function(){
+  if(step!==3)return;
+  mu4=mu4start;locked4=false;render();
+  msg("镜面已回到初始角度。拖动镜面，转到与法线垂直。");
+});
+// ── 步骤 5 挑战 ──
+function newChallenge(){
+  var eps=36+Math.random()*24;
+  var B=[34+Math.random()*22,0,14+Math.random()*20];
+  var ms=muStarOf(eps,B);
+  var off=(20+Math.random()*18)*(Math.random()<0.5?-1:1);
+  var mu0=clamp(Math.round((ms+off)*2)/2,-52,40);
+  if(Math.abs(fold180(mu0-ms))<15)mu0=clamp(Math.round((ms-off)*2)/2,-52,40);
+  ch={eps:Math.round(eps*10)/10,B:[Math.round(B[0]*10)/10,0,Math.round(B[2]*10)/10],muStar:Math.round(ms*10)/10,mu:mu0,stage:0,locked:false,done:false,t0:Date.now(),elapsed:0};
+  ["rd-ck1","rd-ck2","rd-ck3"].forEach(function(id,k){
+    $(id).textContent=["☐ 光线箭头指向目标 B","☐ 法线画成虚线","☐ 镜面 ⊥ 法线 · 斜线在背光侧"][k];
+    $(id).classList.remove("done");
+  });
+  ["rd-tool1","rd-tool2","rd-tool3"].forEach(function(id){$(id).classList.remove("done");});
+}
+$("rd-tool1").addEventListener("click",function(){
+  if(step!==4||!ch)return;
+  if(ch.stage!==0){msg("「连光路」已经完成了——作图第一步：定光路（反射光线指向 B）。");return;}
+  ch.stage=1;
+  $("rd-ck1").textContent="✓ 光线箭头指向目标 B";
+  $("rd-ck1").classList.add("done");
+  $("rd-tool1").classList.add("done");
+  render();
+  msg("✓ 光路已定：反射光线连到 B、箭头指向 B。下一步点「② 画法线」。");
+});
+$("rd-tool2").addEventListener("click",function(){
+  if(step!==4||!ch)return;
+  if(ch.stage===0){msg("拦住！顺序错了——先「① 连光路」定光路，再画法线。没有光路，法线平分谁的夹角？");return;}
+  if(ch.stage!==1){msg("法线已经画好了——它平分入射线与反射线的夹角。");return;}
+  ch.stage=2;
+  $("rd-ck2").textContent="✓ 法线画成虚线";
+  $("rd-ck2").classList.add("done");
+  $("rd-tool2").classList.add("done");
+  render();
+  msg("✓ 法线已定（虚线）：它是两条光线夹角的角平分线。最后点「③ 放镜面」。");
+});
+$("rd-tool3").addEventListener("click",function(){
+  if(step!==4||!ch)return;
+  if(ch.stage<2){msg("拦住！顺序错了——镜面是最后一步：先连光路、画法线，镜面必须对着法线来放。");return;}
+  if(ch.stage!==2){msg("镜面已经放好了——拖动它，转到与法线垂直。");return;}
+  ch.stage=3;
+  $("rd-tool3").classList.add("done");
+  render();
+  msg("镜面已放下，但角度还不对。拖动镜面旋转，转到与法线垂直（90°）时锁定。");
+});
+$("rd-new").addEventListener("click",function(){
+  if(step!==4)return;
+  newChallenge();render();
+  msg("新场景来了：太阳角度、B 的位置都变了。重新按顺序作图！");
+});
+$("fx-stage").addEventListener("keydown",function(e){
+  if(e.key>="1"&&e.key<="5")renderStep(+e.key-1);
+});
+// ── 小测验 ──
+var QUIZ=[
+  {q:"法线与镜面是什么关系？",o:["互相垂直","互相平行","夹角恒为 45°"],a:0,
+   w:"法线就是镜面的垂线：作图时先由角平分线定法线，再过入射点作法线的垂线，就是镜面的位置。"},
+  {q:"「光路可逆」指的是什么？",o:["光从 B 沿原来的反射光线反向射入，会沿原来的入射光线从 A 射回——光走的路可以反着走","镜面翻个面也一样能用","反射角可以大于入射角"],a:0,
+   w:"在反射（和折射）现象中，光路都是可逆的：正着能走通的路，反着走同样成立。"}
+];
+var quizState={};
+function renderQuiz(){
+  var html="";
+  QUIZ.forEach(function(qq,qi){
+    var st=quizState[qi];
+    html+='<div class="quiz-q">'+(qi+1)+". "+qq.q+'</div><div class="quiz-opts">';
+    qq.o.forEach(function(op,oi){
+      var cls="";
+      if(st!=null){if(oi===qq.a)cls=" right";else if(oi===st)cls=" wrong";}
+      html+='<button class="quiz-opt'+cls+'" data-q="'+qi+'" data-o="'+oi+'">'+op+"</button>";
+    });
+    html+="</div>";
+    if(st!=null){
+      html+='<div class="quiz-why" style="display:block">'+(st===qq.a?"✓ 答对了！":"✗ 再想想。")+qq.w+"</div>";
+    }
+  });
+  $("quiz-body").innerHTML=html;
+}
+$("quiz-body").addEventListener("click",function(e){
+  var t=e.target;if(!t||!t.dataset||t.dataset.q==null)return;
+  quizState[+t.dataset.q]=+t.dataset.o;
+  renderQuiz();
+});
+renderQuiz();
+renderStep(0);
+render();
+// ── 测试钩（与拖拽共用 applySun / applyMirror 代码路径，供冒烟测试驱动）──
+if(typeof window!=="undefined")window.__rd={
+  applySun:applySun,applyMirror:applyMirror,
+  state:function(){
+    var inc1=angBetween((function(){var i=incDir(eps1);return [-i[0],0,-i[2]];})(),nOfMu(MU1));
+    return {step:step,eps:eps1,inc:inc1,connected:connected,reversed:reversed,normalDrawn:normalDrawn,
+      mu4:mu4,muStarF:muStarF,locked4:locked4,
+      stage:ch?ch.stage:-1,muC:ch?ch.mu:null,muStarC:ch?ch.muStar:null,lockedC:ch?ch.locked:false,doneC:ch?ch.done:false,
+      epsC:ch?ch.eps:null,BC:ch?ch.B:null};
+  }
+};
+
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var __step=0,__hold=-1;
+function renderStep(i){
+  __step=i;
+  var btns=document.querySelectorAll(".fx-stepbtn");
+  btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
+  var s=STEPS[i];
+  $("fx-steptext").innerHTML="<b>"+s.t.replace(/^\d+\s*[·、]\s*/,"")+"</b>　"+s.html;
+  if(typeof onStep==="function")onStep(i);
+}
+function holdStep(i){__hold=i;renderStep(i);}
+function releaseHold(){__hold=-1;}
+document.querySelectorAll(".fx-stepbtn").forEach(function(b){
+  b.addEventListener("click",function(){holdStep(+b.dataset.step);});
+});
+(function initTips(){
+  var tip=$("fx-tip"),stage=$("fx-stage");
+  if(!tip||!stage||typeof TIPS==="undefined")return;
+  function show(id,x,y){
+    var t=TIPS[id];if(!t)return;
+    tip.innerHTML="<b>"+t[0]+"</b><span>"+t[1]+"</span>";
+    tip.style.display="block";
+    var r=stage.getBoundingClientRect();
+    tip.style.left=Math.min(r.width-250,Math.max(8,x-r.left+14))+"px";
+    tip.style.top=Math.max(8,y-r.top-10)+"px";
+  }
+  document.querySelectorAll(".fx-part").forEach(function(el){
+    el.addEventListener("pointerenter",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointermove",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointerleave",function(){tip.style.display="none";});
+    el.addEventListener("click",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+  });
+})();
+</script></body></html>

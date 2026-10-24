@@ -25,6 +25,13 @@ Open `index.html`, or run any page directly:
 | Chemistry 化学 | `figures/rust-removal.html` | Rust removal — watch rust → yellow solution → pale-green solution |
 | Physics 物理 | `figures/convex-lens.html` | Convex lens imaging — move the object, watch the image change |
 | Math 数学 | `figures/quadratic-function.html` | Quadratic functions — drag coefficients, watch the parabola reshape |
+| Chemistry 化学 | `figures/acid-base-titration.html` | Acid–base titration — watch the curve grow to the end point |
+| Chemistry 化学 | `figures/double-displacement.html` | Double displacement — a four-grid judgement board for reaction conditions |
+| Chemistry 化学 | `figures/mass-conservation.html` | Conservation of mass — atoms rearrange, the total never changes |
+| Physics 物理 | `figures/matter-states.html` | States of matter — heating/cooling and particle movement |
+| Physics 物理 | `figures/plane-mirror-imaging.html` | Plane mirror imaging — equal size, equal distance, virtual image |
+| Physics 物理 | `figures/reflection-drawing.html` | Reflection drawing in three steps |
+| Life Science 生活科学 | `figures/humidifier-anatomy.html` | Ultrasonic humidifier — how mist is made |
 
 Each page is a single self-contained HTML file (no build step, no external assets). Just open it in a browser.
 
@@ -32,6 +39,6 @@ Each page is a single self-contained HTML file (no build step, no external asset
 
 ## Status / 状态
 
-**Demo only.** This repository contains 3 sample pages.
+**Demo only.** This repository contains 10 sample pages.
 
-**仅为演示版**——本仓库只有 3 个样例页。The full 37-page version is a private product under development and is not published here. 完整 37 页版本为私有产品，正在开发与验证中，不在此公开。
+**仅为演示版**——本仓库只有 10 个样例页。The full 41-page version is kept in a private repository and is not published here. 完整 41 页版本存于私有仓库，不在此公开。

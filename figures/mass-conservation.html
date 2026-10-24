@@ -1,0 +1,599 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><title>质量守恒定律 · 交互式等距插图</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(740px,100% - 32px);margin:64px auto 96px}
+/* 平板断点：iPad 竖屏 768px 起放宽版心；iPad 横屏/桌面 1100px 起再放宽，阅读行宽设上限 */
+@media (min-width:768px){
+.iso-page{width:min(940px,100% - 48px)}
+.iso-plate{padding-left:32px;padding-right:32px}
+}
+@media (min-width:1100px){
+.iso-page{width:min(1080px,100% - 64px)}
+}
+
+
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.fx-slider{display:flex;align-items:center;gap:10px;justify-content:center;font-size:14px;color:var(--anatomy-strong);margin:6px 0}
+.fx-slider input{width:min(300px,52vw);accent-color:#e5484d}
+.fx-slider b{font-variant-numeric:tabular-nums;min-width:64px;text-align:left}
+.fx-subhead{max-width:640px;margin:26px auto 8px;font-size:15px;font-weight:700;color:var(--anatomy-strong);text-align:center}
+.fx-micro{display:block;margin:0 auto;max-width:520px;width:100%}
+.fx-map{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0 4px}
+#ms-state{background:#fff7ed;border:1px solid #f5a524;border-radius:10px;max-width:640px;margin-left:auto;margin-right:auto;padding:10px 16px}
+.quiz-qwrap{max-width:640px;margin:10px auto;padding:12px 16px;background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:10px}
+.quiz-q{font-size:13.5px;font-weight:700;color:var(--anatomy-strong);margin-bottom:8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;padding:7px 14px;border-radius:18px;border:1px solid var(--anatomy-lo);background:var(--anatomy-card);color:var(--anatomy-text);cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e8f7ef;color:#1c7a4d}
+.quiz-opt.wrong{border-color:#e5484d;background:#fdeeee;color:#b3272e}
+.quiz-why{font-size:12.5px;color:var(--anatomy-muted);margin-top:8px;line-height:1.6}
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.iso-swatch[data-mark="o"] path{stroke:#e5484d}
+.iso-swatch[data-mark="h"] path{stroke:#c9c9ce}
+.iso-swatch[data-mark="c"] path{stroke:#3a3a3e}
+.iso-swatch[data-mark="mg"] path{stroke:#7fb069}
+.mc-rxrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;flex:1 1 100%;margin-bottom:2px}
+.mc-rx.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.mc-sliderrow{display:flex;align-items:center;gap:12px;max-width:620px;margin:8px auto;flex:1 1 100%;flex-wrap:wrap}
+.mc-sliderrow label{font-size:13px;color:var(--anatomy-strong);white-space:nowrap}
+.mc-sliderrow input[type=range]{flex:1 1 160px;min-width:0;accent-color:#3e63dd;cursor:pointer;height:28px}
+.mc-phase{font-size:13px;color:var(--anatomy-strong);min-width:150px;text-align:right;font-weight:700}
+.mc-btnrow{display:flex;justify-content:center;flex:1 1 100%;margin:2px 0}
+.mc-banner{display:none;max-width:640px;margin:10px auto 0;padding:11px 16px;border-radius:10px;background:#e6f6ea;border:1px solid #8fce9e;font-size:14px;line-height:1.6;color:#1f7a48;text-align:center}
+.mc-banner.show{display:block}
+.mc-banner b{color:#14663b}
+.mc-counters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px}
+.mc-chip{font-size:13px;color:var(--anatomy-strong);background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;padding:7px 14px}
+.mc-chip i{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px solid;margin-right:6px;vertical-align:baseline}
+.mc-chip b{color:#1f7a48}
+.mc-baltitle{text-align:center;font-size:15px;font-weight:700;color:var(--anatomy-strong);margin:28px 0 6px}
+.mc-balsvg{margin:0 auto}
+.mc-balcap{text-align:center;font-size:12.5px;color:var(--anatomy-muted);margin:6px 0}
+.mc-game{position:relative;margin:24px 0 8px;padding:18px 16px 20px;border:1px solid var(--anatomy-faint);border-radius:12px;background:var(--anatomy-card);overflow:hidden}
+.mc-gametitle{font-size:15px;font-weight:700;color:var(--anatomy-strong);margin-bottom:12px;text-align:center}
+.mc-ground{font-size:14px;font-weight:700;color:var(--anatomy-strong);text-align:center;margin-bottom:10px}
+.mc-eqrow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:6px 0 12px}
+.mc-sp{display:inline-flex;flex-direction:column;align-items:center;gap:6px}
+.mc-pmrow{display:flex;align-items:center;gap:8px}
+.mc-coef{min-width:34px;text-align:center;font-size:20px;font-weight:700;color:var(--anatomy-blue);font-variant-numeric:tabular-nums}
+.mc-pm{width:34px;height:34px;border-radius:50%;border:1px solid var(--anatomy-lo);background:var(--anatomy-page);color:var(--anatomy-strong);font-size:18px;cursor:pointer;line-height:1}
+.mc-pm:hover{border-color:var(--anatomy-blue)}
+.mc-formula{font-size:17px;font-weight:700;color:var(--anatomy-strong);font-family:ui-monospace,Menlo,monospace}
+.mc-op{font-size:20px;color:var(--anatomy-muted);font-weight:700}
+.mc-op.mc-arrow{color:var(--anatomy-blue)}
+.mc-tallyrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:4px 0 8px}
+.mc-tally{font-size:12.5px;border-radius:16px;padding:5px 12px;border:1px solid}
+.mc-tally.ok{border-color:#8fce9e;background:#e6f6ea;color:#1f7a48;font-weight:700}
+.mc-tally.bad{border-color:#f0b0b0;background:#ffecec;color:#b3272e}
+.mc-gmsg{text-align:center;font-size:13.5px;color:var(--anatomy-text);margin:8px 0}
+.mc-success{text-align:center;font-size:16px;font-weight:700;color:#1f7a48;margin:10px 0}
+.mc-nextrow{text-align:center;margin-top:10px}
+.mc-confwrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.mc-conf{position:absolute;top:-14px;border-radius:2px;animation:mcFall 1.5s ease-in forwards}
+@keyframes mcFall{to{transform:translateY(150px) rotate(540deg);opacity:0}}
+.mc-note{max-width:640px;margin:10px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+.mc-note b{color:var(--anatomy-strong)}
+.quiz{margin:22px 0 8px;padding:16px;border:1px solid var(--anatomy-faint);border-radius:12px;background:var(--anatomy-card)}
+.quiz-title{font-size:15px;font-weight:700;color:var(--anatomy-strong);margin-bottom:10px}
+.quiz-q{font-size:14px;color:var(--anatomy-strong);margin:10px 0 8px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-opt{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);background:var(--anatomy-page);border:1px solid var(--anatomy-lo);border-radius:8px;padding:6px 14px;cursor:pointer}
+.quiz-opt.right{border-color:#30a46c;background:#e6f6ea;color:#1f7a48;font-weight:700}
+.quiz-opt.wrong{border-color:#e5484d;background:#ffecec;color:#e5484d}
+.quiz-why{font-size:13px;color:var(--anatomy-text);margin:8px 0 4px;display:none}
+@media (prefers-reduced-motion:reduce){.mc-conf{animation:none}}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><nav class="kg-back"><a href="../index.html">← 返回知识馆</a></nav>
+<header class="fx-pagehead"><h1>质量守恒定律</h1><p>分子会变，原子不变——亲手拆开分子，看原子重新牵手</p></header>
+<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 29</span><span class="iso-plate-corner" data-corner="title">质量守恒定律</span><span class="iso-plate-corner" data-corner="hint">拖进度条看原子重排 · 1–4 切换步骤 · 点 +/− 配平</span><span class="iso-plate-corner" data-corner="readout" data-readout>6 个原子 · 36g = 36g</span></div><div class="iso-stage" id="fx-stage" tabindex="0" role="group" aria-label="质量守恒微观剧场：拖动反应进度，看分子拆开成原子再重新组合"><div class="fx-tip" id="fx-tip"></div><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 740 520" role="img" aria-label="微观剧场：拖动反应进度条，看分子拆开成原子、原子重新组合成新分子"><g><path class="iso-halo" d="M148.4 350.7L148.8 348.7L150 346.8L151.9 345L154.5 343.4L307 267.2L310.1 265.9L313.7 264.9L317.6 264.3L321.6 264.1L325.7 264.3L329.6 264.9L333.1 265.9L336.3 267.2L585.5 391.8L588.1 393.3L590 395.1L591.2 397.1L591.6 399.1L591.2 401.1L590 403.1L588.1 404.9L585.5 406.4L433 482.7L429.9 484L426.3 484.9L422.4 485.5L418.4 485.7L414.3 485.5L410.4 484.9L406.9 484L403.7 482.7L154.5 358.1L151.9 356.5L150 354.7L148.8 352.7Z"/><g class="iso-solid"><path class="iso-fill" d="M311.4 276.6L312.4 275.1L314.3 273.8L316.9 272.8L320 272.3L323.2 272.3L326.3 272.8L329 273.8L330.9 275.1L331.9 276.6L331.9 307L330.9 308.5L329 309.8L326.3 310.8L323.2 311.3L320 311.3L316.9 310.8L314.3 309.8L312.4 308.5L311.4 307Z"/><path class="iso-top" d="M329 309.8L326.3 310.8L323.2 311.3L320 311.3L316.9 310.8L314.3 309.8L312.4 308.5L311.4 307L311.4 305.3L312.4 303.8L314.3 302.5L316.9 301.5L320 301L323.2 301L326.3 301.5L329 302.5L330.9 303.8L331.9 305.3L331.9 307L330.9 308.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M331.9 307L330.9 308.5L329 309.8L326.3 310.8L323.2 311.3L320 311.3L316.9 310.8L314.3 309.8L312.4 308.5L311.4 307"/><path class="iso-line iso-edge" data-tone="lo" d="M311.4 307L311.4 305.3L312.4 303.8L314.3 302.5L316.9 301.5L320 301L323.2 301L326.3 301.5L329 302.5L330.9 303.8L331.9 305.3L331.9 307"/></g><g class="iso-solid"><path class="iso-fill" d="M554.7 398.3L555.7 396.8L557.7 395.4L560.3 394.5L563.4 394L566.6 394L569.7 394.5L572.3 395.4L574.2 396.8L575.2 398.3L575.2 428.6L574.2 430.2L572.3 431.5L569.7 432.5L566.6 433L563.4 433L560.3 432.5L557.7 431.5L555.7 430.2L554.7 428.6Z"/><path class="iso-top" d="M572.3 431.5L569.7 432.5L566.6 433L563.4 433L560.3 432.5L557.7 431.5L555.7 430.2L554.7 428.6L554.7 427L555.7 425.5L557.7 424.2L560.3 423.2L563.4 422.7L566.6 422.7L569.7 423.2L572.3 424.2L574.2 425.5L575.2 427L575.2 428.6L574.2 430.2Z"/><path class="iso-line iso-crease" data-tone="faint" d="M575.2 428.6L574.2 430.2L572.3 431.5L569.7 432.5L566.6 433L563.4 433L560.3 432.5L557.7 431.5L555.7 430.2L554.7 428.6"/><path class="iso-line iso-edge" data-tone="lo" d="M554.7 428.6L554.7 427L555.7 425.5L557.7 424.2L560.3 423.2L563.4 422.7L566.6 422.7L569.7 423.2L572.3 424.2L574.2 425.5L575.2 427L575.2 428.6"/></g><g class="iso-solid"><path class="iso-fill" d="M164.8 349.9L165.8 348.4L167.7 347.1L170.3 346.1L173.4 345.6L176.6 345.6L179.7 346.1L182.3 347.1L184.3 348.4L185.3 349.9L185.3 378.6L185.3 380.3L184.3 381.8L182.3 383.1L179.7 384.1L176.6 384.6L173.4 384.6L170.3 384.1L167.7 383.1L165.8 381.8L164.8 380.3Z"/><path class="iso-top" d="M182.3 383.1L179.7 384.1L176.6 384.6L173.4 384.6L170.3 384.1L167.7 383.1L165.8 381.8L164.8 380.3L164.8 378.6L165.8 377.1L167.7 375.8L170.3 374.8L173.4 374.3L176.6 374.3L179.7 374.8L182.3 375.8L184.3 377.1L185.3 378.6L185.3 380.3L184.3 381.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M185.3 380.3L184.3 381.8L182.3 383.1L179.7 384.1L176.6 384.6L173.4 384.6L170.3 384.1L167.7 383.1L165.8 381.8L164.8 380.3"/><path class="iso-line iso-edge" data-tone="lo" d="M164.8 380.3L164.8 378.6L165.8 377.1L167.7 375.8L170.3 374.8L173.4 374.3L176.6 374.3L179.7 374.8L182.3 375.8L184.3 377.1L185.3 378.6L185.3 380.3"/></g><g class="iso-solid"><path class="iso-fill" d="M408.1 473.2L408.1 471.6L409.1 470.1L411 468.7L413.7 467.8L416.8 467.3L420 467.3L423.1 467.8L425.7 468.7L427.6 470.1L428.6 471.6L428.6 501.9L427.6 503.5L425.7 504.8L423.1 505.8L420 506.3L416.8 506.3L413.7 505.8L411 504.8L409.1 503.5L408.1 501.9Z"/><path class="iso-top" d="M425.7 504.8L423.1 505.8L420 506.3L416.8 506.3L413.7 505.8L411 504.8L409.1 503.5L408.1 501.9L408.1 500.3L409.1 498.8L411 497.5L413.7 496.5L416.8 496L420 496L423.1 496.5L425.7 497.5L427.6 498.8L428.6 500.3L428.6 501.9L427.6 503.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M428.6 501.9L427.6 503.5L425.7 504.8L423.1 505.8L420 506.3L416.8 506.3L413.7 505.8L411 504.8L409.1 503.5L408.1 501.9"/><path class="iso-line iso-edge" data-tone="lo" d="M408.1 501.9L408.1 500.3L409.1 498.8L411 497.5L413.7 496.5L416.8 496L420 496L423.1 496.5L425.7 497.5L427.6 498.8L428.6 500.3L428.6 501.9"/></g><g class="iso-solid"><path class="iso-fill" d="M148.4 275.3L148.8 273.3L150 271.3L151.9 269.6L154.5 268L307 191.7L310.1 190.5L313.7 189.5L317.6 188.9L321.6 188.7L325.7 188.9L329.6 189.5L333.1 190.5L336.3 191.7L585.5 316.4L588.1 317.9L590 319.7L591.2 321.7L591.6 323.7L591.2 325.7L590 327.7L588.1 329.5L585.5 331L433 407.3L429.9 408.5L426.3 409.5L422.4 410.1L418.4 410.3L414.3 410.1L410.4 409.5L406.9 408.5L403.7 407.3L154.5 282.6L151.9 281.1L150 279.3L148.8 277.3Z"/><path class="iso-top" d="M585.5 316.4L588.1 317.9L590 319.7L591.2 321.7L591.6 323.7L591.2 325.7L590 327.7L588.1 329.5L585.5 331L433 407.3L429.9 408.5L426.3 409.5L422.4 410.1L418.4 410.3L414.3 410.1L410.4 409.5L406.9 408.5L403.7 407.3L154.5 282.6L151.9 281.1L150 279.3L148.8 277.3L148.4 275.3L148.8 273.3L150 271.3L151.9 269.6L154.5 268L307 191.7L310.1 190.5L313.7 189.5L317.6 188.9L321.6 188.7L325.7 188.9L329.6 189.5L333.1 190.5L336.3 191.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M591.6 323.7L591.2 325.7L590 327.7L588.1 329.5L585.5 331L433 407.3L429.9 408.5L426.3 409.5L422.4 410.1L418.4 410.3L414.3 410.1L410.4 409.5L406.9 408.5L403.7 407.3L154.5 282.6L151.9 281.1L150 279.3L148.8 277.3L148.4 275.3"/><path class="iso-line iso-bevel" data-tone="faint" d="M591.6 323.7L588.7 325.5L587.7 327.2L586 328.8L583.7 330.2L431.4 406.3L428.5 407.5L425.4 408.4L421.9 408.9L418.4 409L414.8 408.9L411.4 408.4L408.2 407.5L405.4 406.3L156.3 281.8L154 280.4L152.3 278.8L151.3 277.1L148.4 275.3"/><path class="iso-line iso-edge" data-tone="mid" d="M148.4 275.3L148.8 273.3L150 271.3L151.9 269.6L154.5 268L307 191.7L310.1 190.5L313.7 189.5L317.6 188.9L321.6 188.7L325.7 188.9L329.6 189.5L333.1 190.5L336.3 191.7L585.5 316.4L588.1 317.9L590 319.7L591.2 321.7L591.6 323.7"/></g><path class="iso-line" data-tone="faint" d="M576.7 292L577.7 292.7L578.5 293.4L579 294.2L579.1 295L579 295.8L578.5 296.5L577.7 297.3L576.7 297.9L424.2 374.1L423 374.6L421.6 375L420 375.3L418.4 375.3L416.8 375.3L415.2 375L413.8 374.6L412.5 374.1L163.3 249.5L162.3 248.9L161.5 248.2L161 247.4L160.9 246.6L161 245.8L161.5 245L162.3 244.3L163.3 243.7L315.8 167.4L317 166.9L318.4 166.5L320 166.3L321.6 166.2L323.2 166.3L324.8 166.5L326.2 166.9L327.5 167.4Z"/><text class="iso-face-text" data-tone="faint" transform="matrix(1.466 0.733 -1.466 0.733 252.716 275.56)" font-size="5" text-anchor="start">质量守恒实验台</text><g class="iso-solid"><path class="iso-fill" d="M218.5 235.4L218.9 233.8L219.8 232.2L221.3 230.8L223.4 229.5L305.5 188.5L308 187.5L310.9 186.7L314 186.2L317.2 186.1L320.5 186.2L323.6 186.7L326.4 187.5L329 188.5L516.6 282.3L518.7 283.6L520.2 285L521.1 286.6L521.5 288.2L521.5 297.2L521.1 298.8L520.2 300.3L518.7 301.8L516.6 303L434.5 344.1L432 345.1L429.1 345.9L426 346.3L422.8 346.5L419.5 346.3L416.4 345.9L413.6 345.1L411 344.1L223.4 250.2L221.3 249L219.8 247.6L218.9 246L218.5 244.4Z"/><path class="iso-shade" data-shade="0" d="M521.5 297.2L521.1 298.8L521.1 289.8L521.5 288.2ZM521.1 298.8L520.2 300.3L520.2 291.4L521.1 289.8ZM520.2 300.3L518.7 301.8L518.7 292.8L520.2 291.4ZM518.7 301.8L516.6 303L516.6 294L518.7 292.8ZM516.6 303L434.5 344.1L434.5 335.1L516.6 294ZM434.5 344.1L432 345.1L432 336.1L434.5 335.1Z"/><path class="iso-shade" data-shade="1" d="M432 345.1L429.1 345.9L429.1 336.9L432 336.1ZM429.1 345.9L426 346.3L426 337.4L429.1 336.9ZM426 346.3L422.8 346.5L422.8 337.5L426 337.4Z"/><path class="iso-shade" data-shade="2" d="M422.8 346.5L419.5 346.3L419.5 337.4L422.8 337.5ZM419.5 346.3L416.4 345.9L416.4 336.9L419.5 337.4ZM416.4 345.9L413.6 345.1L413.6 336.1L416.4 336.9Z"/><path class="iso-shade" data-shade="3" d="M413.6 345.1L411 344.1L411 335.1L413.6 336.1ZM411 344.1L223.4 250.2L223.4 241.3L411 335.1ZM223.4 250.2L221.3 249L221.3 240L223.4 241.3ZM221.3 249L219.8 247.6L219.8 238.6L221.3 240ZM219.8 247.6L218.9 246L218.9 237L219.8 238.6ZM218.9 246L218.5 244.4L218.5 235.4L218.9 237Z"/><path class="iso-top" d="M516.6 282.3L518.7 283.6L520.2 285L521.1 286.6L521.5 288.2L521.1 289.8L520.2 291.4L518.7 292.8L516.6 294L434.5 335.1L432 336.1L429.1 336.9L426 337.4L422.8 337.5L419.5 337.4L416.4 336.9L413.6 336.1L411 335.1L223.4 241.3L221.3 240L219.8 238.6L218.9 237L218.5 235.4L218.9 233.8L219.8 232.2L221.3 230.8L223.4 229.5L305.5 188.5L308 187.5L310.9 186.7L314 186.2L317.2 186.1L320.5 186.2L323.6 186.7L326.4 187.5L329 188.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M521.5 288.2L521.1 289.8L520.2 291.4L518.7 292.8L516.6 294L434.5 335.1L432 336.1L429.1 336.9L426 337.4L422.8 337.5L419.5 337.4L416.4 336.9L413.6 336.1L411 335.1L223.4 241.3L221.3 240L219.8 238.6L218.9 237L218.5 235.4"/><path class="iso-line iso-bevel" data-tone="faint" d="M521.5 288.2L518.7 289.6L517.9 290.9L516.6 292.1L514.8 293.2L432.8 334.2L430.6 335.1L428.2 335.7L425.5 336.1L422.8 336.3L420 336.1L417.4 335.7L414.9 335.1L412.7 334.2L225.2 240.4L223.4 239.3L222.1 238.1L221.3 236.8L218.5 235.4"/><path class="iso-line iso-edge" data-tone="lo" d="M218.5 235.4L218.9 233.8L219.8 232.2L221.3 230.8L223.4 229.5L305.5 188.5L308 187.5L310.9 186.7L314 186.2L317.2 186.1L320.5 186.2L323.6 186.7L326.4 187.5L329 188.5L516.6 282.3L518.7 283.6L520.2 285L521.1 286.6L521.5 288.2M521.5 297.2L521.1 298.8L520.2 300.3L518.7 301.8L516.6 303L434.5 344.1L432 345.1L429.1 345.9L426 346.3L422.8 346.5L419.5 346.3L416.4 345.9L413.6 345.1L411 344.1L223.4 250.2L221.3 249L219.8 247.6L218.9 246L218.5 244.4M521.5 288.2L521.5 297.2M218.5 235.4L218.5 244.4"/></g><text class="iso-face-text" data-tone="faint" transform="matrix(1.466 0.733 -1.466 0.733 235.123 234.329)" font-size="5" text-anchor="start">微观剧场</text><path class="iso-line" data-tone="faint" d="M422.8 234.9 L317.2 287.6"/><ellipse cx="371.5" cy="260.5" rx="66" ry="27" fill="none" stroke="#9a9aa2" stroke-width="1.4" stroke-dasharray="7 5" opacity=".8"/><text x="377.3" y="199.5" text-anchor="middle" font-size="11" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">反应物</text><text x="494.6" y="258.1" text-anchor="middle" font-size="11" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">生成物</text><text x="302.6" y="295.5" text-anchor="middle" font-size="11" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">原子重组区</text><g class="fx-part" data-tip="igniter"><polygon points="411.8,359.1 422,364.2 422,343.7 411.8,343.7" fill="#a8a8ae" stroke="#6a6a6e" stroke-width="1"/><ellipse cx="416.9" cy="343.7" rx="5.1" ry="1.9" fill="#8a8a8f" stroke="#55555a" stroke-width="1"/><line x1="416.9" y1="343.7" x2="416.9" y2="336.5" stroke="#55555a" stroke-width="3.4" stroke-linecap="round"/></g><text x="402.3" y="360" text-anchor="middle" font-size="10" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">点火器</text><g class="iso-solid"><path class="iso-fill" d="M287.5 164.7L287.8 163.9L288.4 163.2L289.4 162.5L308.4 153L309.7 152.5L311.2 152.2L312.8 152.1L314.4 152.2L315.9 152.5L317.2 153L348 168.4L349 169L349.6 169.8L349.8 170.6L349.8 181.3L349.6 182.1L349 182.9L348 183.5L329 193.1L327.7 193.6L326.2 193.9L324.6 194L322.9 193.9L321.4 193.6L320.2 193.1L289.4 177.7L288.4 177L287.8 176.3L287.5 175.5Z"/><path class="iso-shade" data-shade="0" d="M349.8 181.3L349.6 182.1L349.6 171.4L349.8 170.6ZM349.6 182.1L349 182.9L349 172.1L349.6 171.4ZM349 182.9L348 183.5L348 172.8L349 172.1ZM348 183.5L329 193.1L329 182.3L348 172.8ZM329 193.1L327.7 193.6L327.7 182.8L329 182.3Z"/><path class="iso-shade" data-shade="1" d="M327.7 193.6L326.2 193.9L326.2 183.1L327.7 182.8ZM326.2 193.9L324.6 194L324.6 183.2L326.2 183.1Z"/><path class="iso-shade" data-shade="2" d="M324.6 194L322.9 193.9L322.9 183.1L324.6 183.2ZM322.9 193.9L321.4 193.6L321.4 182.8L322.9 183.1Z"/><path class="iso-shade" data-shade="3" d="M321.4 193.6L320.2 193.1L320.2 182.3L321.4 182.8ZM320.2 193.1L289.4 177.7L289.4 166.9L320.2 182.3ZM289.4 177.7L288.4 177L288.4 166.3L289.4 166.9ZM288.4 177L287.8 176.3L287.8 165.5L288.4 166.3ZM287.8 176.3L287.5 175.5L287.5 164.7L287.8 165.5Z"/><path class="iso-top" d="M348 168.4L349 169L349.6 169.8L349.8 170.6L349.6 171.4L349 172.1L348 172.8L329 182.3L327.7 182.8L326.2 183.1L324.6 183.2L322.9 183.1L321.4 182.8L320.2 182.3L289.4 166.9L288.4 166.3L287.8 165.5L287.5 164.7L287.8 163.9L288.4 163.2L289.4 162.5L308.4 153L309.7 152.5L311.2 152.2L312.8 152.1L314.4 152.2L315.9 152.5L317.2 153Z"/><path class="iso-line iso-crease" data-tone="faint" d="M349.8 170.6L349.6 171.4L349 172.1L348 172.8L329 182.3L327.7 182.8L326.2 183.1L324.6 183.2L322.9 183.1L321.4 182.8L320.2 182.3L289.4 166.9L288.4 166.3L287.8 165.5L287.5 164.7"/><path class="iso-line iso-bevel" data-tone="faint" d="M349.8 170.6L348 171.2L347.6 171.7L346.8 172.2L327.9 181.7L326.8 182.1L325.7 182.3L324.6 182.4L323.4 182.3L322.3 182.1L321.2 181.7L290.6 166.4L289.8 165.8L289.4 165.3L287.5 164.7"/><path class="iso-line iso-edge" data-tone="lo" d="M287.5 164.7L287.8 163.9L288.4 163.2L289.4 162.5L308.4 153L309.7 152.5L311.2 152.2L312.8 152.1L314.4 152.2L315.9 152.5L317.2 153L348 168.4L349 169L349.6 169.8L349.8 170.6M349.8 181.3L349.6 182.1L349 182.9L348 183.5L329 193.1L327.7 193.6L326.2 193.9L324.6 194L322.9 193.9L321.4 193.6L320.2 193.1L289.4 177.7L288.4 177L287.8 176.3L287.5 175.5M349.8 170.6L349.8 181.3M287.5 164.7L287.5 175.5"/></g><g class="fx-part" data-tip="modelbox"><circle cx="312.8" cy="152.1" r="6.5" fill="#e5484d" stroke="#b3272e" stroke-width="1"/><circle cx="310.7" cy="150" r="2.2" fill="rgba(255,255,255,.55)"/><circle cx="320.2" cy="160.1" r="5" fill="#f2f2f4" stroke="#9a9aa2" stroke-width="1"/><circle cx="318.6" cy="158.5" r="1.7" fill="rgba(255,255,255,.55)"/><circle cx="305.5" cy="158.7" r="5.5" fill="#3a3a3e" stroke="#1c1c1f" stroke-width="1"/><circle cx="303.7" cy="156.9" r="1.9" fill="rgba(255,255,255,.55)"/></g><text x="340.7" y="159.2" text-anchor="middle" font-size="10" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif">原子模型箱</text><g id="mc-shadows"></g><g id="mc-bonds"></g><g id="mc-atoms"></g><text id="mc-midlabel" x="371.5" y="185.6" text-anchor="middle" font-size="13" font-weight="700" fill="#b3272e" font-family="ui-sans-serif,system-ui,sans-serif" opacity="0">原子重新组合中…</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="o" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>氧原子 O（红）</span><span class="iso-key"><svg class="iso-swatch" data-mark="h" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>氢原子 H（白）</span><span class="iso-key"><svg class="iso-swatch" data-mark="c" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>碳原子 C（黑）</span><span class="iso-key"><svg class="iso-swatch" data-mark="mg" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>镁原子 Mg（绿）</span></span><span class="iso-caption">化学反应前后：原子的种类、个数、质量都不变——变的只是分子的组合方式。这就是质量守恒定律。</span></figcaption></figure>
+<div class="fx-steps"><button class="fx-stepbtn active" data-step="0">1 · 认识原子重排</button><button class="fx-stepbtn" data-step="1">2 · 天平称质量</button><button class="fx-stepbtn" data-step="2">3 · 配平的意义</button><button class="fx-stepbtn" data-step="3">4 · 配平小游戏</button></div><div class="fx-steptext" id="fx-steptext"></div>
+<div class="fx-controls">
+<div class="mc-rxrow">
+<button class="fx-btn mc-rx active" id="mc-rx-0">氢气燃烧</button>
+<button class="fx-btn mc-rx" id="mc-rx-1">木炭燃烧</button>
+<button class="fx-btn mc-rx" id="mc-rx-2">镁条燃烧</button>
+</div>
+<div class="mc-sliderrow">
+<button class="fx-btn primary" id="mc-play">▶ 播放反应</button>
+<label for="mc-slider">反应进度</label><input type="range" id="mc-slider" min="0" max="1000" step="1" value="0" aria-label="反应进度">
+<span class="mc-phase" id="mc-phase">分子完好，还没开始</span>
+</div>
+<div class="mc-btnrow"><button class="fx-btn" id="mc-reset">重置</button></div>
+<div class="fx-readline" id="fx-readline"></div>
+<div class="fx-eq" id="mc-eq"></div>
+<div class="mc-banner" id="mc-banner">✓ <b>质量守恒</b>：反应前后，原子的<b>种类、个数、总质量</b>都不变——变的只是分子的组合方式。</div></div>
+
+<div class="mc-counters" id="mc-counters"></div>
+<div class="mc-baltitle" id="mc-balance">托盘天平 · 称一称反应前后的总质量</div>
+<svg xmlns="http://www.w3.org/2000/svg" class="iso-svg mc-balsvg" viewBox="0 0 740 300" role="img" aria-label="托盘天平：反应前总质量等于反应后总质量，天平保持平衡">
+<rect x="300" y="252" width="140" height="12" rx="3" fill="#8a8a8f"/>
+<path d="M360 252 L367 100 L373 100 L380 252 Z" fill="#a8a8ae" stroke="#6a6a6e" stroke-width="1"/>
+<rect x="110" y="88" width="520" height="9" rx="4" fill="#6a6a6e"/>
+<circle cx="370" cy="92" r="8" fill="#55555a"/>
+<line x1="370" y1="99" x2="370" y2="126" stroke="#e5484d" stroke-width="3" stroke-linecap="round"/>
+<line x1="352" y1="128" x2="352" y2="136" stroke="#8a8a8f" stroke-width="2"/>
+<line x1="388" y1="128" x2="388" y2="136" stroke="#8a8a8f" stroke-width="2"/>
+<text x="370" y="152" text-anchor="middle" font-size="10" fill="#8c8c90" font-family="ui-sans-serif,system-ui,sans-serif">0</text>
+<line x1="170" y1="97" x2="138" y2="168" stroke="#8a8a8f" stroke-width="2.5"/><line x1="170" y1="97" x2="202" y2="168" stroke="#8a8a8f" stroke-width="2.5"/><path d="M112 168 Q170 198 228 168 L228 175 Q170 205 112 175 Z" fill="#b9b9bf" stroke="#8a8a8f" stroke-width="1"/><line x1="570" y1="97" x2="538" y2="168" stroke="#8a8a8f" stroke-width="2.5"/><line x1="570" y1="97" x2="602" y2="168" stroke="#8a8a8f" stroke-width="2.5"/><path d="M512 168 Q570 198 628 168 L628 175 Q570 205 512 175 Z" fill="#b9b9bf" stroke="#8a8a8f" stroke-width="1"/>
+<rect x="122" y="140" width="96" height="24" rx="5" fill="#3e63dd" stroke="rgba(0,0,0,.12)" stroke-width="1"/><text id="bal-l1" x="170" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="ui-sans-serif,system-ui,sans-serif"></text>
+<rect x="122" y="112" width="96" height="24" rx="5" fill="#7aa2f7" stroke="rgba(0,0,0,.12)" stroke-width="1"/><text id="bal-l2" x="170" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="ui-sans-serif,system-ui,sans-serif"></text>
+<rect x="522" y="124" width="96" height="40" rx="5" fill="#30a46c" stroke="rgba(0,0,0,.12)" stroke-width="1"/><text id="bal-r1" x="570" y="148" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="ui-sans-serif,system-ui,sans-serif"></text>
+<text id="bal-ltot" x="170" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif"></text>
+<text id="bal-rtot" x="570" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#333336" font-family="ui-sans-serif,system-ui,sans-serif"></text>
+<circle cx="370" cy="190" r="16" fill="#30a46c"/>
+<path d="M362 190 l6 6 l12 -13" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="370" y="222" text-anchor="middle" font-size="13" font-weight="700" fill="#1f7a48" font-family="ui-sans-serif,system-ui,sans-serif">平衡</text>
+</svg>
+<div class="mc-balcap">反应物总质量 ＝ 生成物总质量，天平始终平衡——这就是质量守恒定律最直观的证据。</div>
+<div class="mc-game" id="mc-game"><div class="mc-gametitle">配平小游戏 · 只动系数，不动下标</div><div class="mc-confwrap" id="game-confetti"></div><div id="game-body"></div></div>
+<div class="mc-note">配平口诀：<b>只动系数、不动下标</b>；先配奇数元素，再配其他；最后把所有系数约成<b>最简整数比</b>。</div>
+<div class="quiz" id="quiz"><div class="quiz-title">小测验</div><div id="quiz-body"></div></div></main><script type="module">var STEPS=[{"t":"1 · 认识原子重排","html":"化学反应的本质，是<b>分子拆开、原子重新组合</b>。点「播放反应」或拖动进度条：氢分子、氧分子先散成一个个原子，原子再重新牵手，组成水分子。<b>原子没有消失，也没有新生。</b>"},{"t":"2 · 天平称质量","html":"把反应物和生成物分别放上托盘天平：2H₂（4g）+ O₂（32g）=<b>36g</b>，生成的 2H₂O 正好也是 <b>36g</b>。换个反应试试——天平<b>永远平衡</b>，这就是质量守恒。"},{"t":"3 · 配平的意义","html":"方程式里的<b>系数</b>就是分子的个数。配平要做的，就是让两边<b>每种原子的个数相等</b>——因为原子不会凭空产生或消失。口诀：<b>只动系数、不动下标；先配奇数元素；最后约成最简</b>。"},{"t":"4 · 配平小游戏","html":"轮到你了！点 +/− 调整系数，让左右两边每种原子的个数都相等，配平成功会撒花庆祝 🎉。注意：系数还要约成<b>最简</b>才算真正过关。"}];
+var TIPS={"platform":["微观剧场","球棍模型搭成的舞台：小球代表原子，短棍代表化学键。反应就在这里上演——分子拆开，原子重组。"],"igniter":["点火器","本页三个反应都需要在「点燃」条件下进行。点燃只是启动条件，不改变原子守恒。"],"modelbox":["原子模型箱","小球代表原子：白=氢、红=氧、黑=碳、绿=镁。化学反应中，原子既不会消失，也不会凭空产生。"]};
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var RXNS=[{"eq":"2H₂ + O₂ —点燃→ 2H₂O","atoms":[{"el":"H","r":7.5,"react":[309.2,179.7],"free":[370,204.2],"prod":[430.1,228.4],"sr":[309.2,212.7],"sf":[370,237.3],"sp":[430.1,261.5]},{"el":"H","r":7.5,"react":[325.3,187.7],"free":[340.7,232.1],"prod":[450.6,238.7],"sr":[325.3,220.8],"sf":[340.7,265.1],"sp":[450.6,271.7]},{"el":"H","r":7.5,"react":[276.9,195.8],"free":[405.2,223.3],"prod":[427.2,262.1],"sr":[276.9,228.8],"sf":[405.2,256.3],"sp":[427.2,295.2]},{"el":"H","r":7.5,"react":[293,203.9],"free":[377.3,247.5],"prod":[447.7,272.4],"sr":[293,236.9],"sf":[377.3,280.5],"sp":[447.7,305.4]},{"el":"O","r":10.5,"react":[326.8,204.6],"free":[355.3,218.9],"prod":[433,237.2],"sr":[326.8,237.6],"sf":[355.3,251.9],"sp":[433,270.2]},{"el":"O","r":10.5,"react":[345.8,214.1],"free":[384.7,236.5],"prod":[430.1,270.9],"sr":[345.8,247.2],"sf":[384.7,269.5],"sp":[430.1,304]}],"bondsR":[[0,1],[2,3],[4,5]],"bondsP":[[4,0],[4,1],[5,2],[5,3]],"counts":[["H",4,4],["O",2,2]],"totalAtoms":6,"totalMass":36,"balance":{"l":[["2H₂","4 g"],["O₂","32 g"]],"r":[["2H₂O","36 g"]],"total":36}},{"eq":"C + O₂ —点燃→ CO₂","atoms":[{"el":"C","r":10.5,"react":[304,193.2],"free":[352.4,230.6],"prod":[427.2,254.8],"sr":[304,226.3],"sf":[352.4,263.7],"sp":[427.2,287.8]},{"el":"O","r":10.5,"react":[326.8,204.6],"free":[364.1,211.6],"prod":[411,246.7],"sr":[326.8,237.6],"sf":[364.1,244.6],"sp":[411,279.8]},{"el":"O","r":10.5,"react":[345.8,214.1],"free":[393.5,229.1],"prod":[443.3,262.9],"sr":[345.8,247.2],"sf":[393.5,262.2],"sp":[443.3,295.9]}],"bondsR":[[1,2]],"bondsP":[[1,0],[0,2]],"counts":[["C",1,1],["O",2,2]],"totalAtoms":3,"totalMass":44,"balance":{"l":[["C","12 g"],["O₂","32 g"]],"r":[["CO₂","44 g"]],"total":44}},{"eq":"2Mg + O₂ —点燃→ 2MgO","atoms":[{"el":"Mg","r":11.5,"react":[314.3,182.2],"free":[372.9,208.6],"prod":[423.5,235.4],"sr":[314.3,215.3],"sf":[372.9,241.7],"sp":[423.5,268.4]},{"el":"Mg","r":11.5,"react":[282,198.4],"free":[339.2,229.9],"prod":[420.6,266.2],"sr":[282,231.4],"sf":[339.2,262.9],"sp":[420.6,299.2]},{"el":"O","r":10.5,"react":[326.8,204.6],"free":[393.5,226.2],"prod":[442.6,244.9],"sr":[326.8,237.6],"sf":[393.5,259.3],"sp":[442.6,277.9]},{"el":"O","r":10.5,"react":[345.8,214.1],"free":[380.3,243.1],"prod":[439.6,275.7],"sr":[345.8,247.2],"sf":[380.3,276.1],"sp":[439.6,308.7]}],"bondsR":[[2,3]],"bondsP":[[0,2],[1,3]],"counts":[["Mg",2,2],["O",2,2]],"totalAtoms":4,"totalMass":80,"balance":{"l":[["2Mg","48 g"],["O₂","32 g"]],"r":[["2MgO","80 g"]],"total":80}}];
+var ELMETA={"H":{"name":"氢","color":"#f2f2f4","stroke":"#9a9aa2","text":"#55555c"},"O":{"name":"氧","color":"#e5484d","stroke":"#b3272e","text":"#ffffff"},"C":{"name":"碳","color":"#3a3a3e","stroke":"#1c1c1f","text":"#ffffff"},"Mg":{"name":"镁","color":"#7fb069","stroke":"#55803f","text":"#ffffff"}};
+var NS="http://www.w3.org/2000/svg";
+var DUR=4200;
+var cur=0,P=0,playing=false,playStart=null;
+var atomEls=[],bondREls=[],bondPEls=[];
+var lastPhase="",lastRead="__";
+var roEl=document.querySelector("[data-readout]");
+function ease(t){if(t<0)t=0;if(t>1)t=1;return t*t*(3-2*t);}
+function lerp(a,b,t){return a+(b-a)*t;}
+function atomPosAt(at,p){
+  var e=ease(p);
+  if(e<0.45){var t=ease(e/0.45);return [lerp(at.react[0],at.free[0],t),lerp(at.react[1],at.free[1],t),lerp(at.sr[0],at.sf[0],t),lerp(at.sr[1],at.sf[1],t)];}
+  if(e>0.55){var t2=ease((e-0.55)/0.45);return [lerp(at.free[0],at.prod[0],t2),lerp(at.free[1],at.prod[1],t2),lerp(at.sf[0],at.sp[0],t2),lerp(at.sf[1],at.sp[1],t2)];}
+  return [at.free[0],at.free[1],at.sf[0],at.sf[1]];
+}
+function buildTheater(){
+  var rx=RXNS[cur];
+  var gA=$("mc-atoms"),gB=$("mc-bonds"),gS=$("mc-shadows");
+  gA.innerHTML="";gB.innerHTML="";gS.innerHTML="";
+  atomEls=[];bondREls=[];bondPEls=[];
+  rx.atoms.forEach(function(at){
+    var meta=ELMETA[at.el];
+    var sh=document.createElementNS(NS,"ellipse");
+    sh.setAttribute("fill","rgba(30,30,40,.14)");
+    sh.setAttribute("rx",(at.r*1.05).toFixed(1));sh.setAttribute("ry",(at.r*0.38).toFixed(1));
+    gS.appendChild(sh);
+    var g=document.createElementNS(NS,"g");
+    var c=document.createElementNS(NS,"circle");
+    c.setAttribute("r",at.r);c.setAttribute("fill",meta.color);c.setAttribute("stroke",meta.stroke);c.setAttribute("stroke-width","1.2");
+    var hl=document.createElementNS(NS,"circle");
+    hl.setAttribute("cx",(-at.r*0.34).toFixed(1));hl.setAttribute("cy",(-at.r*0.34).toFixed(1));hl.setAttribute("r",(at.r*0.36).toFixed(1));hl.setAttribute("fill","rgba(255,255,255,.55)");
+    var tx=document.createElementNS(NS,"text");
+    tx.setAttribute("text-anchor","middle");tx.setAttribute("y",(at.r*0.36).toFixed(1));
+    tx.setAttribute("font-size",(at.el.length>1?at.r*0.8:at.r*0.95).toFixed(1));
+    tx.setAttribute("font-weight","700");tx.setAttribute("fill",meta.text);
+    tx.setAttribute("font-family","ui-sans-serif,system-ui,sans-serif");
+    tx.textContent=at.el;
+    g.appendChild(c);g.appendChild(hl);g.appendChild(tx);
+    gA.appendChild(g);
+    atomEls.push({g:g,sh:sh});
+  });
+  function mkBond(){var ln=document.createElementNS(NS,"line");ln.setAttribute("stroke","#8a8a8f");ln.setAttribute("stroke-width","5");ln.setAttribute("stroke-linecap","round");gB.appendChild(ln);return ln;}
+  rx.bondsR.forEach(function(){bondREls.push(mkBond());});
+  rx.bondsP.forEach(function(){bondPEls.push(mkBond());});
+  $("mc-counters").innerHTML=rx.counts.map(function(cn){
+    var m=ELMETA[cn[0]];
+    return '<span class="mc-chip"><i style="background:'+m.color+';border-color:'+m.stroke+'"></i>'+m.name+" "+cn[0]+"：反应物 "+cn[1]+" 个 ＝ 生成物 "+cn[2]+' 个 <b>✓ 不变</b></span>';
+  }).join("");
+  $("bal-l1").textContent=rx.balance.l[0][0]+" · "+rx.balance.l[0][1];
+  $("bal-l2").textContent=rx.balance.l[1][0]+" · "+rx.balance.l[1][1];
+  $("bal-r1").textContent=rx.balance.r[0][0]+" · "+rx.balance.r[0][1];
+  $("bal-ltot").textContent="反应前总质量："+rx.balance.total+" g";
+  $("bal-rtot").textContent="反应后总质量："+rx.balance.total+" g";
+  $("mc-eq").textContent=rx.eq;
+  if(roEl)roEl.textContent=rx.totalAtoms+" 个原子 · "+rx.totalMass+"g = "+rx.totalMass+"g";
+  [0,1,2].forEach(function(i){$("mc-rx-"+i).classList.toggle("active",i===cur);});
+  lastRead="__";lastPhase="";
+  render(P);
+}
+function render(p){
+  var rx=RXNS[cur];
+  var pos=rx.atoms.map(function(at){return atomPosAt(at,p);});
+  pos.forEach(function(pp,i){
+    var a=atomEls[i];if(!a)return;
+    a.g.setAttribute("transform","translate("+pp[0].toFixed(1)+" "+pp[1].toFixed(1)+")");
+    a.sh.setAttribute("cx",pp[2].toFixed(1));a.sh.setAttribute("cy",pp[3].toFixed(1));
+  });
+  var e=ease(p);
+  var oR=Math.max(0,1-e/0.3),oP=Math.max(0,(e-0.7)/0.3);
+  rx.bondsR.forEach(function(bd,i){
+    var ln=bondREls[i];if(!ln)return;var a=pos[bd[0]],b=pos[bd[1]];
+    ln.setAttribute("x1",a[0].toFixed(1));ln.setAttribute("y1",a[1].toFixed(1));
+    ln.setAttribute("x2",b[0].toFixed(1));ln.setAttribute("y2",b[1].toFixed(1));
+    ln.setAttribute("stroke-opacity",oR.toFixed(2));
+  });
+  rx.bondsP.forEach(function(bd,i){
+    var ln=bondPEls[i];if(!ln)return;var a=pos[bd[0]],b=pos[bd[1]];
+    ln.setAttribute("x1",a[0].toFixed(1));ln.setAttribute("y1",a[1].toFixed(1));
+    ln.setAttribute("x2",b[0].toFixed(1));ln.setAttribute("y2",b[1].toFixed(1));
+    ln.setAttribute("stroke-opacity",oP.toFixed(2));
+  });
+  var mid=Math.max(0,Math.min(1,(e-0.28)/0.14))*Math.max(0,Math.min(1,(0.72-e)/0.14));
+  $("mc-midlabel").setAttribute("opacity",mid.toFixed(2));
+  var total=rx.totalAtoms,free;
+  if(p<=0.02||p>=0.98)free=0;
+  else if(e<0.45)free=Math.round(total*ease(e/0.45));
+  else if(e>0.55)free=Math.round(total*(1-ease((e-0.55)/0.45)));
+  else free=total;
+  var phase=p<=0?"分子完好，还没开始":p>=1?"生成物形成完毕 ✓":e<0.45?"旧分子被拆开…":e<=0.55?"原子重新组合…":"新分子正在形成…";
+  if(phase!==lastPhase){lastPhase=phase;$("mc-phase").textContent=phase;}
+  var rd="原子总数 <b>"+total+"</b> 个（反应前后不变） · 游离原子 <b>"+free+"</b> 个 · 总质量 <b>"+rx.totalMass+" g ＝ "+rx.totalMass+" g</b>";
+  if(rd!==lastRead){lastRead=rd;$("fx-readline").innerHTML=rd;}
+  if(p>=1)$("mc-banner").classList.add("show");else $("mc-banner").classList.remove("show");
+}
+function setP(p){
+  P=p;
+  var s=$("mc-slider");if(s)s.value=Math.round(p*1000);
+  render(p);
+}
+function play(){
+  if(playing)return;
+  if(reduceMotion){setP(1);return;}
+  if(P>=1)setP(0);
+  playing=true;playStart=null;
+  requestAnimationFrame(tick);
+}
+function tick(ts){
+  if(!playing)return;
+  if(playStart===null)playStart=ts-P*DUR;
+  var np=Math.min(1,(ts-playStart)/DUR);
+  setP(np);
+  if(np<1)requestAnimationFrame(tick);else playing=false;
+}
+$("mc-play").addEventListener("click",play);
+$("mc-reset").addEventListener("click",function(){playing=false;setP(0);});
+$("mc-slider").addEventListener("input",function(){playing=false;setP(+$("mc-slider").value/1000);});
+[0,1,2].forEach(function(i){
+  $("mc-rx-"+i).addEventListener("click",function(){
+    cur=i;playing=false;setP(0);buildTheater();
+  });
+});
+function onStep(i){
+  if(i===0){setP(0);play();}
+  else if(i===1){var b=$("mc-balance");if(b&&b.scrollIntoView)b.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"start"});}
+  else if(i===2){playing=false;setP(1);}
+  else if(i===3){var g=$("mc-game");if(g&&g.scrollIntoView)g.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"start"});}
+}
+document.addEventListener("keydown",function(e){
+  if(e.key>="1"&&e.key<="4")holdStep(+e.key-1);
+  else if(e.key==="r"||e.key==="R"){playing=false;setP(0);}
+});
+
+// ── 配平小游戏 ──
+var ELNAME={H:"氢",O:"氧",C:"碳"};
+var ROUNDS=[
+  {title:"第 1 题 · 氢气燃烧",left:[{f:"H₂",atoms:{H:2}},{f:"O₂",atoms:{O:2}}],right:[{f:"H₂O",atoms:{H:2,O:1}}],start:[1,1,1]},
+  {title:"第 2 题 · 甲烷燃烧",left:[{f:"CH₄",atoms:{C:1,H:4}},{f:"O₂",atoms:{O:2}}],right:[{f:"CO₂",atoms:{C:1,O:2}},{f:"H₂O",atoms:{H:2,O:1}}],start:[1,1,1,1]}
+];
+var gRound=0,gCoef=ROUNDS[0].start.slice(),gDone=false;
+function gcd2(a,b){return b?gcd2(b,a%b):a;}
+function gcdAll(arr){var g=0;arr.forEach(function(n){g=gcd2(g,n);});return g||1;}
+function tallyOf(round,coef){
+  var L={},R={},order=[],seen={};
+  function add(map,sp,c){Object.keys(sp.atoms).forEach(function(el){if(!seen[el]){seen[el]=1;order.push(el);}map[el]=(map[el]||0)+sp.atoms[el]*c;});}
+  round.left.forEach(function(sp,i){add(L,sp,coef[i]);});
+  round.right.forEach(function(sp,i){add(R,sp,coef[round.left.length+i]);});
+  return {L:L,R:R,order:order};
+}
+function spHtml(sp,i){
+  return '<span class="mc-sp"><span class="mc-pmrow"><button class="mc-pm" data-g="dec" data-i="'+i+'">−</button><span class="mc-coef">'+gCoef[i]+'</span><button class="mc-pm" data-g="inc" data-i="'+i+'">+</button></span><span class="mc-formula">'+sp.f+'</span></span>';
+}
+function confetti(){
+  var host=$("game-confetti");if(!host)return;
+  var colors=["#e5484d","#3e63dd","#30a46c","#f5b83d","#9b5de5"];
+  var s="";
+  for(var i=0;i<36;i++){
+    var c=colors[i%colors.length];
+    var l=(Math.random()*96).toFixed(1),dl=(Math.random()*0.5).toFixed(2),sz=(6+Math.random()*6).toFixed(0);
+    s+='<span class="mc-conf" style="left:'+l+"%;background:"+c+";width:"+sz+"px;height:"+sz+"px;animation-delay:"+dl+'s"></span>';
+  }
+  host.innerHTML=s;
+  setTimeout(function(){host.innerHTML="";},2800);
+}
+function renderGame(){
+  var r=ROUNDS[gRound];
+  var t=tallyOf(r,gCoef);
+  var eqHtml=r.left.map(function(sp,i){return spHtml(sp,i);}).join('<span class="mc-op">+</span>')
+    +'<span class="mc-op mc-arrow">→</span>'
+    +r.right.map(function(sp,i){return spHtml(sp,r.left.length+i);}).join('<span class="mc-op">+</span>');
+  var allEq=t.order.every(function(el){return (t.L[el]||0)===(t.R[el]||0);});
+  var tallyHtml=t.order.map(function(el){
+    var l=t.L[el]||0,rr=t.R[el]||0,ok=l===rr;
+    return '<span class="mc-tally '+(ok?"ok":"bad")+'">'+(ELNAME[el]||el)+" "+el+"：左 "+l+" · 右 "+rr+" "+(ok?"✓":"✗")+"</span>";
+  }).join("");
+  var g=gcdAll(gCoef);
+  var success=allEq&&g===1;
+  if(success&&!gDone){gDone=true;confetti();}
+  var html='<div class="mc-ground">'+r.title+'</div><div class="mc-eqrow">'+eqHtml+'</div><div class="mc-tallyrow">'+tallyHtml+"</div>";
+  if(success){
+    if(gRound===ROUNDS.length-1){
+      html+='<div class="mc-success">🎉 全部配平成功！记住：配平 = 让两边每种原子的个数相等，只能改系数，不能改下标。</div>';
+    }else{
+      html+='<div class="mc-success">🎉 配平成功！</div><div class="mc-nextrow"><button class="fx-btn primary" data-g="next">下一题 →</button></div>';
+    }
+  }else if(allEq&&g>1){
+    html+='<div class="mc-gmsg">两边原子数已经相等了！但系数还能同时除以 '+g+' 约分——配平要<b>最简</b>，试试把每个系数都调小。</div>';
+  }else{
+    html+='<div class="mc-gmsg">点 +/− 调整系数，让每种原子的左右个数都相等。</div>';
+  }
+  $("game-body").innerHTML=html;
+}
+$("game-body").addEventListener("click",function(e){
+  var d=e.target&&e.target.dataset;if(!d||!d.g)return;
+  if(d.g==="inc"||d.g==="dec"){
+    if(gDone)return;
+    var i=+d.i;
+    gCoef[i]+=d.g==="inc"?1:-1;
+    if(gCoef[i]<1)gCoef[i]=1;
+    if(gCoef[i]>6)gCoef[i]=6;
+    renderGame();
+  }else if(d.g==="next"){
+    gRound++;gCoef=ROUNDS[gRound].start.slice();gDone=false;
+    renderGame();
+  }
+});
+
+// ── 小测验 ──
+var QUIZ=[
+  {q:"1. 化学反应前后，一定不变的是？",opts:["分子的种类","原子的种类和个数","物质的种类"],ans:1,why:"反应中分子被拆开、原子重新组合，分子和物质都变了；原子是化学变化中的最小微粒，种类、个数、质量都不变——这正是质量守恒的原因。"},
+  {q:"2. 蜡烛燃烧后变轻了，这违反质量守恒定律吗？",opts:["违反，质量确实减少了","不违反，生成的二氧化碳和水蒸气逸散到空气中，没有被称到"],ans:1,why:"蜡烛 + 氧气 → 二氧化碳 + 水。气体跑掉了没称到，看起来才变轻；把所有物质都算上，总质量不变。若在密闭容器里称量，就不会变轻。"}
+];
+var qState={};
+function renderQuiz(){
+  $("quiz-body").innerHTML=QUIZ.map(function(item,qi){
+    var st=qState[qi];
+    var opts=item.opts.map(function(op,oi){
+      var cls="quiz-opt";
+      if(st!==undefined){if(oi===item.ans)cls+=" right";else if(oi===st)cls+=" wrong";}
+      return '<button class="'+cls+'" data-q="'+qi+'" data-o="'+oi+'">'+op+"</button>";
+    }).join("");
+    var why=st!==undefined
+      ? '<div class="quiz-why" style="display:block">'+(st===item.ans?"✓ 答对了！":"✗ 答错了。")+item.why+"</div>"
+      : '<div class="quiz-why"></div>';
+    return '<div class="quiz-q">'+item.q+'</div><div class="quiz-opts">'+opts+"</div>"+why;
+  }).join("");
+}
+$("quiz-body").addEventListener("click",function(e){
+  var d=e.target&&e.target.dataset;if(!d||d.q===undefined)return;
+  var qi=+d.q;
+  if(qState[qi]!==undefined)return;
+  qState[qi]=+d.o;
+  renderQuiz();
+});
+
+buildTheater();
+renderGame();
+renderQuiz();
+renderStep(0);
+
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var __step=0,__hold=-1;
+function renderStep(i){
+  __step=i;
+  var btns=document.querySelectorAll(".fx-stepbtn");
+  btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
+  var s=STEPS[i];
+  $("fx-steptext").innerHTML="<b>"+s.t.replace(/^\d+\s*[·、]\s*/,"")+"</b>　"+s.html;
+  if(typeof onStep==="function")onStep(i);
+}
+function holdStep(i){__hold=i;renderStep(i);}
+function releaseHold(){__hold=-1;}
+document.querySelectorAll(".fx-stepbtn").forEach(function(b){
+  b.addEventListener("click",function(){holdStep(+b.dataset.step);});
+});
+(function initTips(){
+  var tip=$("fx-tip"),stage=$("fx-stage");
+  if(!tip||!stage||typeof TIPS==="undefined")return;
+  function show(id,x,y){
+    var t=TIPS[id];if(!t)return;
+    tip.innerHTML="<b>"+t[0]+"</b><span>"+t[1]+"</span>";
+    tip.style.display="block";
+    var r=stage.getBoundingClientRect();
+    tip.style.left=Math.min(r.width-250,Math.max(8,x-r.left+14))+"px";
+    tip.style.top=Math.max(8,y-r.top-10)+"px";
+  }
+  document.querySelectorAll(".fx-part").forEach(function(el){
+    el.addEventListener("pointerenter",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointermove",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointerleave",function(){tip.style.display="none";});
+    el.addEventListener("click",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+  });
+})();
+</script></body></html>
