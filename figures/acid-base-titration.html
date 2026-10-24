@@ -222,6 +222,7 @@ function renderStep(i){
   btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
   $("tb-steptext").innerHTML="<b>"+STEPS[i].t.slice(4)+"</b>　"+STEPS[i].html.replace(/^<b>[^<]*<\/b>/,"");
 }
+function f1(n){return Math.round(n*10)/10;}
 function fmt(n,d){return n.toFixed(d);}
 function update(announce){
   var ph=phOf(V),t=tempOf(V);

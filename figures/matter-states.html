@@ -420,12 +420,14 @@ function renderStep(i){
   var btns=document.querySelectorAll(".fx-stepbtn");
   btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
   var s=STEPS[i];
+  if(!s)return;
   $("fx-steptext").innerHTML="<b>"+s.t.replace(/^\d+\s*[·、]\s*/,"")+"</b>　"+s.html;
   if(typeof onStep==="function")onStep(i);
 }
 function holdStep(i){__hold=i;renderStep(i);}
 function releaseHold(){__hold=-1;}
 document.querySelectorAll(".fx-stepbtn").forEach(function(b){
+  if(b.dataset.step===undefined)return;
   b.addEventListener("click",function(){holdStep(+b.dataset.step);});
 });
 (function initTips(){
