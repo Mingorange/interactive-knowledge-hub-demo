@@ -1,0 +1,319 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><title>铁钉除锈双阶段时间线 · 交互式等距插图</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(740px,100% - 32px);margin:64px auto 96px}
+/* 平板断点：iPad 竖屏 768px 起放宽版心；iPad 横屏/桌面 1100px 起再放宽，阅读行宽设上限 */
+@media (min-width:768px){
+.iso-page{width:min(940px,100% - 48px)}
+.iso-plate{padding-left:32px;padding-right:32px}
+}
+@media (min-width:1100px){
+.iso-page{width:min(1080px,100% - 64px)}
+}
+
+.kg-back{margin:2px 0 20px}.kg-back a{color:var(--anatomy-muted);text-decoration:none;font-size:14px}
+.kg-back a:hover{text-decoration:underline;color:var(--anatomy-text)}
+.fx-part{cursor:pointer}
+.iso-stage{position:relative;touch-action:pan-y}
+.iso-stage:focus{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
+.fx-tip{position:absolute;display:none;z-index:5;max-width:240px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);pointer-events:none}
+.fx-tip b{display:block;color:var(--anatomy-strong);font-size:13px;margin-bottom:2px}
+.fx-tip span{color:var(--anatomy-text);font-size:12px;line-height:1.5}
+.fx-pagehead{text-align:center;margin:6px 0 26px}
+.fx-pagehead h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em;color:var(--anatomy-strong)}
+.fx-pagehead p{color:var(--anatomy-muted);margin:0;font-size:14px}
+.fx-steps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 4px}
+.fx-stepbtn{font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-text);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-faint);border-radius:20px;
+  padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.fx-stepbtn:hover{border-color:var(--anatomy-blue)}
+.fx-stepbtn.active{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-steptext{max-width:640px;margin:10px auto 4px;padding:12px 16px;background:var(--anatomy-card);
+  border:1px solid var(--anatomy-faint);border-radius:10px;font-size:13.5px;line-height:1.65;
+  color:var(--anatomy-text);min-height:66px}
+.fx-steptext b{color:var(--anatomy-strong)}
+.fx-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.fx-btn{font:14px/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--anatomy-strong);
+  background:var(--anatomy-card);border:1px solid var(--anatomy-lo);border-radius:8px;
+  padding:8px 18px;cursor:pointer}
+.fx-btn:hover{border-color:var(--anatomy-blue)}
+.fx-btn.primary{background:var(--anatomy-blue);border-color:var(--anatomy-blue);color:#fff}
+.fx-btn:disabled{opacity:.45;cursor:default}
+.fx-msg{min-height:24px;text-align:center;font-size:13.5px;margin:6px 0;color:var(--anatomy-strong)}
+.fx-readline{text-align:center;font-size:13.5px;color:var(--anatomy-strong);
+  font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.fx-eq{text-align:center;font-size:13px;color:var(--anatomy-muted);margin:10px 0 4px;
+  font-family:ui-monospace,Menlo,monospace}
+.fx-note{max-width:640px;margin:8px auto 0;font-size:12.5px;color:var(--anatomy-muted);line-height:1.6;text-align:center}
+@media (max-width:560px){.fx-steptext{min-height:88px}}
+@media (min-width:768px){.iso-page{width:min(940px,100% - 48px)}.iso-plate{padding-left:32px;padding-right:32px}}
+@media (min-width:1100px){.iso-page{width:min(1080px,100% - 64px)}}
+
+.fx-stagebanner{max-width:640px;margin:14px auto 10px;padding:12px 18px;text-align:center;
+  font-size:17px;font-weight:700;color:var(--anatomy-strong);background:var(--anatomy-card);
+  border:2px solid var(--anatomy-blue);border-radius:12px}
+.fx-colorband{display:flex;align-items:stretch;justify-content:center;gap:6px;margin:4px auto 10px;max-width:640px}
+.cb{flex:1;background:var(--anatomy-card);border:2px solid var(--anatomy-faint);border-radius:12px;
+  padding:10px 8px;text-align:center;opacity:.55;transition:all .25s}
+.cb-swatch{display:block;height:34px;border-radius:8px;margin-bottom:6px;border:1px solid rgba(0,0,0,.12)}
+.cb b{display:block;font-size:15px;color:var(--anatomy-strong)}
+.cb i{display:block;font-style:normal;font-size:11.5px;color:var(--anatomy-muted);margin-top:2px}
+.cb.active{opacity:1;border-color:var(--anatomy-blue);box-shadow:0 0 0 3px rgba(62,99,221,.18);transform:scale(1.04)}
+.cb-arrow{align-self:center;font-size:20px;color:var(--anatomy-muted);font-weight:700}
+.fx-eqbig{font-size:15px;padding:10px 12px}
+.fx-eqbig span{color:var(--anatomy-blue);font-weight:700}
+.fx-warn{max-width:640px;margin:12px auto 0;padding:12px 16px;font-size:13.5px;line-height:1.7;
+  color:var(--anatomy-strong);background:#fff7e8;border:2px solid #e8930c;border-radius:12px}
+.fx-warn b{color:#b25e09}
+@media (max-width:560px){.cb i{display:none}.fx-stagebanner{font-size:15px}}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><nav class="kg-back"><a href="../index.html">← 返回知识馆</a></nav>
+<header class="fx-pagehead"><h1>铁钉除锈双阶段时间线</h1><p>拖时间轴：先看锈溶解变黄，再看铁冒泡变绿</p></header>
+<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 9</span><span class="iso-plate-corner" data-corner="title">铁钉除锈双阶段时间线</span><span class="iso-plate-corner" data-corner="hint">拖时间滑杆 · 数字键 1–4 切换 · 点钉/烧杯看说明</span><span class="iso-plate-corner" data-corner="readout" data-readout>进度 0% · 待开始</span></div><div class="iso-stage" id="fx-stage" tabindex="0" role="group" aria-label="铁钉除锈时间线交互式插图。拖动时间滑杆观察两阶段变化。"><div class="fx-tip" id="fx-tip"></div><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 740 500" role="img" aria-label="铁钉除锈时间线：锈溶解变黄，铁反应冒泡变绿"><g><path class="iso-halo" d="M-533.6 766L-531.9 757.8L-527.1 749.9L-519.3 742.6L-508.8 736.1L112.9 425.3L125.7 420L140.4 416.1L156.2 413.7L172.7 412.9L189.2 413.7L205.1 416.1L219.7 420L232.5 425.3L1248.8 933.4L1259.3 939.8L1267.1 947.1L1271.9 955.1L1273.6 963.3L1271.9 971.6L1267.1 979.5L1259.3 986.8L1248.8 993.2L627.1 1304.1L614.3 1309.3L599.6 1313.2L583.8 1315.6L567.3 1316.5L550.8 1315.6L534.9 1313.2L520.3 1309.3L507.5 1304.1L-508.8 795.9L-519.3 789.5L-527.1 782.2L-531.9 774.3Z"/><g class="iso-solid"><path class="iso-fill" d="M131 470.4L131 463.8L135.1 457.5L142.8 452.2L153.5 448.3L166.1 446.3L179.3 446.3L191.9 448.3L202.6 452.2L210.4 457.5L214.5 463.8L214.5 587.6L210.4 593.9L202.6 599.2L191.9 603.1L179.3 605.2L166.1 605.2L153.5 603.1L142.8 599.2L135.1 593.9L131 587.6Z"/><path class="iso-top" d="M202.6 599.2L191.9 603.1L179.3 605.2L166.1 605.2L153.5 603.1L142.8 599.2L135.1 593.9L131 587.6L131 581L135.1 574.7L142.8 569.3L153.5 565.4L166.1 563.4L179.3 563.4L191.9 565.4L202.6 569.3L210.4 574.7L214.5 581L214.5 587.6L210.4 593.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M214.5 587.6L210.4 593.9L202.6 599.2L191.9 603.1L179.3 605.2L166.1 605.2L153.5 603.1L142.8 599.2L135.1 593.9L131 587.6"/><path class="iso-line iso-edge" data-tone="lo" d="M131 587.6L131 581L135.1 574.7L142.8 569.3L153.5 565.4L166.1 563.4L179.3 563.4L191.9 565.4L202.6 569.3L210.4 574.7L214.5 581L214.5 587.6"/></g><g class="iso-solid"><path class="iso-fill" d="M1123.3 966.6L1123.3 960L1127.4 953.7L1135.2 948.4L1145.9 944.5L1158.5 942.4L1171.7 942.4L1184.3 944.5L1195 948.4L1202.8 953.7L1206.8 960L1206.8 1083.8L1202.8 1090.1L1195 1095.4L1184.3 1099.3L1171.7 1101.3L1158.5 1101.3L1145.9 1099.3L1135.2 1095.4L1127.4 1090.1L1123.3 1083.8Z"/><path class="iso-top" d="M1195 1095.4L1184.3 1099.3L1171.7 1101.3L1158.5 1101.3L1145.9 1099.3L1135.2 1095.4L1127.4 1090.1L1123.3 1083.8L1123.3 1077.2L1127.4 1070.9L1135.2 1065.5L1145.9 1061.6L1158.5 1059.6L1171.7 1059.6L1184.3 1061.6L1195 1065.5L1202.8 1070.9L1206.8 1077.2L1206.8 1083.8L1202.8 1090.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M1206.8 1083.8L1202.8 1090.1L1195 1095.4L1184.3 1099.3L1171.7 1101.3L1158.5 1101.3L1145.9 1099.3L1135.2 1095.4L1127.4 1090.1L1123.3 1083.8"/><path class="iso-line iso-edge" data-tone="lo" d="M1123.3 1083.8L1123.3 1077.2L1127.4 1070.9L1135.2 1065.5L1145.9 1061.6L1158.5 1059.6L1171.7 1059.6L1184.3 1061.6L1195 1065.5L1202.8 1070.9L1206.8 1077.2L1206.8 1083.8"/></g><g class="iso-solid"><path class="iso-fill" d="M-466.8 762.7L-462.8 756.4L-455 751.1L-444.3 747.2L-431.7 745.2L-418.5 745.2L-405.9 747.2L-395.2 751.1L-387.4 756.4L-383.3 762.7L-383.3 879.9L-383.3 886.5L-387.4 892.8L-395.2 898.1L-405.9 902L-418.5 904.1L-431.7 904.1L-444.3 902L-455 898.1L-462.8 892.8L-466.8 886.5Z"/><path class="iso-top" d="M-395.2 898.1L-405.9 902L-418.5 904.1L-431.7 904.1L-444.3 902L-455 898.1L-462.8 892.8L-466.8 886.5L-466.8 879.9L-462.8 873.6L-455 868.2L-444.3 864.4L-431.7 862.3L-418.5 862.3L-405.9 864.4L-395.2 868.2L-387.4 873.6L-383.3 879.9L-383.3 886.5L-387.4 892.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M-383.3 886.5L-387.4 892.8L-395.2 898.1L-405.9 902L-418.5 904.1L-431.7 904.1L-444.3 902L-455 898.1L-462.8 892.8L-466.8 886.5"/><path class="iso-line iso-edge" data-tone="lo" d="M-466.8 886.5L-466.8 879.9L-462.8 873.6L-455 868.2L-444.3 864.4L-431.7 862.3L-418.5 862.3L-405.9 864.4L-395.2 868.2L-387.4 873.6L-383.3 879.9L-383.3 886.5"/></g><g class="iso-solid"><path class="iso-fill" d="M525.5 1265.5L525.5 1258.9L529.6 1252.6L537.4 1247.3L548.1 1243.4L560.7 1241.4L573.9 1241.4L586.5 1243.4L597.2 1247.3L604.9 1252.6L609 1258.9L609 1382.7L604.9 1389L597.2 1394.3L586.5 1398.2L573.9 1400.3L560.7 1400.3L548.1 1398.2L537.4 1394.3L529.6 1389L525.5 1382.7Z"/><path class="iso-top" d="M597.2 1394.3L586.5 1398.2L573.9 1400.3L560.7 1400.3L548.1 1398.2L537.4 1394.3L529.6 1389L525.5 1382.7L525.5 1376.1L529.6 1369.8L537.4 1364.4L548.1 1360.5L560.7 1358.5L573.9 1358.5L586.5 1360.5L597.2 1364.4L604.9 1369.8L609 1376.1L609 1382.7L604.9 1389Z"/><path class="iso-line iso-crease" data-tone="faint" d="M609 1382.7L604.9 1389L597.2 1394.3L586.5 1398.2L573.9 1400.3L560.7 1400.3L548.1 1398.2L537.4 1394.3L529.6 1389L525.5 1382.7"/><path class="iso-line iso-edge" data-tone="lo" d="M525.5 1382.7L525.5 1376.1L529.6 1369.8L537.4 1364.4L548.1 1360.5L560.7 1358.5L573.9 1358.5L586.5 1360.5L597.2 1364.4L604.9 1369.8L609 1376.1L609 1382.7"/></g><g class="iso-solid"><path class="iso-fill" d="M-533.6 458.5L-531.9 450.3L-527.1 442.3L-519.3 435L-508.8 428.6L112.9 117.8L125.7 112.5L140.4 108.6L156.2 106.2L172.7 105.4L189.2 106.2L205.1 108.6L219.7 112.5L232.5 117.8L1248.8 625.9L1259.3 632.3L1267.1 639.6L1271.9 647.6L1273.6 655.8L1271.9 664.1L1267.1 672L1259.3 679.3L1248.8 685.7L627.1 996.6L614.3 1001.8L599.6 1005.7L583.8 1008.1L567.3 1008.9L550.8 1008.1L534.9 1005.7L520.3 1001.8L507.5 996.6L-508.8 488.4L-519.3 482L-527.1 474.7L-531.9 466.8Z"/><path class="iso-top" d="M1248.8 625.9L1259.3 632.3L1267.1 639.6L1271.9 647.6L1273.6 655.8L1271.9 664.1L1267.1 672L1259.3 679.3L1248.8 685.7L627.1 996.6L614.3 1001.8L599.6 1005.7L583.8 1008.1L567.3 1008.9L550.8 1008.1L534.9 1005.7L520.3 1001.8L507.5 996.6L-508.8 488.4L-519.3 482L-527.1 474.7L-531.9 466.8L-533.6 458.5L-531.9 450.3L-527.1 442.3L-519.3 435L-508.8 428.6L112.9 117.8L125.7 112.5L140.4 108.6L156.2 106.2L172.7 105.4L189.2 106.2L205.1 108.6L219.7 112.5L232.5 117.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M1273.6 655.8L1271.9 664.1L1267.1 672L1259.3 679.3L1248.8 685.7L627.1 996.6L614.3 1001.8L599.6 1005.7L583.8 1008.1L567.3 1008.9L550.8 1008.1L534.9 1005.7L520.3 1001.8L507.5 996.6L-508.8 488.4L-519.3 482L-527.1 474.7L-531.9 466.8L-533.6 458.5"/><path class="iso-line iso-bevel" data-tone="faint" d="M1273.6 655.8L1262 663.1L1257.7 670L1250.9 676.5L1241.3 682.3L620.2 992.8L608.6 997.6L595.8 1001L581.8 1003.2L567.3 1003.9L552.8 1003.2L538.8 1001L525.9 997.6L514.3 992.8L-501.3 485L-510.9 479.2L-517.7 472.8L-522 465.8L-533.6 458.5"/><path class="iso-line iso-edge" data-tone="mid" d="M-533.6 458.5L-531.9 450.3L-527.1 442.3L-519.3 435L-508.8 428.6L112.9 117.8L125.7 112.5L140.4 108.6L156.2 106.2L172.7 105.4L189.2 106.2L205.1 108.6L219.7 112.5L232.5 117.8L1248.8 625.9L1259.3 632.3L1267.1 639.6L1271.9 647.6L1273.6 655.8"/></g><path class="iso-line" data-tone="faint" d="M1212.9 526.7L1217.1 529.3L1220.3 532.2L1222.2 535.4L1222.8 538.7L1222.2 542L1220.3 545.1L1217.1 548.1L1212.9 550.6L591.2 861.5L586.1 863.6L580.2 865.1L573.9 866.1L567.3 866.4L560.7 866.1L554.3 865.1L548.5 863.6L543.4 861.5L-472.9 353.3L-477.1 350.8L-480.3 347.8L-482.2 344.7L-482.8 341.4L-482.2 338.1L-480.3 334.9L-477.1 332L-472.9 329.4L148.8 18.6L153.9 16.5L159.8 14.9L166.1 13.9L172.7 13.6L179.3 13.9L185.7 14.9L191.5 16.5L196.6 18.6Z"/><text class="iso-face-text" data-tone="faint" transform="matrix(5.978 2.989 -5.978 2.989 -60.429 471.494)" font-size="5" text-anchor="start">除锈时间线</text><g id="beaker" class="fx-part" data-tip="beaker"><polygon points="376,122.3 579.2,224 579.2,458.3 376,356.6" fill="rgba(150,195,235,.10)" stroke="#8fb8dd" stroke-width="1"/><ellipse cx="477.6" cy="173.1" rx="101.6" ry="38.6" fill="rgba(150,195,235,.16)" stroke="#8fb8dd" stroke-width="1"/><polygon id="sol-liq" points="376,195.5 579.2,297.2 579.2,458.3 376,356.6" fill="rgba(150,195,235,.30)" stroke="none"/><ellipse id="sol-liqtop" cx="477.6" cy="246.4" rx="101.6" ry="38.6" fill="rgba(150,195,235,.45)" stroke="none"/></g><g class="fx-part" data-tip="nail"><polygon id="nail" points="470.6,70.6 484.6,70.6 484.6,392.8 470.6,392.8" fill="#8f3d1e" stroke="#6e2f14" stroke-width="1.2"/><ellipse cx="477.6" cy="70.6" rx="7" ry="3" fill="#a0522d" stroke="#6e2f14" stroke-width="1"/></g><rect x="467.6" y="62.6" width="20" height="8" rx="3" fill="#7c3a1c" stroke="#6e2f14"/><circle id="bub0" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub1" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub2" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub3" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub4" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub5" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub6" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub7" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub8" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub9" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub10" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><circle id="bub11" r="2.6" fill="rgba(255,255,255,.9)" stroke="#9cc4e8" stroke-width="0.6" style="display:none"/><g id="nobub" style="display:none"><rect x="617" y="247.8" width="80" height="28" rx="14" fill="#fff" stroke="#e5484d" stroke-width="2.5"/><text x="657" y="267.8" text-anchor="middle" font-size="14" font-weight="700" fill="#e5484d" font-family="ui-sans-serif,system-ui,sans-serif">🚫 无气泡</text></g><g id="manybub" style="display:none"><rect x="616.9" y="209.9" width="104" height="28" rx="14" fill="#e6f6ea" stroke="#30a46c" stroke-width="2.5"/><text x="668.9" y="229.9" text-anchor="middle" font-size="13" font-weight="700" fill="#1f7a48" font-family="ui-sans-serif,system-ui,sans-serif">💨 大量气泡 H₂↑</text></g><g class="fx-part" data-tip="hcl"><g class="iso-solid"><path class="iso-fill" d="M195.2 25.7L195.2 18.1L198.6 10.7L205.1 3.9L214.6 -2L226.4 -6.8L240.1 -10L254.8 -11.7L270 -11.7L284.7 -10L298.4 -6.8L310.2 -2L319.7 3.9L326.2 10.7L329.6 18.1L329.6 186.7L326.2 194.1L319.7 200.9L310.2 206.9L298.4 211.6L284.7 214.9L270 216.6L254.8 216.6L240.1 214.9L226.4 211.6L214.6 206.9L205.1 200.9L198.6 194.1L195.2 186.7Z"/><path class="iso-shade" data-shade="0" d="M310.2 206.9L298.4 211.6L298.4 50.5L310.2 45.8ZM329.6 186.7L326.2 194.1L326.2 33L329.6 25.7ZM326.2 194.1L319.7 200.9L319.7 39.9L326.2 33ZM319.7 200.9L310.2 206.9L310.2 45.8L319.7 39.9Z"/><path class="iso-shade" data-shade="1" d="M298.4 211.6L284.7 214.9L284.7 53.8L298.4 50.5ZM284.7 214.9L270 216.6L270 55.5L284.7 53.8ZM270 216.6L254.8 216.6L254.8 55.5L270 55.5Z"/><path class="iso-shade" data-shade="2" d="M254.8 216.6L240.1 214.9L240.1 53.8L254.8 55.5ZM240.1 214.9L226.4 211.6L226.4 50.5L240.1 53.8Z"/><path class="iso-shade" data-shade="3" d="M226.4 211.6L214.6 206.9L214.6 45.8L226.4 50.5ZM214.6 206.9L205.1 200.9L205.1 39.9L214.6 45.8ZM205.1 200.9L198.6 194.1L198.6 33L205.1 39.9ZM198.6 194.1L195.2 186.7L195.2 25.7L198.6 33Z"/><path class="iso-top" d="M310.2 45.8L298.4 50.5L284.7 53.8L270 55.5L254.8 55.5L240.1 53.8L226.4 50.5L214.6 45.8L205.1 39.9L198.6 33L195.2 25.7L195.2 18.1L198.6 10.7L205.1 3.9L214.6 -2L226.4 -6.8L240.1 -10L254.8 -11.7L270 -11.7L284.7 -10L298.4 -6.8L310.2 -2L319.7 3.9L326.2 10.7L329.6 18.1L329.6 25.7L326.2 33L319.7 39.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M329.6 25.7L326.2 33L319.7 39.9L310.2 45.8L298.4 50.5L284.7 53.8L270 55.5L254.8 55.5L240.1 53.8L226.4 50.5L214.6 45.8L205.1 39.9L198.6 33L195.2 25.7"/><path class="iso-line iso-edge" data-tone="mid" d="M195.2 25.7L195.2 18.1L198.6 10.7L205.1 3.9L214.6 -2L226.4 -6.8L240.1 -10L254.8 -11.7L270 -11.7L284.7 -10L298.4 -6.8L310.2 -2L319.7 3.9L326.2 10.7L329.6 18.1L329.6 25.7M329.6 186.7L326.2 194.1L319.7 200.9L310.2 206.9L298.4 211.6L284.7 214.9L270 216.6L254.8 216.6L240.1 214.9L226.4 211.6L214.6 206.9L205.1 200.9L198.6 194.1L195.2 186.7M195.2 25.7L195.2 186.7M329.6 25.7L329.6 186.7"/></g><g class="iso-solid"><path class="iso-fill" d="M225.7 -172.9L225.7 -178.7L229.2 -184.3L236.1 -189L245.5 -192.4L256.6 -194.2L268.2 -194.2L279.3 -192.4L288.7 -189L295.5 -184.3L299.1 -178.7L299.1 24.8L295.5 30.3L288.7 35L279.3 38.5L268.2 40.2L256.6 40.2L245.5 38.5L236.1 35L229.2 30.3L225.7 24.8Z"/><path class="iso-shade" data-shade="0" d="M288.7 35L279.3 38.5L279.3 -159.2L288.7 -162.7ZM299.1 24.8L295.5 30.3L295.5 -167.4L299.1 -172.9ZM295.5 30.3L288.7 35L288.7 -162.7L295.5 -167.4Z"/><path class="iso-shade" data-shade="1" d="M279.3 38.5L268.2 40.2L268.2 -157.4L279.3 -159.2Z"/><path class="iso-shade" data-shade="2" d="M268.2 40.2L256.6 40.2L256.6 -157.4L268.2 -157.4ZM256.6 40.2L245.5 38.5L245.5 -159.2L256.6 -157.4Z"/><path class="iso-shade" data-shade="3" d="M245.5 38.5L236.1 35L236.1 -162.7L245.5 -159.2ZM236.1 35L229.2 30.3L229.2 -167.4L236.1 -162.7ZM229.2 30.3L225.7 24.8L225.7 -172.9L229.2 -167.4Z"/><path class="iso-top" d="M288.7 -162.7L279.3 -159.2L268.2 -157.4L256.6 -157.4L245.5 -159.2L236.1 -162.7L229.2 -167.4L225.7 -172.9L225.7 -178.7L229.2 -184.3L236.1 -189L245.5 -192.4L256.6 -194.2L268.2 -194.2L279.3 -192.4L288.7 -189L295.5 -184.3L299.1 -178.7L299.1 -172.9L295.5 -167.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M299.1 -172.9L295.5 -167.4L288.7 -162.7L279.3 -159.2L268.2 -157.4L256.6 -157.4L245.5 -159.2L236.1 -162.7L229.2 -167.4L225.7 -172.9"/><path class="iso-line iso-edge" data-tone="lo" d="M225.7 -172.9L225.7 -178.7L229.2 -184.3L236.1 -189L245.5 -192.4L256.6 -194.2L268.2 -194.2L279.3 -192.4L288.7 -189L295.5 -184.3L299.1 -178.7L299.1 -172.9M299.1 24.8L295.5 30.3L288.7 35L279.3 38.5L268.2 40.2L256.6 40.2L245.5 38.5L236.1 35L229.2 30.3L225.7 24.8M225.7 -172.9L225.7 24.8M299.1 -172.9L299.1 24.8"/></g><g class="iso-solid"><path class="iso-fill" d="M215.6 -232.2L220.2 -239.3L228.9 -245.3L240.9 -249.6L255 -251.9L269.8 -251.9L283.9 -249.6L295.9 -245.3L304.6 -239.3L309.2 -232.2L309.2 -11L304.6 -4L295.9 2L283.9 6.4L269.8 8.6L255 8.6L240.9 6.4L228.9 2L220.2 -4L215.6 -11L215.6 -18.4Z"/><path class="iso-shade" data-shade="0" d="M295.9 2L283.9 6.4L283.9 -207.4L295.9 -211.8ZM309.2 -11L304.6 -4L304.6 -217.8L309.2 -224.8ZM304.6 -4L295.9 2L295.9 -211.8L304.6 -217.8Z"/><path class="iso-shade" data-shade="1" d="M283.9 6.4L269.8 8.6L269.8 -205.1L283.9 -207.4ZM269.8 8.6L255 8.6L255 -205.1L269.8 -205.1Z"/><path class="iso-shade" data-shade="2" d="M255 8.6L240.9 6.4L240.9 -207.4L255 -205.1Z"/><path class="iso-shade" data-shade="3" d="M240.9 6.4L228.9 2L228.9 -211.8L240.9 -207.4ZM228.9 2L220.2 -4L220.2 -217.8L228.9 -211.8ZM220.2 -4L215.6 -11L215.6 -224.8L220.2 -217.8Z"/><path class="iso-top" d="M295.9 -211.8L283.9 -207.4L269.8 -205.1L255 -205.1L240.9 -207.4L228.9 -211.8L220.2 -217.8L215.6 -224.8L215.6 -232.2L220.2 -239.3L228.9 -245.3L240.9 -249.6L255 -251.9L269.8 -251.9L283.9 -249.6L295.9 -245.3L304.6 -239.3L309.2 -232.2L309.2 -224.8L304.6 -217.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M309.2 -224.8L304.6 -217.8L295.9 -211.8L283.9 -207.4L269.8 -205.1L255 -205.1L240.9 -207.4L228.9 -211.8L220.2 -217.8L215.6 -224.8"/><path class="iso-line iso-edge" data-tone="lo" d="M215.6 -224.8L215.6 -232.2L220.2 -239.3L228.9 -245.3L240.9 -249.6L255 -251.9L269.8 -251.9L283.9 -249.6L295.9 -245.3L304.6 -239.3L309.2 -232.2L309.2 -224.8M309.2 -11L304.6 -4L295.9 2L283.9 6.4L269.8 8.6L255 8.6L240.9 6.4L228.9 2L220.2 -4L215.6 -11M215.6 -224.8L215.6 -11M309.2 -224.8L309.2 -11"/></g><text x="212.2" y="135.6" text-anchor="middle" font-size="9" fill="#57575a" font-family="ui-sans-serif,system-ui,sans-serif">稀盐酸</text></g><text x="340.1" y="483.5" text-anchor="middle" font-size="9" fill="#57575a" font-family="ui-sans-serif,system-ui,sans-serif">生锈铁钉 ＋ 稀盐酸 —— 拖时间轴看两阶段</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="red" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>黄色溶液：Fe³⁺（锈溶解）</span><span class="iso-key"><svg class="iso-swatch" data-mark="green" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>浅绿溶液：Fe²⁺（铁反应）</span><span class="iso-key"><svg class="iso-swatch" data-mark="blue" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>气泡：H₂</span></span><span class="iso-caption">除锈分先后：先是 Fe₂O₃＋6HCl＝2FeCl₃＋3H₂O（变黄、无气泡），锈除净后才是 Fe＋2HCl＝FeCl₂＋H₂↑（冒泡、变浅绿）。</span></figcaption></figure>
+<div class="fx-steps"><button class="fx-stepbtn active" data-step="0">1 · 锈是什么</button><button class="fx-stepbtn" data-step="1">2 · 第一阶段：锈溶解</button><button class="fx-stepbtn" data-step="2">3 · 第二阶段：铁产氢</button><button class="fx-stepbtn" data-step="3">4 · 方程式总结</button></div><div class="fx-steptext" id="fx-steptext"></div>
+<div class="fx-controls"><input type="range" id="fx-time" min="0" max="100" value="0" step="1" style="width:min(420px,80%);accent-color:#3e63dd"><button class="fx-btn primary" id="fx-play">▶ 播放</button><button class="fx-btn" id="fx-reset9">重置</button></div>
+<div class="fx-stagebanner" id="fx-stagebanner">待开始 · 把铁钉放入稀盐酸</div>
+<div class="fx-colorband" id="fx-colorband" aria-label="颜色时间线">
+  <div class="cb" id="cb0"><span class="cb-swatch" style="background:#8f3d1e"></span><b>红棕色</b><i>铁锈 Fe₂O₃</i></div>
+  <div class="cb-arrow">→</div>
+  <div class="cb" id="cb1"><span class="cb-swatch" style="background:#eab308"></span><b>黄色</b><i>FeCl₃ 溶液 · 无气泡</i></div>
+  <div class="cb-arrow">→</div>
+  <div class="cb" id="cb2"><span class="cb-swatch" style="background:#a9d6a5"></span><b>浅绿色</b><i>FeCl₂ 溶液 · 大量气泡</i></div>
+</div>
+<div class="fx-msg" id="fx-msg"></div><div class="fx-readline" id="fx-readline"></div>
+<div class="fx-eq fx-eqbig" id="eq1">① Fe₂O₃ ＋ 6HCl ＝ 2FeCl₃ ＋ 3H₂O　<span>锈溶解 · 溶液变黄 · 无气泡</span></div>
+<div class="fx-eq fx-eqbig" id="eq2">② Fe ＋ 2HCl ＝ FeCl₂ ＋ H₂↑　<span>铁反应 · 溶液变浅绿 · 大量气泡</span></div>
+<div class="fx-warn">⚠️ <b>名师扫雷</b>：第一阶段<b>不产生任何气体</b>！你看到的气泡，是第二阶段铁锈除净后、银灰色铁本体与盐酸反应产生的 H₂。中考最爱考"为什么一开始没有气泡"——因为第一阶段是复分解，根本不产气。</div></main><script type="module">var STEPS=[{"t":"1 · 锈是什么","html":"铁钉表面的红棕色是 <b>Fe₂O₃（氧化铁）</b>。把它丢进稀盐酸，接下来的变化分<b>先后两阶段</b>——顺序是必考点！"},{"t":"2 · 第一阶段：锈溶解","html":"先反应的是<b>锈</b>：Fe₂O₃＋6HCl＝2FeCl₃＋3H₂O。红棕色消失、溶液变<b>黄</b>，<b>没有气泡</b>——这不是置换，是复分解。"},{"t":"3 · 第二阶段：铁产氢","html":"锈除净后，内层<b>铁</b>和过量盐酸反应：Fe＋2HCl＝FeCl₂＋H₂↑。大量<b>无色气泡</b>冒出，溶液由黄变<b>浅绿</b>（Fe²⁺ 的颜色）。"},{"t":"4 · 方程式总结","html":"两条方程式、两种颜色、一种气体：<b>先黄后绿、先无泡后有泡</b>。考题最爱问“为什么一开始没气泡”——因为第一阶段根本不产生气体。"}];
+var TIPS={"nail":["生锈铁钉","表面红棕色是 Fe₂O₃。拖时间轴看它先被酸溶掉，再露出铁。"],"beaker":["稀盐酸","先溶锈（复分解），再和铁反应（置换，产生 H₂）。"],"hcl":["稀盐酸试剂瓶","除锈的酸。注意：是“稀”盐酸，浓硫酸会让铁钝化！"]};
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var SOLC={"x":477.6,"y":246.4},NAILCX=477.6;
+var t=0,playing=false,timer=null;
+function lerp(a,b,k){return a+(b-a)*k;}
+function mix(c1,c2,k){
+  return "rgb("+Math.round(lerp(c1[0],c2[0],k))+","+Math.round(lerp(c1[1],c2[1],k))+","+Math.round(lerp(c1[2],c2[2],k))+")";
+}
+var CLEAR=[150,195,235],YELLOW=[235,175,20],GREEN=[169,214,165];
+var RUST=[143,61,30],IRON=[154,158,164];
+function render(){
+  var k1=Math.min(1,t/50),k2=Math.max(0,(t-50)/50);
+  // 溶液颜色：清→黄→浅绿（颜色是第一叙事线，加深不透明度）
+  var sol=t<=50?mix(CLEAR,YELLOW,k1):mix(YELLOW,GREEN,k2);
+  $("sol-liq").setAttribute("fill",sol.replace("rgb","rgba").replace(")",",.55)"));
+  $("sol-liqtop").setAttribute("fill",sol.replace("rgb","rgba").replace(")",",.7)"));
+  // 铁钉：红棕锈→银灰铁本体
+  $("nail").setAttribute("fill",mix(RUST,IRON,k2));
+  // 气泡（只在第二阶段）
+  var n=Math.round(k2*12);
+  for(var i=0;i<12;i++){
+    var b=$("bub"+i);
+    if(i<n){b.style.display="";}else{b.style.display="none";continue;}
+  }
+  // 阶段徽章：第一阶段强调“无气泡”，第二阶段强调“大量气泡”
+  var s1=t>2&&t<=50,s2=t>50;
+  $("nobub").style.display=s1?"":"none";
+  $("manybub").style.display=t>55?"":"none";
+  // 颜色时间线色带同步高亮
+  var active=t<=2?0:(t<=50?1:2);
+  for(var c=0;c<3;c++)$("cb"+c).classList.toggle("active",c===active);
+  // 大字阶段横幅
+  var banner=t<=2?"待开始 · 把铁钉放入稀盐酸"
+    :s1?"第一阶段 · 锈溶解 —— 溶液变黄，🚫 无气泡"
+    :"第二阶段 · 铁产氢 —— 大量气泡，溶液变浅绿";
+  $("fx-stagebanner").textContent=banner;
+  // 方程式高亮
+  $("eq1").style.color=s1?"#e5484d":"";
+  $("eq1").style.fontWeight=s1?"700":"";
+  $("eq1").style.background=s1?"#fff0f0":"";
+  $("eq2").style.color=s2?"#1f7a48":"";
+  $("eq2").style.fontWeight=s2?"700":"";
+  $("eq2").style.background=s2?"#eef7ef":"";
+  // 读数
+  var stage=t<=2?"待开始":s1?"第一阶段：锈溶解（变黄·无气泡）":"第二阶段：铁反应（冒泡·变浅绿）";
+  $("fx-readline").textContent="除锈进度 "+t+"% · "+stage;
+  var ro=document.querySelector("[data-readout]");
+  if(ro)ro.textContent="进度 "+t+"% · "+(t<=2?"红棕锈":s1?"黄色":"浅绿");
+  if(t>=100)stop();
+}
+function bubblesAnim(){
+  if(!playing||reduceMotion)return;
+  var ts=Date.now()/1000;
+  var n=Math.round(Math.max(0,(t-50)/50)*12);
+  for(var i=0;i<n;i++){
+    var b=$("bub"+i);
+    var yy=(ts*30+i*17)%44;
+    b.setAttribute("cx",(NAILCX+((i*53)%18)-9).toFixed(1));
+    b.setAttribute("cy",(SOLC.y+10-yy).toFixed(1));
+  }
+  requestAnimationFrame(bubblesAnim);
+}
+function play(){
+  if(playing)return;
+  if(t>=100)t=0;
+  playing=true;$("fx-play").textContent="⏸ 暂停";$("fx-play").classList.remove("primary");
+  bubblesAnim();
+  timer=setInterval(function(){t=Math.min(100,t+1);$("fx-time").value=t;render();},60);
+}
+function stop(){
+  playing=false;clearInterval(timer);
+  $("fx-play").textContent="▶ 播放";$("fx-play").classList.add("primary");
+}
+$("fx-play").addEventListener("click",function(){playing?stop():play();});
+$("fx-time").addEventListener("input",function(){stop();t=+this.value;render();});
+$("fx-reset9").addEventListener("click",function(){stop();t=0;$("fx-time").value=0;render();$("fx-msg").textContent="已重置。铁钉重新生锈（并没有）。";});
+function onStep(i){
+  stop();
+  if(i===1){t=30;$("fx-time").value=30;render();$("fx-msg").textContent="拖到约 30%：看颜色带——黄色块亮起，溶液变黄，🚫 无气泡徽章出现。";}
+  if(i===2){t=75;$("fx-time").value=75;render();$("fx-msg").textContent="拖到约 75%：浅绿块亮起，大量气泡 H₂↑，铁钉露出银灰色本体。";}
+  if(i===0){t=0;$("fx-time").value=0;render();}
+  if(i===3){t=100;$("fx-time").value=100;render();$("fx-msg").textContent="完整走一遍：红棕 → 黄（无气泡）→ 浅绿（有气泡）。记住扫雷卡：第一阶段不产气！";}
+}
+render();
+
+var $=function(id){return document.getElementById(id);};
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var __step=0,__hold=-1;
+function renderStep(i){
+  __step=i;
+  var btns=document.querySelectorAll(".fx-stepbtn");
+  btns.forEach(function(b,j){b.classList.toggle("active",i===j);});
+  var s=STEPS[i];
+  $("fx-steptext").innerHTML="<b>"+s.t.replace(/^\d+\s*[·、]\s*/,"")+"</b>　"+s.html;
+  if(typeof onStep==="function")onStep(i);
+}
+function holdStep(i){__hold=i;renderStep(i);}
+function releaseHold(){__hold=-1;}
+document.querySelectorAll(".fx-stepbtn").forEach(function(b){
+  b.addEventListener("click",function(){holdStep(+b.dataset.step);});
+});
+(function initTips(){
+  var tip=$("fx-tip"),stage=$("fx-stage");
+  if(!tip||!stage||typeof TIPS==="undefined")return;
+  function show(id,x,y){
+    var t=TIPS[id];if(!t)return;
+    tip.innerHTML="<b>"+t[0]+"</b><span>"+t[1]+"</span>";
+    tip.style.display="block";
+    var r=stage.getBoundingClientRect();
+    tip.style.left=Math.min(r.width-250,Math.max(8,x-r.left+14))+"px";
+    tip.style.top=Math.max(8,y-r.top-10)+"px";
+  }
+  document.querySelectorAll(".fx-part").forEach(function(el){
+    el.addEventListener("pointerenter",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointermove",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+    el.addEventListener("pointerleave",function(){tip.style.display="none";});
+    el.addEventListener("click",function(e){show(el.dataset.tip,e.clientX,e.clientY);});
+  });
+})();
+</script></body></html>

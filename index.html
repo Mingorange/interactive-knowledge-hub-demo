@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Knowledge Hub — Demo</title>
+<style>
+  body{font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#f7f4ec;color:#222}
+  .wrap{max-width:860px;margin:0 auto;padding:48px 20px 64px}
+  h1{font-size:32px;margin:0 0 8px}
+  .sub{color:#666;line-height:1.7;margin:0 0 32px}
+  .card{display:block;background:#fff;border-radius:14px;padding:22px 24px;margin:14px 0;text-decoration:none;color:#222;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:6px solid #e8833a}
+  .card:hover{transform:translateY(-2px)}
+  .card h2{margin:0 0 6px;font-size:20px}
+  .card p{margin:0;color:#666;line-height:1.6}
+  .tag{display:inline-block;font-size:12px;background:#eef3ea;color:#4a6b3a;border-radius:20px;padding:2px 10px;margin-bottom:8px}
+  footer{color:#999;font-size:13px;margin-top:36px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Interactive Knowledge Hub · 互动知识馆</h1>
+  <p class="sub">Middle-school knowledge points, rebuilt as interactive illustrated web pages.<br>
+  A static PDF can show a diagram — it cannot show a process changing. That is what these pages do.<br>
+  把中学知识点做成可交互的图解网页：静态 PDF 做不到的「互动 + 变化过程」，就是这些页面的价值。</p>
+
+  <a class="card" href="figures/rust-removal.html">
+    <span class="tag">Chemistry · 化学</span>
+    <h2>Rusting &amp; Rust Removal 铁钉除锈</h2>
+    <p>Watch the colour story: reddish-brown rust → yellow solution → pale-green solution. Colour change is the first narrative line.</p>
+  </a>
+
+  <a class="card" href="figures/convex-lens.html">
+    <span class="tag">Physics · 物理</span>
+    <h2>Convex Lens Imaging 凸透镜成像</h2>
+    <p>Move the object, watch the image form, flip and resize in real time — the rule becomes obvious by playing with it.</p>
+  </a>
+
+  <a class="card" href="figures/quadratic-function.html">
+    <span class="tag">Math · 数学</span>
+    <h2>Quadratic Functions 二次函数</h2>
+    <p>Drag the coefficients and see the parabola reshape itself — a, b and c stop being abstract symbols.</p>
+  </a>
+
+  <footer>Demo edition — 3 sample pages only. The full 37-page version is private / under development.<br>
+  演示版：仅含 3 个样例页。完整 37 页版本为私有产品，开发中。</footer>
+</div>
+</body>
+</html>
