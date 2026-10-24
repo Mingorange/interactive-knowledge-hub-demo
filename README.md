@@ -4,6 +4,8 @@ Middle-school knowledge points, rebuilt as **interactive, isometric illustrated 
 
 把中学知识点，做成可交互的等距图解网页。
 
+**Live demo / 在线成品（点开即玩）：** https://mingorange.github.io/interactive-knowledge-hub-demo/
+
 ## Why / 理念
 
 A textbook or PDF can show a diagram, but it is static. What a student actually struggles with is usually a **process**: a colour changing during a reaction, an image forming through a lens, a curve reshaping as a coefficient moves.
